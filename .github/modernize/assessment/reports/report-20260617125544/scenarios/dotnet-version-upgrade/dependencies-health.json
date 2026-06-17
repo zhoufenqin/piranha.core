@@ -1,0 +1,2314 @@
+{
+  "packageGovernance": {
+    "totalDistinctPackages": 12,
+    "totalVersionDriftInstances": 0,
+    "targetFramework": "net10.0",
+    "packages": [
+      {
+        "name": "AutoMapper",
+        "totalProjectCount": 1,
+        "distinctVersionCount": 1,
+        "recommendedVersion": "16.1.1",
+        "isCompatible": true,
+        "description": "NuGet package contains security vulnerability",
+        "versions": [
+          {
+            "version": "12.0.1",
+            "projects": [
+              "Piranha.Data.EF"
+            ],
+            "isRecommended": false
+          }
+        ],
+        "upgrade": {
+          "newVersion": "16.1.1"
+        }
+      },
+      {
+        "name": "Azure.Storage.Blobs",
+        "totalProjectCount": 1,
+        "distinctVersionCount": 1,
+        "recommendedVersion": "",
+        "isCompatible": true,
+        "description": "",
+        "versions": [
+          {
+            "version": "12.18.0",
+            "projects": [
+              "Piranha.Azure.BlobStorage"
+            ],
+            "isRecommended": false
+          }
+        ],
+        "upgrade": {
+          "newVersion": ""
+        }
+      },
+      {
+        "name": "coverlet.collector",
+        "totalProjectCount": 2,
+        "distinctVersionCount": 1,
+        "recommendedVersion": "",
+        "isCompatible": true,
+        "description": "",
+        "versions": [
+          {
+            "version": "6.0.2",
+            "projects": [
+              "Piranha.Manager.Tests",
+              "Piranha.Tests"
+            ],
+            "isRecommended": false
+          }
+        ],
+        "upgrade": {
+          "newVersion": ""
+        }
+      },
+      {
+        "name": "coverlet.msbuild",
+        "totalProjectCount": 2,
+        "distinctVersionCount": 1,
+        "recommendedVersion": "",
+        "isCompatible": true,
+        "description": "",
+        "versions": [
+          {
+            "version": "6.0.2",
+            "projects": [
+              "Piranha.Manager.Tests",
+              "Piranha.Tests"
+            ],
+            "isRecommended": false
+          }
+        ],
+        "upgrade": {
+          "newVersion": ""
+        }
+      },
+      {
+        "name": "Markdig",
+        "totalProjectCount": 1,
+        "distinctVersionCount": 1,
+        "recommendedVersion": "",
+        "isCompatible": true,
+        "description": "",
+        "versions": [
+          {
+            "version": "0.40.0",
+            "projects": [
+              "Piranha"
+            ],
+            "isRecommended": false
+          }
+        ],
+        "upgrade": {
+          "newVersion": ""
+        }
+      },
+      {
+        "name": "Microsoft.NET.Test.Sdk",
+        "totalProjectCount": 2,
+        "distinctVersionCount": 1,
+        "recommendedVersion": "",
+        "isCompatible": true,
+        "description": "",
+        "versions": [
+          {
+            "version": "17.9.0",
+            "projects": [
+              "Piranha.Manager.Tests",
+              "Piranha.Tests"
+            ],
+            "isRecommended": false
+          }
+        ],
+        "upgrade": {
+          "newVersion": ""
+        }
+      },
+      {
+        "name": "Microsoft.SourceLink.GitHub",
+        "totalProjectCount": 26,
+        "distinctVersionCount": 1,
+        "recommendedVersion": "",
+        "isCompatible": true,
+        "description": "",
+        "versions": [
+          {
+            "version": "1.1.1",
+            "projects": [
+              "MvcWeb",
+              "Piranha",
+              "Piranha.AspNetCore",
+              "Piranha.AspNetCore.Hosting",
+              "Piranha.AspNetCore.Identity",
+              "Piranha.AspNetCore.Identity.MySQL",
+              "Piranha.AspNetCore.Identity.PostgreSQL",
+              "Piranha.AspNetCore.Identity.SQLite",
+              "Piranha.AspNetCore.Identity.SQLServer",
+              "Piranha.AttributeBuilder",
+              "Piranha.Azure.BlobStorage",
+              "Piranha.Data.EF",
+              "Piranha.Data.EF.MySql",
+              "Piranha.Data.EF.PostgreSql",
+              "Piranha.Data.EF.SQLite",
+              "Piranha.Data.EF.SQLServer",
+              "Piranha.ImageSharp",
+              "Piranha.Local.FileStorage",
+              "Piranha.Manager",
+              "Piranha.Manager.LocalAuth",
+              "Piranha.Manager.Localization",
+              "Piranha.Manager.Tests",
+              "Piranha.Manager.TinyMCE",
+              "Piranha.Tests",
+              "Piranha.WebApi",
+              "RazorWeb"
+            ],
+            "isRecommended": false
+          }
+        ],
+        "upgrade": {
+          "newVersion": ""
+        }
+      },
+      {
+        "name": "Newtonsoft.Json",
+        "totalProjectCount": 1,
+        "distinctVersionCount": 1,
+        "recommendedVersion": "13.0.4",
+        "isCompatible": true,
+        "description": "NuGet package upgrade is recommended",
+        "versions": [
+          {
+            "version": "13.0.3",
+            "projects": [
+              "Piranha"
+            ],
+            "isRecommended": false
+          }
+        ],
+        "upgrade": {
+          "newVersion": "13.0.4"
+        }
+      },
+      {
+        "name": "SixLabors.ImageSharp",
+        "totalProjectCount": 1,
+        "distinctVersionCount": 1,
+        "recommendedVersion": "",
+        "isCompatible": true,
+        "description": "",
+        "versions": [
+          {
+            "version": "2.1.13",
+            "projects": [
+              "Piranha.ImageSharp"
+            ],
+            "isRecommended": false
+          }
+        ],
+        "upgrade": {
+          "newVersion": ""
+        }
+      },
+      {
+        "name": "X.Web.Sitemap",
+        "totalProjectCount": 1,
+        "distinctVersionCount": 1,
+        "recommendedVersion": "",
+        "isCompatible": true,
+        "description": "",
+        "versions": [
+          {
+            "version": "2.10.1",
+            "projects": [
+              "Piranha.AspNetCore"
+            ],
+            "isRecommended": false
+          }
+        ],
+        "upgrade": {
+          "newVersion": ""
+        }
+      },
+      {
+        "name": "xunit",
+        "totalProjectCount": 2,
+        "distinctVersionCount": 1,
+        "recommendedVersion": "",
+        "isCompatible": false,
+        "description": "NuGet package is deprecated",
+        "versions": [
+          {
+            "version": "2.7.0",
+            "projects": [
+              "Piranha.Manager.Tests",
+              "Piranha.Tests"
+            ],
+            "isRecommended": false
+          }
+        ],
+        "upgrade": {
+          "newVersion": ""
+        }
+      },
+      {
+        "name": "xunit.runner.visualstudio",
+        "totalProjectCount": 2,
+        "distinctVersionCount": 1,
+        "recommendedVersion": "",
+        "isCompatible": true,
+        "description": "",
+        "versions": [
+          {
+            "version": "2.5.7",
+            "projects": [
+              "Piranha.Manager.Tests",
+              "Piranha.Tests"
+            ],
+            "isRecommended": false
+          }
+        ],
+        "upgrade": {
+          "newVersion": ""
+        }
+      }
+    ]
+  },
+  "projects": [
+    {
+      "name": "MvcWeb",
+      "path": "examples\\MvcWeb\\MvcWeb.csproj",
+      "isSdk": true,
+      "currentFrameworks": [
+        "net8.0",
+        "net9.0"
+      ],
+      "targetFramework": "net10.0",
+      "dependencies": {
+        "packages": [
+          {
+            "name": "Microsoft.SourceLink.GitHub",
+            "version": "1.1.1",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "Directory.Build.targets"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          }
+        ],
+        "assemblies": [],
+        "projectReferences": [
+          {
+            "name": "Piranha",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "examples\\MvcWeb\\MvcWeb.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha\\Piranha.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.AspNetCore",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "examples\\MvcWeb\\MvcWeb.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha.AspNetCore\\Piranha.AspNetCore.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.AttributeBuilder",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "examples\\MvcWeb\\MvcWeb.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha.AttributeBuilder\\Piranha.AttributeBuilder.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.ImageSharp",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "examples\\MvcWeb\\MvcWeb.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha.ImageSharp\\Piranha.ImageSharp.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.Local.FileStorage",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "examples\\MvcWeb\\MvcWeb.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha.Local.FileStorage\\Piranha.Local.FileStorage.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.Manager",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "examples\\MvcWeb\\MvcWeb.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha.Manager\\Piranha.Manager.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.Manager.LocalAuth",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "examples\\MvcWeb\\MvcWeb.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha.Manager.LocalAuth\\Piranha.Manager.LocalAuth.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.Manager.TinyMCE",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "examples\\MvcWeb\\MvcWeb.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha.Manager.TinyMCE\\Piranha.Manager.TinyMCE.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.Data.EF.SQLite",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "examples\\MvcWeb\\MvcWeb.csproj"
+              }
+            ],
+            "referencedProjectPath": "data\\Piranha.Data.EF.SQLite\\Piranha.Data.EF.SQLite.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.AspNetCore.Identity.SQLite",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "examples\\MvcWeb\\MvcWeb.csproj"
+              }
+            ],
+            "referencedProjectPath": "identity\\Piranha.AspNetCore.Identity.SQLite\\Piranha.AspNetCore.Identity.SQLite.csproj",
+            "compatibility": "valid"
+          }
+        ],
+        "frameworkReferences": []
+      },
+      "imports": [
+        {
+          "path": "Directory.Build.props",
+          "isLocal": true
+        },
+        {
+          "path": "Directory.Build.targets",
+          "isLocal": true
+        }
+      ]
+    },
+    {
+      "name": "Piranha.AspNetCore",
+      "path": "core\\Piranha.AspNetCore\\Piranha.AspNetCore.csproj",
+      "isSdk": true,
+      "currentFrameworks": [
+        "net8.0",
+        "net9.0"
+      ],
+      "targetFramework": "net10.0",
+      "dependencies": {
+        "packages": [
+          {
+            "name": "X.Web.Sitemap",
+            "version": "2.10.1",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "core\\Piranha.AspNetCore\\Piranha.AspNetCore.csproj"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          },
+          {
+            "name": "Microsoft.SourceLink.GitHub",
+            "version": "1.1.1",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "Directory.Build.targets"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          }
+        ],
+        "assemblies": [],
+        "projectReferences": [
+          {
+            "name": "Piranha",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "core\\Piranha.AspNetCore\\Piranha.AspNetCore.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha\\Piranha.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.AspNetCore.Hosting",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "core\\Piranha.AspNetCore\\Piranha.AspNetCore.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha.AspNetCore.Hosting\\Piranha.AspNetCore.Hosting.csproj",
+            "compatibility": "valid"
+          }
+        ],
+        "frameworkReferences": []
+      },
+      "imports": [
+        {
+          "path": "Directory.Build.props",
+          "isLocal": true
+        },
+        {
+          "path": "Directory.Build.targets",
+          "isLocal": true
+        }
+      ]
+    },
+    {
+      "name": "Piranha.AspNetCore.Hosting",
+      "path": "core\\Piranha.AspNetCore.Hosting\\Piranha.AspNetCore.Hosting.csproj",
+      "isSdk": true,
+      "currentFrameworks": [
+        "net8.0",
+        "net9.0"
+      ],
+      "targetFramework": "net10.0",
+      "dependencies": {
+        "packages": [
+          {
+            "name": "Microsoft.SourceLink.GitHub",
+            "version": "1.1.1",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "Directory.Build.targets"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          }
+        ],
+        "assemblies": [],
+        "projectReferences": [
+          {
+            "name": "Piranha",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "core\\Piranha.AspNetCore.Hosting\\Piranha.AspNetCore.Hosting.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha\\Piranha.csproj",
+            "compatibility": "valid"
+          }
+        ],
+        "frameworkReferences": []
+      },
+      "imports": [
+        {
+          "path": "Directory.Build.props",
+          "isLocal": true
+        },
+        {
+          "path": "Directory.Build.targets",
+          "isLocal": true
+        }
+      ]
+    },
+    {
+      "name": "Piranha.AspNetCore.Identity",
+      "path": "identity\\Piranha.AspNetCore.Identity\\Piranha.AspNetCore.Identity.csproj",
+      "isSdk": true,
+      "currentFrameworks": [
+        "net8.0",
+        "net9.0"
+      ],
+      "targetFramework": "net10.0",
+      "dependencies": {
+        "packages": [
+          {
+            "name": "Microsoft.SourceLink.GitHub",
+            "version": "1.1.1",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "Directory.Build.targets"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          }
+        ],
+        "assemblies": [],
+        "projectReferences": [
+          {
+            "name": "Piranha",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "identity\\Piranha.AspNetCore.Identity\\Piranha.AspNetCore.Identity.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha\\Piranha.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.Manager",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "identity\\Piranha.AspNetCore.Identity\\Piranha.AspNetCore.Identity.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha.Manager\\Piranha.Manager.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.Manager.LocalAuth",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "identity\\Piranha.AspNetCore.Identity\\Piranha.AspNetCore.Identity.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha.Manager.LocalAuth\\Piranha.Manager.LocalAuth.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.Manager.Localization",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "identity\\Piranha.AspNetCore.Identity\\Piranha.AspNetCore.Identity.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha.Manager.Localization\\Piranha.Manager.Localization.csproj",
+            "compatibility": "valid"
+          }
+        ],
+        "frameworkReferences": []
+      },
+      "imports": [
+        {
+          "path": "Directory.Build.props",
+          "isLocal": true
+        },
+        {
+          "path": "Directory.Build.targets",
+          "isLocal": true
+        }
+      ]
+    },
+    {
+      "name": "Piranha.AspNetCore.Identity.MySQL",
+      "path": "identity\\Piranha.AspNetCore.Identity.MySQL\\Piranha.AspNetCore.Identity.MySQL.csproj",
+      "isSdk": true,
+      "currentFrameworks": [
+        "net8.0",
+        "net9.0"
+      ],
+      "targetFramework": "net10.0",
+      "dependencies": {
+        "packages": [
+          {
+            "name": "Microsoft.SourceLink.GitHub",
+            "version": "1.1.1",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "Directory.Build.targets"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          }
+        ],
+        "assemblies": [],
+        "projectReferences": [
+          {
+            "name": "Piranha.AspNetCore.Identity",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "identity\\Piranha.AspNetCore.Identity.MySQL\\Piranha.AspNetCore.Identity.MySQL.csproj"
+              }
+            ],
+            "referencedProjectPath": "identity\\Piranha.AspNetCore.Identity\\Piranha.AspNetCore.Identity.csproj",
+            "compatibility": "valid"
+          }
+        ],
+        "frameworkReferences": []
+      },
+      "imports": [
+        {
+          "path": "Directory.Build.props",
+          "isLocal": true
+        },
+        {
+          "path": "Directory.Build.targets",
+          "isLocal": true
+        }
+      ]
+    },
+    {
+      "name": "Piranha.AspNetCore.Identity.PostgreSQL",
+      "path": "identity\\Piranha.AspNetCore.Identity.PostgreSQL\\Piranha.AspNetCore.Identity.PostgreSQL.csproj",
+      "isSdk": true,
+      "currentFrameworks": [
+        "net8.0",
+        "net9.0"
+      ],
+      "targetFramework": "net10.0",
+      "dependencies": {
+        "packages": [
+          {
+            "name": "Microsoft.SourceLink.GitHub",
+            "version": "1.1.1",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "Directory.Build.targets"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          }
+        ],
+        "assemblies": [],
+        "projectReferences": [
+          {
+            "name": "Piranha.AspNetCore.Identity",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "identity\\Piranha.AspNetCore.Identity.PostgreSQL\\Piranha.AspNetCore.Identity.PostgreSQL.csproj"
+              }
+            ],
+            "referencedProjectPath": "identity\\Piranha.AspNetCore.Identity\\Piranha.AspNetCore.Identity.csproj",
+            "compatibility": "valid"
+          }
+        ],
+        "frameworkReferences": []
+      },
+      "imports": [
+        {
+          "path": "Directory.Build.props",
+          "isLocal": true
+        },
+        {
+          "path": "Directory.Build.targets",
+          "isLocal": true
+        }
+      ]
+    },
+    {
+      "name": "Piranha.AspNetCore.Identity.SQLite",
+      "path": "identity\\Piranha.AspNetCore.Identity.SQLite\\Piranha.AspNetCore.Identity.SQLite.csproj",
+      "isSdk": true,
+      "currentFrameworks": [
+        "net8.0",
+        "net9.0"
+      ],
+      "targetFramework": "net10.0",
+      "dependencies": {
+        "packages": [
+          {
+            "name": "Microsoft.SourceLink.GitHub",
+            "version": "1.1.1",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "Directory.Build.targets"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          }
+        ],
+        "assemblies": [],
+        "projectReferences": [
+          {
+            "name": "Piranha.AspNetCore.Identity",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "identity\\Piranha.AspNetCore.Identity.SQLite\\Piranha.AspNetCore.Identity.SQLite.csproj"
+              }
+            ],
+            "referencedProjectPath": "identity\\Piranha.AspNetCore.Identity\\Piranha.AspNetCore.Identity.csproj",
+            "compatibility": "valid"
+          }
+        ],
+        "frameworkReferences": []
+      },
+      "imports": [
+        {
+          "path": "Directory.Build.props",
+          "isLocal": true
+        },
+        {
+          "path": "Directory.Build.targets",
+          "isLocal": true
+        }
+      ]
+    },
+    {
+      "name": "Piranha.AspNetCore.Identity.SQLServer",
+      "path": "identity\\Piranha.AspNetCore.Identity.SQLServer\\Piranha.AspNetCore.Identity.SQLServer.csproj",
+      "isSdk": true,
+      "currentFrameworks": [
+        "net8.0",
+        "net9.0"
+      ],
+      "targetFramework": "net10.0",
+      "dependencies": {
+        "packages": [
+          {
+            "name": "Microsoft.SourceLink.GitHub",
+            "version": "1.1.1",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "Directory.Build.targets"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          }
+        ],
+        "assemblies": [],
+        "projectReferences": [
+          {
+            "name": "Piranha.AspNetCore.Identity",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "identity\\Piranha.AspNetCore.Identity.SQLServer\\Piranha.AspNetCore.Identity.SQLServer.csproj"
+              }
+            ],
+            "referencedProjectPath": "identity\\Piranha.AspNetCore.Identity\\Piranha.AspNetCore.Identity.csproj",
+            "compatibility": "valid"
+          }
+        ],
+        "frameworkReferences": []
+      },
+      "imports": [
+        {
+          "path": "Directory.Build.props",
+          "isLocal": true
+        },
+        {
+          "path": "Directory.Build.targets",
+          "isLocal": true
+        }
+      ]
+    },
+    {
+      "name": "Piranha.AttributeBuilder",
+      "path": "core\\Piranha.AttributeBuilder\\Piranha.AttributeBuilder.csproj",
+      "isSdk": true,
+      "currentFrameworks": [
+        "net8.0",
+        "net9.0"
+      ],
+      "targetFramework": "net10.0",
+      "dependencies": {
+        "packages": [
+          {
+            "name": "Microsoft.SourceLink.GitHub",
+            "version": "1.1.1",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "Directory.Build.targets"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          }
+        ],
+        "assemblies": [],
+        "projectReferences": [
+          {
+            "name": "Piranha",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "core\\Piranha.AttributeBuilder\\Piranha.AttributeBuilder.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha\\Piranha.csproj",
+            "compatibility": "valid"
+          }
+        ],
+        "frameworkReferences": []
+      },
+      "imports": [
+        {
+          "path": "Directory.Build.props",
+          "isLocal": true
+        },
+        {
+          "path": "Directory.Build.targets",
+          "isLocal": true
+        }
+      ]
+    },
+    {
+      "name": "Piranha.Azure.BlobStorage",
+      "path": "core\\Piranha.Azure.BlobStorage\\Piranha.Azure.BlobStorage.csproj",
+      "isSdk": true,
+      "currentFrameworks": [
+        "net8.0",
+        "net9.0"
+      ],
+      "targetFramework": "net10.0",
+      "dependencies": {
+        "packages": [
+          {
+            "name": "Azure.Storage.Blobs",
+            "version": "12.18.0",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "core\\Piranha.Azure.BlobStorage\\Piranha.Azure.BlobStorage.csproj"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          },
+          {
+            "name": "Microsoft.SourceLink.GitHub",
+            "version": "1.1.1",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "Directory.Build.targets"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          }
+        ],
+        "assemblies": [],
+        "projectReferences": [
+          {
+            "name": "Piranha",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "core\\Piranha.Azure.BlobStorage\\Piranha.Azure.BlobStorage.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha\\Piranha.csproj",
+            "compatibility": "valid"
+          }
+        ],
+        "frameworkReferences": []
+      },
+      "imports": [
+        {
+          "path": "Directory.Build.props",
+          "isLocal": true
+        },
+        {
+          "path": "Directory.Build.targets",
+          "isLocal": true
+        }
+      ]
+    },
+    {
+      "name": "Piranha",
+      "path": "core\\Piranha\\Piranha.csproj",
+      "isSdk": true,
+      "currentFrameworks": [
+        "net8.0",
+        "net9.0"
+      ],
+      "targetFramework": "net10.0",
+      "dependencies": {
+        "packages": [
+          {
+            "name": "Markdig",
+            "version": "0.40.0",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "core\\Piranha\\Piranha.csproj"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          },
+          {
+            "name": "Newtonsoft.Json",
+            "version": "13.0.3",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "core\\Piranha\\Piranha.csproj"
+              }
+            ],
+            "description": "NuGet package upgrade is recommended",
+            "compatibility": "valid",
+            "recommendedVersion": "13.0.4",
+            "upgrade": {
+              "newVersion": "13.0.4"
+            }
+          },
+          {
+            "name": "Microsoft.SourceLink.GitHub",
+            "version": "1.1.1",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "Directory.Build.targets"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          }
+        ],
+        "assemblies": [],
+        "projectReferences": [],
+        "frameworkReferences": []
+      },
+      "imports": [
+        {
+          "path": "Directory.Build.props",
+          "isLocal": true
+        },
+        {
+          "path": "Directory.Build.targets",
+          "isLocal": true
+        }
+      ]
+    },
+    {
+      "name": "Piranha.Data.EF",
+      "path": "data\\Piranha.Data.EF\\Piranha.Data.EF.csproj",
+      "isSdk": true,
+      "currentFrameworks": [
+        "net8.0",
+        "net9.0"
+      ],
+      "targetFramework": "net10.0",
+      "dependencies": {
+        "packages": [
+          {
+            "name": "AutoMapper",
+            "version": "12.0.1",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "data\\Piranha.Data.EF\\Piranha.Data.EF.csproj"
+              }
+            ],
+            "description": "NuGet package contains security vulnerability",
+            "compatibility": "valid",
+            "recommendedVersion": "16.1.1",
+            "upgrade": {
+              "newVersion": "16.1.1"
+            }
+          },
+          {
+            "name": "Microsoft.SourceLink.GitHub",
+            "version": "1.1.1",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "Directory.Build.targets"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          }
+        ],
+        "assemblies": [],
+        "projectReferences": [
+          {
+            "name": "Piranha",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "data\\Piranha.Data.EF\\Piranha.Data.EF.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha\\Piranha.csproj",
+            "compatibility": "valid"
+          }
+        ],
+        "frameworkReferences": []
+      },
+      "imports": [
+        {
+          "path": "Directory.Build.props",
+          "isLocal": true
+        },
+        {
+          "path": "Directory.Build.targets",
+          "isLocal": true
+        }
+      ]
+    },
+    {
+      "name": "Piranha.Data.EF.MySql",
+      "path": "data\\Piranha.Data.EF.MySql\\Piranha.Data.EF.MySql.csproj",
+      "isSdk": true,
+      "currentFrameworks": [
+        "net8.0",
+        "net9.0"
+      ],
+      "targetFramework": "net10.0",
+      "dependencies": {
+        "packages": [
+          {
+            "name": "Microsoft.SourceLink.GitHub",
+            "version": "1.1.1",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "Directory.Build.targets"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          }
+        ],
+        "assemblies": [],
+        "projectReferences": [
+          {
+            "name": "Piranha.Data.EF",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "data\\Piranha.Data.EF.MySql\\Piranha.Data.EF.MySql.csproj"
+              }
+            ],
+            "referencedProjectPath": "data\\Piranha.Data.EF\\Piranha.Data.EF.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "data\\Piranha.Data.EF.MySql\\Piranha.Data.EF.MySql.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha\\Piranha.csproj",
+            "compatibility": "valid"
+          }
+        ],
+        "frameworkReferences": []
+      },
+      "imports": [
+        {
+          "path": "Directory.Build.props",
+          "isLocal": true
+        },
+        {
+          "path": "Directory.Build.targets",
+          "isLocal": true
+        }
+      ]
+    },
+    {
+      "name": "Piranha.Data.EF.PostgreSql",
+      "path": "data\\Piranha.Data.EF.PostgreSql\\Piranha.Data.EF.PostgreSql.csproj",
+      "isSdk": true,
+      "currentFrameworks": [
+        "net8.0",
+        "net9.0"
+      ],
+      "targetFramework": "net10.0",
+      "dependencies": {
+        "packages": [
+          {
+            "name": "Microsoft.SourceLink.GitHub",
+            "version": "1.1.1",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "Directory.Build.targets"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          }
+        ],
+        "assemblies": [],
+        "projectReferences": [
+          {
+            "name": "Piranha.Data.EF",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "data\\Piranha.Data.EF.PostgreSql\\Piranha.Data.EF.PostgreSql.csproj"
+              }
+            ],
+            "referencedProjectPath": "data\\Piranha.Data.EF\\Piranha.Data.EF.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "data\\Piranha.Data.EF.PostgreSql\\Piranha.Data.EF.PostgreSql.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha\\Piranha.csproj",
+            "compatibility": "valid"
+          }
+        ],
+        "frameworkReferences": []
+      },
+      "imports": [
+        {
+          "path": "Directory.Build.props",
+          "isLocal": true
+        },
+        {
+          "path": "Directory.Build.targets",
+          "isLocal": true
+        }
+      ]
+    },
+    {
+      "name": "Piranha.Data.EF.SQLite",
+      "path": "data\\Piranha.Data.EF.SQLite\\Piranha.Data.EF.SQLite.csproj",
+      "isSdk": true,
+      "currentFrameworks": [
+        "net8.0",
+        "net9.0"
+      ],
+      "targetFramework": "net10.0",
+      "dependencies": {
+        "packages": [
+          {
+            "name": "Microsoft.SourceLink.GitHub",
+            "version": "1.1.1",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "Directory.Build.targets"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          }
+        ],
+        "assemblies": [],
+        "projectReferences": [
+          {
+            "name": "Piranha.Data.EF",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "data\\Piranha.Data.EF.SQLite\\Piranha.Data.EF.SQLite.csproj"
+              }
+            ],
+            "referencedProjectPath": "data\\Piranha.Data.EF\\Piranha.Data.EF.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "data\\Piranha.Data.EF.SQLite\\Piranha.Data.EF.SQLite.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha\\Piranha.csproj",
+            "compatibility": "valid"
+          }
+        ],
+        "frameworkReferences": []
+      },
+      "imports": [
+        {
+          "path": "Directory.Build.props",
+          "isLocal": true
+        },
+        {
+          "path": "Directory.Build.targets",
+          "isLocal": true
+        }
+      ]
+    },
+    {
+      "name": "Piranha.Data.EF.SQLServer",
+      "path": "data\\Piranha.Data.EF.SQLServer\\Piranha.Data.EF.SQLServer.csproj",
+      "isSdk": true,
+      "currentFrameworks": [
+        "net8.0",
+        "net9.0"
+      ],
+      "targetFramework": "net10.0",
+      "dependencies": {
+        "packages": [
+          {
+            "name": "Microsoft.SourceLink.GitHub",
+            "version": "1.1.1",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "Directory.Build.targets"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          }
+        ],
+        "assemblies": [],
+        "projectReferences": [
+          {
+            "name": "Piranha.Data.EF",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "data\\Piranha.Data.EF.SQLServer\\Piranha.Data.EF.SQLServer.csproj"
+              }
+            ],
+            "referencedProjectPath": "data\\Piranha.Data.EF\\Piranha.Data.EF.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "data\\Piranha.Data.EF.SQLServer\\Piranha.Data.EF.SQLServer.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha\\Piranha.csproj",
+            "compatibility": "valid"
+          }
+        ],
+        "frameworkReferences": []
+      },
+      "imports": [
+        {
+          "path": "Directory.Build.props",
+          "isLocal": true
+        },
+        {
+          "path": "Directory.Build.targets",
+          "isLocal": true
+        }
+      ]
+    },
+    {
+      "name": "Piranha.ImageSharp",
+      "path": "core\\Piranha.ImageSharp\\Piranha.ImageSharp.csproj",
+      "isSdk": true,
+      "currentFrameworks": [
+        "net8.0",
+        "net9.0"
+      ],
+      "targetFramework": "net10.0",
+      "dependencies": {
+        "packages": [
+          {
+            "name": "SixLabors.ImageSharp",
+            "version": "2.1.13",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "core\\Piranha.ImageSharp\\Piranha.ImageSharp.csproj"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          },
+          {
+            "name": "Microsoft.SourceLink.GitHub",
+            "version": "1.1.1",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "Directory.Build.targets"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          }
+        ],
+        "assemblies": [],
+        "projectReferences": [
+          {
+            "name": "Piranha",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "core\\Piranha.ImageSharp\\Piranha.ImageSharp.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha\\Piranha.csproj",
+            "compatibility": "valid"
+          }
+        ],
+        "frameworkReferences": []
+      },
+      "imports": [
+        {
+          "path": "Directory.Build.props",
+          "isLocal": true
+        },
+        {
+          "path": "Directory.Build.targets",
+          "isLocal": true
+        }
+      ]
+    },
+    {
+      "name": "Piranha.Local.FileStorage",
+      "path": "core\\Piranha.Local.FileStorage\\Piranha.Local.FileStorage.csproj",
+      "isSdk": true,
+      "currentFrameworks": [
+        "net8.0",
+        "net9.0"
+      ],
+      "targetFramework": "net10.0",
+      "dependencies": {
+        "packages": [
+          {
+            "name": "Microsoft.SourceLink.GitHub",
+            "version": "1.1.1",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "Directory.Build.targets"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          }
+        ],
+        "assemblies": [],
+        "projectReferences": [
+          {
+            "name": "Piranha",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "core\\Piranha.Local.FileStorage\\Piranha.Local.FileStorage.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha\\Piranha.csproj",
+            "compatibility": "valid"
+          }
+        ],
+        "frameworkReferences": []
+      },
+      "imports": [
+        {
+          "path": "Directory.Build.props",
+          "isLocal": true
+        },
+        {
+          "path": "Directory.Build.targets",
+          "isLocal": true
+        }
+      ]
+    },
+    {
+      "name": "Piranha.Manager",
+      "path": "core\\Piranha.Manager\\Piranha.Manager.csproj",
+      "isSdk": true,
+      "currentFrameworks": [
+        "net8.0",
+        "net9.0"
+      ],
+      "targetFramework": "net10.0",
+      "dependencies": {
+        "packages": [
+          {
+            "name": "Microsoft.SourceLink.GitHub",
+            "version": "1.1.1",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "Directory.Build.targets"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          }
+        ],
+        "assemblies": [],
+        "projectReferences": [
+          {
+            "name": "Piranha",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "core\\Piranha.Manager\\Piranha.Manager.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha\\Piranha.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.AspNetCore.Hosting",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "core\\Piranha.Manager\\Piranha.Manager.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha.AspNetCore.Hosting\\Piranha.AspNetCore.Hosting.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.Manager.Localization",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "core\\Piranha.Manager\\Piranha.Manager.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha.Manager.Localization\\Piranha.Manager.Localization.csproj",
+            "compatibility": "valid"
+          }
+        ],
+        "frameworkReferences": []
+      },
+      "imports": [
+        {
+          "path": "Directory.Build.props",
+          "isLocal": true
+        },
+        {
+          "path": "Directory.Build.targets",
+          "isLocal": true
+        }
+      ]
+    },
+    {
+      "name": "Piranha.Manager.LocalAuth",
+      "path": "core\\Piranha.Manager.LocalAuth\\Piranha.Manager.LocalAuth.csproj",
+      "isSdk": true,
+      "currentFrameworks": [
+        "net8.0",
+        "net9.0"
+      ],
+      "targetFramework": "net10.0",
+      "dependencies": {
+        "packages": [
+          {
+            "name": "Microsoft.SourceLink.GitHub",
+            "version": "1.1.1",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "Directory.Build.targets"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          }
+        ],
+        "assemblies": [],
+        "projectReferences": [
+          {
+            "name": "Piranha",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "core\\Piranha.Manager.LocalAuth\\Piranha.Manager.LocalAuth.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha\\Piranha.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.Manager",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "core\\Piranha.Manager.LocalAuth\\Piranha.Manager.LocalAuth.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha.Manager\\Piranha.Manager.csproj",
+            "compatibility": "valid"
+          }
+        ],
+        "frameworkReferences": []
+      },
+      "imports": [
+        {
+          "path": "Directory.Build.props",
+          "isLocal": true
+        },
+        {
+          "path": "Directory.Build.targets",
+          "isLocal": true
+        }
+      ]
+    },
+    {
+      "name": "Piranha.Manager.Localization",
+      "path": "core\\Piranha.Manager.Localization\\Piranha.Manager.Localization.csproj",
+      "isSdk": true,
+      "currentFrameworks": [
+        "net8.0",
+        "net9.0"
+      ],
+      "targetFramework": "net10.0",
+      "dependencies": {
+        "packages": [
+          {
+            "name": "Microsoft.SourceLink.GitHub",
+            "version": "1.1.1",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "Directory.Build.targets"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          }
+        ],
+        "assemblies": [],
+        "projectReferences": [],
+        "frameworkReferences": []
+      },
+      "imports": [
+        {
+          "path": "Directory.Build.props",
+          "isLocal": true
+        },
+        {
+          "path": "Directory.Build.targets",
+          "isLocal": true
+        }
+      ]
+    },
+    {
+      "name": "Piranha.Manager.Tests",
+      "path": "test\\Piranha.Manager.Tests\\Piranha.Manager.Tests.csproj",
+      "isSdk": true,
+      "currentFrameworks": [
+        "net8.0",
+        "net9.0"
+      ],
+      "targetFramework": "net10.0",
+      "dependencies": {
+        "packages": [
+          {
+            "name": "Microsoft.NET.Test.Sdk",
+            "version": "17.9.0",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "test\\Piranha.Manager.Tests\\Piranha.Manager.Tests.csproj"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          },
+          {
+            "name": "xunit",
+            "version": "2.7.0",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "test\\Piranha.Manager.Tests\\Piranha.Manager.Tests.csproj"
+              }
+            ],
+            "description": "NuGet package is deprecated",
+            "compatibility": "newVersionNeeded",
+            "recommendedVersion": ""
+          },
+          {
+            "name": "xunit.runner.visualstudio",
+            "version": "2.5.7",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "test\\Piranha.Manager.Tests\\Piranha.Manager.Tests.csproj"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          },
+          {
+            "name": "coverlet.collector",
+            "version": "6.0.2",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "test\\Piranha.Manager.Tests\\Piranha.Manager.Tests.csproj"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          },
+          {
+            "name": "coverlet.msbuild",
+            "version": "6.0.2",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "test\\Piranha.Manager.Tests\\Piranha.Manager.Tests.csproj"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          },
+          {
+            "name": "Microsoft.SourceLink.GitHub",
+            "version": "1.1.1",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "Directory.Build.targets"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          }
+        ],
+        "assemblies": [],
+        "projectReferences": [
+          {
+            "name": "Piranha.Manager",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "test\\Piranha.Manager.Tests\\Piranha.Manager.Tests.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha.Manager\\Piranha.Manager.csproj",
+            "compatibility": "valid"
+          }
+        ],
+        "frameworkReferences": []
+      },
+      "imports": [
+        {
+          "path": "Directory.Build.props",
+          "isLocal": true
+        },
+        {
+          "path": "Directory.Build.targets",
+          "isLocal": true
+        }
+      ]
+    },
+    {
+      "name": "Piranha.Manager.TinyMCE",
+      "path": "core\\Piranha.Manager.TinyMCE\\Piranha.Manager.TinyMCE.csproj",
+      "isSdk": true,
+      "currentFrameworks": [
+        "net8.0",
+        "net9.0"
+      ],
+      "targetFramework": "net10.0",
+      "dependencies": {
+        "packages": [
+          {
+            "name": "Microsoft.SourceLink.GitHub",
+            "version": "1.1.1",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "Directory.Build.targets"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          }
+        ],
+        "assemblies": [],
+        "projectReferences": [
+          {
+            "name": "Piranha.Manager",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "core\\Piranha.Manager.TinyMCE\\Piranha.Manager.TinyMCE.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha.Manager\\Piranha.Manager.csproj",
+            "compatibility": "valid"
+          }
+        ],
+        "frameworkReferences": []
+      },
+      "imports": [
+        {
+          "path": "Directory.Build.props",
+          "isLocal": true
+        },
+        {
+          "path": "Directory.Build.targets",
+          "isLocal": true
+        }
+      ]
+    },
+    {
+      "name": "Piranha.Tests",
+      "path": "test\\Piranha.Tests\\Piranha.Tests.csproj",
+      "isSdk": true,
+      "currentFrameworks": [
+        "net8.0",
+        "net9.0"
+      ],
+      "targetFramework": "net10.0",
+      "dependencies": {
+        "packages": [
+          {
+            "name": "Microsoft.NET.Test.Sdk",
+            "version": "17.9.0",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "test\\Piranha.Tests\\Piranha.Tests.csproj"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          },
+          {
+            "name": "xunit",
+            "version": "2.7.0",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "test\\Piranha.Tests\\Piranha.Tests.csproj"
+              }
+            ],
+            "description": "NuGet package is deprecated",
+            "compatibility": "newVersionNeeded",
+            "recommendedVersion": ""
+          },
+          {
+            "name": "xunit.runner.visualstudio",
+            "version": "2.5.7",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "test\\Piranha.Tests\\Piranha.Tests.csproj"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          },
+          {
+            "name": "coverlet.collector",
+            "version": "6.0.2",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "test\\Piranha.Tests\\Piranha.Tests.csproj"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          },
+          {
+            "name": "coverlet.msbuild",
+            "version": "6.0.2",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "test\\Piranha.Tests\\Piranha.Tests.csproj"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          },
+          {
+            "name": "Microsoft.SourceLink.GitHub",
+            "version": "1.1.1",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "Directory.Build.targets"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          }
+        ],
+        "assemblies": [],
+        "projectReferences": [
+          {
+            "name": "Piranha",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "test\\Piranha.Tests\\Piranha.Tests.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha\\Piranha.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.AttributeBuilder",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "test\\Piranha.Tests\\Piranha.Tests.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha.AttributeBuilder\\Piranha.AttributeBuilder.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.ImageSharp",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "test\\Piranha.Tests\\Piranha.Tests.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha.ImageSharp\\Piranha.ImageSharp.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.Local.FileStorage",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "test\\Piranha.Tests\\Piranha.Tests.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha.Local.FileStorage\\Piranha.Local.FileStorage.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.Data.EF",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "test\\Piranha.Tests\\Piranha.Tests.csproj"
+              }
+            ],
+            "referencedProjectPath": "data\\Piranha.Data.EF\\Piranha.Data.EF.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.Data.EF.SQLite",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "test\\Piranha.Tests\\Piranha.Tests.csproj"
+              }
+            ],
+            "referencedProjectPath": "data\\Piranha.Data.EF.SQLite\\Piranha.Data.EF.SQLite.csproj",
+            "compatibility": "valid"
+          }
+        ],
+        "frameworkReferences": []
+      },
+      "imports": [
+        {
+          "path": "Directory.Build.props",
+          "isLocal": true
+        },
+        {
+          "path": "Directory.Build.targets",
+          "isLocal": true
+        }
+      ]
+    },
+    {
+      "name": "Piranha.WebApi",
+      "path": "core\\Piranha.WebApi\\Piranha.WebApi.csproj",
+      "isSdk": true,
+      "currentFrameworks": [
+        "net8.0",
+        "net9.0"
+      ],
+      "targetFramework": "net10.0",
+      "dependencies": {
+        "packages": [
+          {
+            "name": "Microsoft.SourceLink.GitHub",
+            "version": "1.1.1",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "Directory.Build.targets"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          }
+        ],
+        "assemblies": [],
+        "projectReferences": [
+          {
+            "name": "Piranha",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "core\\Piranha.WebApi\\Piranha.WebApi.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha\\Piranha.csproj",
+            "compatibility": "valid"
+          }
+        ],
+        "frameworkReferences": []
+      },
+      "imports": [
+        {
+          "path": "Directory.Build.props",
+          "isLocal": true
+        },
+        {
+          "path": "Directory.Build.targets",
+          "isLocal": true
+        }
+      ]
+    },
+    {
+      "name": "RazorWeb",
+      "path": "examples\\RazorWeb\\RazorWeb.csproj",
+      "isSdk": true,
+      "currentFrameworks": [
+        "net8.0",
+        "net9.0"
+      ],
+      "targetFramework": "net10.0",
+      "dependencies": {
+        "packages": [
+          {
+            "name": "Microsoft.SourceLink.GitHub",
+            "version": "1.1.1",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "Directory.Build.targets"
+              }
+            ],
+            "description": "",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          }
+        ],
+        "assemblies": [],
+        "projectReferences": [
+          {
+            "name": "Piranha",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "examples\\RazorWeb\\RazorWeb.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha\\Piranha.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.AspNetCore",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "examples\\RazorWeb\\RazorWeb.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha.AspNetCore\\Piranha.AspNetCore.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.AttributeBuilder",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "examples\\RazorWeb\\RazorWeb.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha.AttributeBuilder\\Piranha.AttributeBuilder.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.ImageSharp",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "examples\\RazorWeb\\RazorWeb.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha.ImageSharp\\Piranha.ImageSharp.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.Local.FileStorage",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "examples\\RazorWeb\\RazorWeb.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha.Local.FileStorage\\Piranha.Local.FileStorage.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.Manager",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "examples\\RazorWeb\\RazorWeb.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha.Manager\\Piranha.Manager.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.Manager.LocalAuth",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "examples\\RazorWeb\\RazorWeb.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha.Manager.LocalAuth\\Piranha.Manager.LocalAuth.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.Manager.TinyMCE",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "examples\\RazorWeb\\RazorWeb.csproj"
+              }
+            ],
+            "referencedProjectPath": "core\\Piranha.Manager.TinyMCE\\Piranha.Manager.TinyMCE.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.Data.EF.SQLite",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "examples\\RazorWeb\\RazorWeb.csproj"
+              }
+            ],
+            "referencedProjectPath": "data\\Piranha.Data.EF.SQLite\\Piranha.Data.EF.SQLite.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.Data.EF.SQLServer",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "examples\\RazorWeb\\RazorWeb.csproj"
+              }
+            ],
+            "referencedProjectPath": "data\\Piranha.Data.EF.SQLServer\\Piranha.Data.EF.SQLServer.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.Data.EF.MySql",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "examples\\RazorWeb\\RazorWeb.csproj"
+              }
+            ],
+            "referencedProjectPath": "data\\Piranha.Data.EF.MySql\\Piranha.Data.EF.MySql.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.Data.EF.PostgreSql",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "examples\\RazorWeb\\RazorWeb.csproj"
+              }
+            ],
+            "referencedProjectPath": "data\\Piranha.Data.EF.PostgreSql\\Piranha.Data.EF.PostgreSql.csproj",
+            "compatibility": "valid"
+          },
+          {
+            "name": "Piranha.AspNetCore.Identity.SQLite",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "examples\\RazorWeb\\RazorWeb.csproj"
+              }
+            ],
+            "referencedProjectPath": "identity\\Piranha.AspNetCore.Identity.SQLite\\Piranha.AspNetCore.Identity.SQLite.csproj",
+            "compatibility": "valid"
+          }
+        ],
+        "frameworkReferences": []
+      },
+      "imports": [
+        {
+          "path": "Directory.Build.props",
+          "isLocal": true
+        },
+        {
+          "path": "Directory.Build.targets",
+          "isLocal": true
+        }
+      ]
+    }
+  ]
+}

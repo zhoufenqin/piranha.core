@@ -1,0 +1,1930 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Assessment - MvcWeb</title>
+<style>
+:root {
+  --bg-primary: #ffffff;
+  --bg-card: #f8f9fa;
+  --bg-page: #f0f1f3;
+  --text-primary: #24292f;
+  --text-secondary: #57606a;
+  --text-muted: #6b7280;
+  --border-color: #d0d7de;
+  --border-light: #e1e4e8;
+  --link-color: #2563eb;
+  --color-mandatory: #E3008C;
+  --color-potential: #637CEF;
+  --color-optional: #A19F9D;
+  --font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  --font-mono: 'Cascadia Code', 'Consolas', 'Courier New', monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-family); font-size: 13px; color: var(--text-primary); background: var(--bg-primary); line-height: 1.5; margin: 0; padding: 0; }
+a { color: var(--link-color); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── Page layout ───────────────────────────────────────────── */
+.main { margin: 0; padding: 24px 32px; background: var(--bg-primary); }
+.back-link { color: var(--text-muted); font-size: 13px; margin-bottom: 16px; display: block; }
+h1 { font-weight: 600; font-size: 20px; color: var(--text-primary); margin-bottom: 20px; }
+
+/* ── Report cards (matches VS Code .vscode-report-card) ──── */
+.report-card { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 4px; padding: 12px; margin-bottom: 20px; }
+.report-card h2 { font-size: 14px; font-weight: 600; margin: 0; color: var(--text-primary); }
+.report-card-body { margin-top: 16px; }
+
+/* ── Component Information (two-column) ────────────────── */
+.app-info-container { display: flex; gap: 8px; flex-wrap: wrap; }
+.app-info-column { flex: 1; min-width: 200px; display: flex; flex-direction: column; gap: 8px; }
+.app-info-row { display: flex; align-items: baseline; }
+.app-info-label { width: 136px; flex-shrink: 0; font-weight: 600; color: var(--text-primary); }
+.app-info-value { flex: 1; color: var(--text-primary); }
+
+/* ── Issue Summary (pie charts + legend) ─────────────────── */
+.cards-container { display: flex; align-items: stretch; gap: 20px; flex-wrap: wrap; }
+.issue-summary-card { flex: 2; }
+.domain-summary-container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-around; }
+.domain-summary-item { flex: 1; min-width: 120px; text-align: center; padding: 0 16px; border-right: 1px solid var(--border-light); }
+.domain-summary-item:last-child { border-right: none; }
+.domain-summary-item h3 { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-top: 8px; }
+.domain-summary-item .count { font-size: 12px; color: var(--text-secondary); }
+.criticality-legend { display: flex; flex-wrap: wrap; gap: 15px; padding-top: 12px; justify-content: center; }
+.criticality-legend .legend-item { display: flex; align-items: center; gap: 4px; font-size: 12px; color: var(--text-secondary); }
+.legend-swatch { display: inline-block; width: 1em; height: 1em; border-radius: 2px; }
+
+/* ── Issue list tables ───────────────────────────────────── */
+.issue-section { margin-top: 20px; }
+.issue-section h2 { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+.issue-table { width: 100%; border-collapse: collapse; table-layout: fixed; min-width: 600px; }
+.issue-table th { text-align: left; text-transform: uppercase; font-weight: 600; font-size: calc(13px * 0.875); padding: 6px 8px; background: var(--bg-card); border-bottom: 1px solid var(--border-color); color: var(--text-secondary); position: sticky; top: 0; z-index: 1; }
+.issue-table td { padding: 12px 8px; border-bottom: 1px solid var(--border-light); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: middle; }
+.col-issue { width: 55%; }
+.col-criticality { width: 25%; }
+.col-storypoint { width: 20%; }
+
+/* ── Target dropdown ─────────────────────────────────────── */
+.target-select-container { margin: 4px 0 16px 0; display: flex; align-items: center; gap: 8px; }
+.target-select-container label { font-weight: 600; color: var(--text-primary); font-size: 14px; }
+.target-select-container select { font-family: var(--font-family); font-size: 13px; padding: 4px 8px; border: 1px solid var(--border-color); border-radius: 4px; background: var(--bg-primary); color: var(--text-primary); cursor: pointer; }
+
+/* ── Filter bar ──────────────────────────────────────────── */
+.filter-bar { display: flex; flex-wrap: wrap; gap: 16px; margin: 16px 0 8px 0; align-items: center; }
+.multi-select { position: relative; display: inline-block; min-width: 140px; }
+.multi-select-btn { font-family: var(--font-family); font-size: 13px; padding: 4px 24px 4px 8px; border: 1px solid var(--border-color); border-radius: 4px; background: var(--bg-primary); color: var(--text-primary); cursor: pointer; width: 100%; text-align: left; position: relative; white-space: nowrap; }
+.multi-select-btn::after { content: '\25BE'; position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-size: 11px; color: var(--text-secondary); }
+.multi-select-dropdown { display: none; position: absolute; top: 100%; left: 0; min-width: 100%; background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 100; margin-top: 2px; }
+.multi-select.open .multi-select-dropdown { display: block; }
+.multi-select-option { display: flex; align-items: center; gap: 6px; padding: 5px 10px; cursor: pointer; font-size: 13px; white-space: nowrap; }
+.multi-select-option:hover { background: var(--bg-secondary); }
+.multi-select-option input[type=checkbox] { margin: 0; cursor: pointer; }
+.clear-filters { font-size: 12px; color: var(--link-color); cursor: pointer; margin-left: 4px; }
+
+/* ── Criticality labels (colored square + text) ──────────── */
+.crit-label { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; white-space: nowrap; }
+.crit-square { display: inline-block; width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+.crit-square-mandatory { background: var(--color-mandatory); }
+.crit-square-potential { background: var(--color-potential); }
+.crit-square-optional { background: var(--color-optional); }
+
+/* ── Expandable rows ─────────────────────────────────────── */
+.expand-btn { background: none; border: none; cursor: pointer; width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 11px; transition: transform 0.15s; padding: 0; vertical-align: middle; flex-shrink: 0; }
+.expand-btn.open { transform: rotate(90deg); }
+.issue-title-cell { display: flex; align-items: center; gap: 4px; }
+.detail-row td { padding: 0; border-bottom: 1px solid var(--border-light); white-space: normal; overflow: visible; text-overflow: clip; }
+.detail-content { display: flex; gap: 0; padding: 8px 8px 8px 32px; min-width: 0; }
+.file-list { flex: 0 0 50%; min-width: 0; overflow: hidden; }
+.file-list table { width: 100%; border-collapse: collapse; }
+.file-list th { font-size: calc(13px * 0.875); text-transform: uppercase; font-weight: 600; color: var(--text-secondary); padding: 6px 8px; border-bottom: 1px solid var(--border-color); text-align: left; height: 32px; }
+.file-list td { font-size: 13px; padding: 6px 8px; border-bottom: 1px solid var(--border-light); color: var(--text-primary); }
+.file-list .file-path { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 300px; display: block; }
+.file-list .position { font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary); }
+.explanation-panel { flex: 1; padding-left: 16px; min-width: 0; overflow-wrap: break-word; word-wrap: break-word; }
+.explanation-panel h4 { font-size: calc(13px * 0.875); text-transform: uppercase; font-weight: 600; color: var(--text-secondary); padding: 6px 0; border-bottom: 1px solid var(--border-color); height: 32px; margin: 0; }
+.explanation-panel p { font-size: 13px; padding: 8px 0; color: var(--text-primary); line-height: 1.6; white-space: normal; word-break: break-word; }
+
+/* ── Experimental badge ──────────────────────────────────── */
+.badge-experimental { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; background: #fef9c3; color: #854d0e; vertical-align: middle; margin-left: 8px; cursor: default; }
+
+/* ── Footer ──────────────────────────────────────────────── */
+.footer { text-align: center; margin-top: 24px; color: var(--text-muted); font-size: 13px; }
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 800px) {
+  .main { padding: 16px; }
+  .app-info-container { flex-direction: column; }
+  .domain-summary-container { flex-direction: column; }
+  .domain-summary-item { border-right: none; border-bottom: 1px solid var(--border-light); padding-bottom: 12px; }
+  .detail-content { flex-direction: column; }
+  .file-list { flex: none; width: 100%; }
+  .explanation-panel { padding-left: 0; padding-top: 8px; }
+}
+/* ── Tab navigation ──────────────────────────────────────── */
+.tab-nav { display: flex; gap: 0; border-bottom: 1px solid var(--border-color); margin-bottom: 28px; flex-wrap: wrap; }
+.tab-btn { background: none; border: none; border-bottom: 2px solid transparent; padding: 10px 18px; font-size: 13px; font-family: var(--font-family); color: var(--text-secondary); cursor: pointer; margin-bottom: -1px; white-space: nowrap; position: relative; }
+.tab-btn:hover { color: var(--text-primary); }
+.tab-btn.active { color: var(--link-color); border-bottom-color: var(--link-color); font-weight: 600; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ── Tooltip on tab ──────────────────────────────────────── */
+.tab-btn[data-tooltip]::after { content: attr(data-tooltip); position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: #24292f; color: #ffffff; font-size: 12px; font-weight: 400; padding: 6px 10px; border-radius: 4px; white-space: normal; width: max-content; max-width: 260px; text-align: center; pointer-events: none; opacity: 0; transition: opacity 0.15s; z-index: 100; }
+.tab-btn[data-tooltip]:hover::after { opacity: 1; }
+
+/* ── Fact content — prose column ─────────────────────────── */
+.fact-content { max-width: 860px; margin: 0 auto; line-height: 1.75; color: var(--text-primary); font-size: 14px; }
+.fact-content h1 { font-size: 22px; font-weight: 700; margin: 0 0 6px 0; color: var(--text-primary); letter-spacing: -0.01em; }
+.fact-content h1 + p { margin-top: 6px; color: var(--text-secondary); font-size: 14px; margin-bottom: 24px; }
+.fact-content h2 { font-size: 17px; font-weight: 700; margin: 36px 0 12px 0; padding-bottom: 6px; border-bottom: 1px solid var(--border-color); color: var(--text-primary); letter-spacing: -0.01em; }
+.fact-content h3 { font-size: 14px; font-weight: 700; margin: 24px 0 8px 0; color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.04em; font-size: 12px; color: var(--text-secondary); }
+.fact-content p { margin: 10px 0; color: var(--text-primary); }
+.fact-content ul, .fact-content ol { margin: 10px 0 10px 22px; }
+.fact-content li { margin: 5px 0; }
+.fact-content a { color: var(--link-color); }
+.fact-content a:hover { text-decoration: underline; }
+
+/* ── Fact tables ─────────────────────────────────────────── */
+.table-wrap { overflow-x: auto; margin: 16px 0; }
+.fact-content table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 13px; border-radius: 6px; overflow: hidden; border: 1px solid var(--border-color); }
+.fact-content thead { background: var(--bg-card); }
+.fact-content th { text-align: left; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; padding: 8px 14px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); }
+.fact-content td { padding: 9px 14px; border-bottom: 1px solid var(--border-light); vertical-align: top; color: var(--text-primary); }
+.fact-content tr:last-child td { border-bottom: none; }
+.fact-content tbody tr:hover { background: #f6f8fa; }
+
+/* ── Fact code ───────────────────────────────────────────── */
+.fact-content code { font-family: var(--font-mono); font-size: 12px; background: #f0f1f3; padding: 2px 6px; border-radius: 4px; color: #c7254e; }
+.fact-content pre { background: #f6f8fa; border: 1px solid var(--border-light); border-radius: 6px; padding: 14px 16px; overflow-x: auto; margin: 14px 0; }
+.fact-content pre code { background: none; color: var(--text-primary); padding: 0; border-radius: 0; }
+.fact-content hr { border: none; border-top: 1px solid var(--border-light); margin: 28px 0; }
+.fact-content strong { font-weight: 600; }
+.fact-content em { font-style: italic; }
+.fact-content blockquote { border-left: 3px solid var(--border-color); margin: 12px 0; padding: 4px 16px; color: var(--text-secondary); }
+.fact-unavailable { padding: 32px 0; }
+.fact-unavailable h3 { font-size: 16px; font-weight: 600; color: var(--text-primary); text-transform: none; letter-spacing: 0; margin: 0 0 12px 0; }
+.fact-unavailable p { margin: 0 0 8px 0; color: var(--text-secondary); }
+.fact-unavailable ol, .fact-unavailable ul { margin: 0 0 0 22px; color: var(--text-primary); }
+.fact-unavailable li { margin: 6px 0; }
+
+/* ── Mermaid diagram card ─────────────────────────────────── */
+.mermaid { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 8px; padding: 24px 16px; margin: 20px 0; overflow-x: auto; text-align: center; cursor: pointer; position: relative; }
+.mermaid:hover { border-color: var(--border-color); }
+.mermaid svg { max-width: 100%; height: auto !important; display: inline-block; }
+.mermaid-zoom-hint { position: absolute; top: 8px; right: 10px; font-size: 11px; color: var(--text-muted); opacity: 0; transition: opacity 0.15s; pointer-events: none; }
+.mermaid:hover .mermaid-zoom-hint { opacity: 1; }
+
+/* ── Diagram lightbox ────────────────────────────────────── */
+.diagram-lightbox { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,0.7); backdrop-filter: blur(2px); align-items: center; justify-content: center; cursor: zoom-out; padding: 48px 32px; }
+.diagram-lightbox.open { display: flex; }
+.diagram-lightbox-inner { background: #ffffff; border-radius: 10px; padding: 32px; width: 88vw; max-height: 88vh; overflow: hidden; cursor: default; box-shadow: 0 24px 64px rgba(0,0,0,0.35); display: flex; align-items: center; justify-content: center; }
+.diagram-lightbox-inner svg { width: 100% !important; height: auto !important; max-height: 76vh; display: block; }
+.diagram-lightbox-close { position: fixed; top: 20px; right: 24px; background: #ffffff; border: none; border-radius: 50%; width: 36px; height: 36px; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text-primary); box-shadow: 0 2px 8px rgba(0,0,0,0.2); z-index: 1001; }
+.diagram-lightbox-close:hover { background: var(--bg-card); }
+.diagram-lightbox-hint { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.55); color: #ffffff; font-size: 12px; padding: 6px 14px; border-radius: 20px; pointer-events: none; white-space: nowrap; z-index: 1001; }
+</style>
+<script>
+window.__mermaidPending = [];
+window.__mermaidReady = false;
+window.__renderMermaidIn = function(container) {
+  if (container) { window.__mermaidPending.push(container); }
+};
+</script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+mermaid.initialize({ startOnLoad: false, theme: 'default', flowchart: { useMaxWidth: true }, sequence: { useMaxWidth: true } });
+
+window.__renderMermaidIn = function(container) {
+  var nodes = container ? container.querySelectorAll('.mermaid:not([data-processed])') : [];
+  if (nodes.length > 0) {
+    mermaid.run({ nodes: Array.from(nodes) }).then(function() {
+      nodes.forEach(function(node) {
+        if (!node.querySelector('.mermaid-zoom-hint')) {
+          var hint = document.createElement('span');
+          hint.className = 'mermaid-zoom-hint';
+          hint.textContent = 'Click to expand';
+          node.appendChild(hint);
+        }
+      });
+    });
+  }
+};
+
+var drained = new Set();
+(window.__mermaidPending || []).forEach(function(c) {
+  if (!drained.has(c)) { drained.add(c); window.__renderMermaidIn(c); }
+});
+window.__mermaidPending = [];
+window.__mermaidReady = true;
+
+function renderActivePanels() {
+  document.querySelectorAll('.tab-panel.active').forEach(function(p) {
+    if (!drained.has(p)) { drained.add(p); window.__renderMermaidIn(p); }
+  });
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', renderActivePanels);
+} else {
+  renderActivePanels();
+}
+</script>
+</head><body>
+<div id="diagram-lightbox" class="diagram-lightbox" role="dialog" aria-modal="true">
+  <button class="diagram-lightbox-close" id="diagram-lightbox-close" aria-label="Close">&#x2715;</button>
+  <div class="diagram-lightbox-hint">Scroll to zoom &nbsp;&middot;&nbsp; Drag to pan &nbsp;&middot;&nbsp; Double-click to reset</div>
+  <div class="diagram-lightbox-inner" id="diagram-lightbox-inner"></div>
+</div>
+<div class="main">
+<h1>MvcWeb</h1>
+<div class="report-card">
+  <h2>Component Information</h2>
+  <div class="report-card-body">
+    <div class="app-info-container">
+      <div class="app-info-column">
+        <div class="app-info-row"><span class="app-info-label">Component Name</span><span class="app-info-value">MvcWeb</span></div>
+        <div class="app-info-row"><span class="app-info-label">Effort</span><span class="app-info-value" id="effort-display">S (total story points: 6)</span></div>
+      </div>
+      <div class="app-info-column">
+        <div class="app-info-row"><span class="app-info-label">Build Tools</span><span class="app-info-value">MSBuild</span></div>
+        <div class="app-info-row"><span class="app-info-label">Frameworks</span><span class="app-info-value">net8.0, net9.0</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+<nav class="tab-nav">
+  <button class="tab-btn active" data-tab="tab-issues" data-tooltip="Issues detected in the source code">Issues</button>
+  <button class="tab-btn" data-tab="tab-arch" data-tooltip="How the app&#x27;s layers connect — from UI to data.">Architecture</button>
+  <button class="tab-btn" data-tab="tab-api" data-tooltip="Endpoints exposed by this app and how services communicate.">API Contracts</button>
+  <button class="tab-btn" data-tab="tab-config" data-tooltip="Environment settings, runtime profiles, and deployment manifests.">Configuration</button>
+  <button class="tab-btn" data-tab="tab-workflows" data-tooltip="Domain entities and the core flows users move through.">Business Workflows</button>
+  <button class="tab-btn" data-tab="tab-deps" data-tooltip="Libraries and frameworks this app depends on, grouped by category.">Dependencies</button>
+  <button class="tab-btn" data-tab="tab-data" data-tooltip="Database schema, entity relationships, and persistence behavior.">Data Model</button>
+</nav>
+<div id="tab-issues" class="tab-panel active">
+<div class="target-select-container">
+  <label for="target-select">Target Compute Service:</label>
+  <select id="target-select" onchange="onTargetChange(this.value)">
+    <option value="AppService.Windows">Azure App Service</option>
+    <option value="AppService.Linux">Azure Kubernetes Service</option>
+    <option value="AKS.Linux">Azure Container Apps</option>
+    <option value="AKS.Windows">Azure App Service Container</option>
+    <option value="ACA">Azure App Service Managed Instance</option>
+  </select>
+</div>
+<div class="report-card">
+  <h2>Issue Summary</h2>
+  <div class="report-card-body">
+    <div class="domain-summary-container" id="donut-container">
+      <div class="domain-summary-item">
+<svg viewBox="0 0 100 100" width="100" height="100" style="display:block;margin:0 auto;transform:rotate(-90deg);">
+  <circle cx="50" cy="50" r="35" fill="none" stroke="var(--color-mandatory)" stroke-width="15" stroke-dasharray="35.15 219.91" stroke-dashoffset="-0.00"/>
+  <circle cx="50" cy="50" r="35" fill="none" stroke="var(--color-potential)" stroke-width="15" stroke-dasharray="108.46 219.91" stroke-dashoffset="-36.65"/>
+  <circle cx="50" cy="50" r="35" fill="none" stroke="var(--color-optional)" stroke-width="15" stroke-dasharray="71.80 219.91" stroke-dashoffset="-146.61"/>
+</svg>
+
+        <h3>DotNET Upgrade</h3>
+        <div class="count">6 issues</div>
+      </div>
+    </div>
+    <div class="criticality-legend">
+      <div class="legend-item"><span class="legend-swatch" style="background:var(--color-mandatory)"></span>Mandatory</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:var(--color-potential)"></span>Potential</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:var(--color-optional)"></span>Optional</div>
+    </div>
+  </div>
+</div>
+<div class="filter-bar" id="filter-bar">
+  <div class="multi-select" id="criticality-ms">
+    <button class="multi-select-btn" onclick="toggleMultiSelect('criticality-ms')">Criticality</button>
+    <div class="multi-select-dropdown">
+      <label class="multi-select-option"><input type="checkbox" value="mandatory" onchange="onMultiSelectChange('criticality-ms','Criticality')"/> Mandatory</label>
+      <label class="multi-select-option"><input type="checkbox" value="potential" onchange="onMultiSelectChange('criticality-ms','Criticality')"/> Potential</label>
+      <label class="multi-select-option"><input type="checkbox" value="optional" onchange="onMultiSelectChange('criticality-ms','Criticality')"/> Optional</label>
+    </div>
+  </div>
+  <a class="clear-filters" href="javascript:void(0)" onclick="clearAllFilters()">Clear all</a>
+</div>
+<div class="issue-section" data-domain="dotnet-upgrade">
+  <h2>DotNET Upgrade <a href="scenarios/dotnet-version-upgrade/assessment.html" style="font-size:12px;font-weight:400;margin-left:12px;">View Details</a></h2>
+  <table class="issue-table">
+    <colgroup><col class="col-issue"/><col class="col-criticality"/><col class="col-storypoint"/></colgroup>
+    <thead><tr><th>Issue Category</th><th>Criticality</th><th>Story Point</th></tr></thead>
+    <tbody>
+    <tr class="issue-row" data-criticality="mandatory" data-targets='{}' data-default-effort="1" data-default-severity="mandatory" data-rule="Project.0002" onclick="toggleRow('row-dotnetupgrade-0', this)" style="cursor:pointer;">
+      <td style="white-space:normal;"><div class="issue-title-cell"><button class="expand-btn" id="btn-row-dotnetupgrade-0">&#x276F;</button> Project&#x27;s target framework(s) needs to be changed</div></td>
+      <td class="crit-cell"><span class="crit-label"><span class="crit-square crit-square-mandatory"></span>Mandatory</span></td>
+      <td class="sp-cell">1</td>
+    </tr>
+    <tr class="detail-row" id="row-dotnetupgrade-0" style="display:none;">
+      <td colspan="3">
+        <div class="detail-content">
+          <div class="file-list">
+            <table><colgroup><col style="width:70%"/><col style="width:30%"/></colgroup>
+            <thead><tr><th>File</th><th>Position</th></tr></thead><tbody>
+            <tr><td><span class="file-path" title="examples\MvcWeb\MvcWeb.csproj">examples\MvcWeb\MvcWeb.csproj</span></td><td><span class="position"></span></td></tr>
+            <tr><td><span class="file-path" title="core\Piranha.AspNetCore\Piranha.AspNetCore.csproj">core\Piranha.AspNetCore\Piranha.AspNetCore.csproj</span></td><td><span class="position"></span></td></tr>
+            <tr><td><span class="file-path" title="core\Piranha.AspNetCore.Hosting\Piranha.AspNetCore.Hosting.csproj">core\Piranha.AspNetCore.Hosting\Piranha.AspNetCore.Hosting.csproj</span></td><td><span class="position"></span></td></tr>
+            <tr><td><span class="file-path" title="identity\Piranha.AspNetCore.Identity\Piranha.AspNetCore.Identity.csproj">identity\Piranha.AspNetCore.Identity\Piranha.AspNetCore.Identity.csproj</span></td><td><span class="position"></span></td></tr>
+            <tr><td><span class="file-path" title="identity\Piranha.AspNetCore.Identity.MySQL\Piranha.AspNetCore.Identity.MySQL.csproj">identity\Piranha.AspNetCore.Identity.MySQL\Piranha.AspNetCore.Identity.MySQL.csproj</span></td><td><span class="position"></span></td></tr>
+            <tr><td><span class="file-path" title="identity\Piranha.AspNetCore.Identity.PostgreSQL\Piranha.AspNetCore.Identity.PostgreSQL.csproj">identity\Piranha.AspNetCore.Identity.PostgreSQL\Piranha.AspNetCore.Identity.PostgreSQL.csproj</span></td><td><span class="position"></span></td></tr>
+            <tr><td><span class="file-path" title="identity\Piranha.AspNetCore.Identity.SQLite\Piranha.AspNetCore.Identity.SQLite.csproj">identity\Piranha.AspNetCore.Identity.SQLite\Piranha.AspNetCore.Identity.SQLite.csproj</span></td><td><span class="position"></span></td></tr>
+            <tr><td><span class="file-path" title="identity\Piranha.AspNetCore.Identity.SQLServer\Piranha.AspNetCore.Identity.SQLServer.csproj">identity\Piranha.AspNetCore.Identity.SQLServer\Piranha.AspNetCore.Identity.SQLServer.csproj</span></td><td><span class="position"></span></td></tr>
+            <tr><td><span class="file-path" title="core\Piranha.AttributeBuilder\Piranha.AttributeBuilder.csproj">core\Piranha.AttributeBuilder\Piranha.AttributeBuilder.csproj</span></td><td><span class="position"></span></td></tr>
+            <tr><td><span class="file-path" title="core\Piranha.Azure.BlobStorage\Piranha.Azure.BlobStorage.csproj">core\Piranha.Azure.BlobStorage\Piranha.Azure.BlobStorage.csproj</span></td><td><span class="position"></span></td></tr>
+            <tr><td><span class="file-path" title="core\Piranha\Piranha.csproj">core\Piranha\Piranha.csproj</span></td><td><span class="position"></span></td></tr>
+            <tr><td><span class="file-path" title="data\Piranha.Data.EF\Piranha.Data.EF.csproj">data\Piranha.Data.EF\Piranha.Data.EF.csproj</span></td><td><span class="position"></span></td></tr>
+            <tr><td><span class="file-path" title="data\Piranha.Data.EF.MySql\Piranha.Data.EF.MySql.csproj">data\Piranha.Data.EF.MySql\Piranha.Data.EF.MySql.csproj</span></td><td><span class="position"></span></td></tr>
+            <tr><td><span class="file-path" title="data\Piranha.Data.EF.PostgreSql\Piranha.Data.EF.PostgreSql.csproj">data\Piranha.Data.EF.PostgreSql\Piranha.Data.EF.PostgreSql.csproj</span></td><td><span class="position"></span></td></tr>
+            <tr><td><span class="file-path" title="data\Piranha.Data.EF.SQLite\Piranha.Data.EF.SQLite.csproj">data\Piranha.Data.EF.SQLite\Piranha.Data.EF.SQLite.csproj</span></td><td><span class="position"></span></td></tr>
+            <tr><td><span class="file-path" title="data\Piranha.Data.EF.SQLServer\Piranha.Data.EF.SQLServer.csproj">data\Piranha.Data.EF.SQLServer\Piranha.Data.EF.SQLServer.csproj</span></td><td><span class="position"></span></td></tr>
+            <tr><td><span class="file-path" title="core\Piranha.ImageSharp\Piranha.ImageSharp.csproj">core\Piranha.ImageSharp\Piranha.ImageSharp.csproj</span></td><td><span class="position"></span></td></tr>
+            <tr><td><span class="file-path" title="core\Piranha.Local.FileStorage\Piranha.Local.FileStorage.csproj">core\Piranha.Local.FileStorage\Piranha.Local.FileStorage.csproj</span></td><td><span class="position"></span></td></tr>
+            <tr><td><span class="file-path" title="core\Piranha.Manager\Piranha.Manager.csproj">core\Piranha.Manager\Piranha.Manager.csproj</span></td><td><span class="position"></span></td></tr>
+            <tr><td><span class="file-path" title="core\Piranha.Manager.LocalAuth\Piranha.Manager.LocalAuth.csproj">core\Piranha.Manager.LocalAuth\Piranha.Manager.LocalAuth.csproj</span></td><td><span class="position"></span></td></tr>
+            <tr><td><span class="file-path" title="core\Piranha.Manager.Localization\Piranha.Manager.Localization.csproj">core\Piranha.Manager.Localization\Piranha.Manager.Localization.csproj</span></td><td><span class="position"></span></td></tr>
+            <tr><td><span class="file-path" title="test\Piranha.Manager.Tests\Piranha.Manager.Tests.csproj">test\Piranha.Manager.Tests\Piranha.Manager.Tests.csproj</span></td><td><span class="position"></span></td></tr>
+            <tr><td><span class="file-path" title="core\Piranha.Manager.TinyMCE\Piranha.Manager.TinyMCE.csproj">core\Piranha.Manager.TinyMCE\Piranha.Manager.TinyMCE.csproj</span></td><td><span class="position"></span></td></tr>
+            <tr><td><span class="file-path" title="test\Piranha.Tests\Piranha.Tests.csproj">test\Piranha.Tests\Piranha.Tests.csproj</span></td><td><span class="position"></span></td></tr>
+            <tr><td><span class="file-path" title="core\Piranha.WebApi\Piranha.WebApi.csproj">core\Piranha.WebApi\Piranha.WebApi.csproj</span></td><td><span class="position"></span></td></tr>
+            <tr><td><span class="file-path" title="examples\RazorWeb\RazorWeb.csproj">examples\RazorWeb\RazorWeb.csproj</span></td><td><span class="position"></span></td></tr>
+            </tbody></table>
+          </div>
+          <div class="explanation-panel">
+            <h4>Explanation</h4>
+            <div><p>Project&#x27;s target framework(s) needs to be changed to the new target framework that you selected for this upgrade.</p><p>During upgrade target framework will be adjusted to corresponding platform when applicable. In some cases project would result in multiple target frameworks after the upgrade if it was using features that now have their own platforms in modern .NET frameworks (windows, iOS, Android etc).</p></div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr class="issue-row" data-criticality="potential" data-targets='{}' data-default-effort="1" data-default-severity="potential" data-rule="Api.0003" onclick="toggleRow('row-dotnetupgrade-1', this)" style="cursor:pointer;">
+      <td style="white-space:normal;"><div class="issue-title-cell"><button class="expand-btn" id="btn-row-dotnetupgrade-1">&#x276F;</button> Behavioral change in selected .NET version</div></td>
+      <td class="crit-cell"><span class="crit-label"><span class="crit-square crit-square-potential"></span>Potential</span></td>
+      <td class="sp-cell">1</td>
+    </tr>
+    <tr class="detail-row" id="row-dotnetupgrade-1" style="display:none;">
+      <td colspan="3">
+        <div class="detail-content">
+          <div class="file-list">
+            <table><colgroup><col style="width:70%"/><col style="width:30%"/></colgroup>
+            <thead><tr><th>File</th><th>Position</th></tr></thead><tbody>
+            <tr><td><span class="file-path" title="core\Piranha.AspNetCore\Http\SitemapMiddleware.cs">core\Piranha.AspNetCore\Http\SitemapMiddleware.cs</span></td><td><span class="position">Line 118, Col 20</span></td></tr>
+            <tr><td><span class="file-path" title="core\Piranha.AspNetCore\Http\SitemapMiddleware.cs">core\Piranha.AspNetCore\Http\SitemapMiddleware.cs</span></td><td><span class="position">Line 103, Col 12</span></td></tr>
+            <tr><td><span class="file-path" title="core\Piranha.Azure.BlobStorage\BlobStorage.cs">core\Piranha.Azure.BlobStorage\BlobStorage.cs</span></td><td><span class="position">Line 138, Col 8</span></td></tr>
+            <tr><td><span class="file-path" title="core\Piranha.Azure.BlobStorage\BlobStorage.cs">core\Piranha.Azure.BlobStorage\BlobStorage.cs</span></td><td><span class="position">Line 79, Col 8</span></td></tr>
+            <tr><td><span class="file-path" title="core\Piranha.Azure.BlobStorage\BlobStorage.cs">core\Piranha.Azure.BlobStorage\BlobStorage.cs</span></td><td><span class="position">Line 39, Col 4</span></td></tr>
+            <tr><td><span class="file-path" title="core\Piranha.Azure.BlobStorage\Extensions\BlobStorageExtensions.cs">core\Piranha.Azure.BlobStorage\Extensions\BlobStorageExtensions.cs</span></td><td><span class="position">Line 74, Col 4</span></td></tr>
+            <tr><td><span class="file-path" title="core\Piranha.Azure.BlobStorage\Extensions\BlobStorageExtensions.cs">core\Piranha.Azure.BlobStorage\Extensions\BlobStorageExtensions.cs</span></td><td><span class="position">Line 29, Col 4</span></td></tr>
+            <tr><td><span class="file-path" title="core\Piranha\Extend\Fields\SelectField.cs">core\Piranha\Extend\Fields\SelectField.cs</span></td><td><span class="position">Line 86, Col 8</span></td></tr>
+            </tbody></table>
+          </div>
+          <div class="explanation-panel">
+            <h4>Explanation</h4>
+            <div><p>API has a behavioral change in selected .NET version: code and binaries may behave differently at runtime without needing recompilation, but the new behavior might be undesirable and require updates.</p></div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr class="issue-row" data-criticality="potential" data-targets='{}' data-default-effort="1" data-default-severity="potential" data-rule="Api.0002" onclick="toggleRow('row-dotnetupgrade-2', this)" style="cursor:pointer;">
+      <td style="white-space:normal;"><div class="issue-title-cell"><button class="expand-btn" id="btn-row-dotnetupgrade-2">&#x276F;</button> Source incompatible for selected .NET version</div></td>
+      <td class="crit-cell"><span class="crit-label"><span class="crit-square crit-square-potential"></span>Potential</span></td>
+      <td class="sp-cell">1</td>
+    </tr>
+    <tr class="detail-row" id="row-dotnetupgrade-2" style="display:none;">
+      <td colspan="3">
+        <div class="detail-content">
+          <div class="file-list">
+            <table><colgroup><col style="width:70%"/><col style="width:30%"/></colgroup>
+            <thead><tr><th>File</th><th>Position</th></tr></thead><tbody>
+            <tr><td><span class="file-path" title="core\Piranha.AspNetCore\Http\RoutingMiddleware.cs">core\Piranha.AspNetCore\Http\RoutingMiddleware.cs</span></td><td><span class="position">Line 496, Col 12</span></td></tr>
+            <tr><td><span class="file-path" title="core\Piranha.AspNetCore\Extensions\PiranhaStartupExtensions.cs">core\Piranha.AspNetCore\Extensions\PiranhaStartupExtensions.cs</span></td><td><span class="position">Line 36, Col 12</span></td></tr>
+            <tr><td><span class="file-path" title="identity\Piranha.AspNetCore.Identity\Extensions\IdentityModuleExtensions.cs">identity\Piranha.AspNetCore.Identity\Extensions\IdentityModuleExtensions.cs</span></td><td><span class="position">Line 200, Col 8</span></td></tr>
+            <tr><td><span class="file-path" title="identity\Piranha.AspNetCore.Identity\Extensions\IdentityModuleExtensions.cs">identity\Piranha.AspNetCore.Identity\Extensions\IdentityModuleExtensions.cs</span></td><td><span class="position">Line 185, Col 8</span></td></tr>
+            <tr><td><span class="file-path" title="identity\Piranha.AspNetCore.Identity\Extensions\IdentityModuleExtensions.cs">identity\Piranha.AspNetCore.Identity\Extensions\IdentityModuleExtensions.cs</span></td><td><span class="position">Line 120, Col 8</span></td></tr>
+            </tbody></table>
+          </div>
+          <div class="explanation-panel">
+            <h4>Explanation</h4>
+            <div><p>API is source incompatible for selected .NET version: requires code changes to compile successfully when targeting a new version, such as removing obsolete APIs or changing method signatures.</p></div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr class="issue-row" data-criticality="potential" data-targets='{}' data-default-effort="1" data-default-severity="potential" data-rule="NuGet.0002" onclick="toggleRow('row-dotnetupgrade-3', this)" style="cursor:pointer;">
+      <td style="white-space:normal;"><div class="issue-title-cell"><button class="expand-btn" id="btn-row-dotnetupgrade-3">&#x276F;</button> NuGet package upgrade is recommended</div></td>
+      <td class="crit-cell"><span class="crit-label"><span class="crit-square crit-square-potential"></span>Potential</span></td>
+      <td class="sp-cell">1</td>
+    </tr>
+    <tr class="detail-row" id="row-dotnetupgrade-3" style="display:none;">
+      <td colspan="3">
+        <div class="detail-content">
+          <div class="file-list">
+            <table><colgroup><col style="width:70%"/><col style="width:30%"/></colgroup>
+            <thead><tr><th>File</th><th>Position</th></tr></thead><tbody>
+            <tr><td><span class="file-path" title="core\Piranha\Piranha.csproj">core\Piranha\Piranha.csproj</span></td><td><span class="position"></span></td></tr>
+            </tbody></table>
+          </div>
+          <div class="explanation-panel">
+            <h4>Explanation</h4>
+            <div><p>NuGet package upgrade is recommended for selected target framework.</p><p>Standard .NET packages are recommended to have versions matching version of .NET that project targets.</p><p>Some other packages also are known to work better for selected target frameworks.</p></div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr class="issue-row" data-criticality="optional" data-targets='{}' data-default-effort="1" data-default-severity="optional" data-rule="NuGet.0005" onclick="toggleRow('row-dotnetupgrade-4', this)" style="cursor:pointer;">
+      <td style="white-space:normal;"><div class="issue-title-cell"><button class="expand-btn" id="btn-row-dotnetupgrade-4">&#x276F;</button> NuGet package is deprecated</div></td>
+      <td class="crit-cell"><span class="crit-label"><span class="crit-square crit-square-optional"></span>Optional</span></td>
+      <td class="sp-cell">1</td>
+    </tr>
+    <tr class="detail-row" id="row-dotnetupgrade-4" style="display:none;">
+      <td colspan="3">
+        <div class="detail-content">
+          <div class="file-list">
+            <table><colgroup><col style="width:70%"/><col style="width:30%"/></colgroup>
+            <thead><tr><th>File</th><th>Position</th></tr></thead><tbody>
+            <tr><td><span class="file-path" title="test\Piranha.Manager.Tests\Piranha.Manager.Tests.csproj">test\Piranha.Manager.Tests\Piranha.Manager.Tests.csproj</span></td><td><span class="position"></span></td></tr>
+            <tr><td><span class="file-path" title="test\Piranha.Tests\Piranha.Tests.csproj">test\Piranha.Tests\Piranha.Tests.csproj</span></td><td><span class="position"></span></td></tr>
+            </tbody></table>
+          </div>
+          <div class="explanation-panel">
+            <h4>Explanation</h4>
+            <div><p>NuGet package is deprecated.</p><p>Go to its documentation and if there is a guidance for replacement of functionality provided by this package.</p></div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr class="issue-row" data-criticality="optional" data-targets='{}' data-default-effort="1" data-default-severity="optional" data-rule="NuGet.0004" onclick="toggleRow('row-dotnetupgrade-5', this)" style="cursor:pointer;">
+      <td style="white-space:normal;"><div class="issue-title-cell"><button class="expand-btn" id="btn-row-dotnetupgrade-5">&#x276F;</button> NuGet package contains security vulnerability</div></td>
+      <td class="crit-cell"><span class="crit-label"><span class="crit-square crit-square-optional"></span>Optional</span></td>
+      <td class="sp-cell">1</td>
+    </tr>
+    <tr class="detail-row" id="row-dotnetupgrade-5" style="display:none;">
+      <td colspan="3">
+        <div class="detail-content">
+          <div class="file-list">
+            <table><colgroup><col style="width:70%"/><col style="width:30%"/></colgroup>
+            <thead><tr><th>File</th><th>Position</th></tr></thead><tbody>
+            <tr><td><span class="file-path" title="data\Piranha.Data.EF\Piranha.Data.EF.csproj">data\Piranha.Data.EF\Piranha.Data.EF.csproj</span></td><td><span class="position"></span></td></tr>
+            </tbody></table>
+          </div>
+          <div class="explanation-panel">
+            <h4>Explanation</h4>
+            <div><p>NuGet package contains security vulnerabilities.</p><p>Package needs to be upgraded to a newer version that addresses known security vulnerabilities.</p></div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</div><!-- #tab-issues -->
+<div id="tab-arch" class="tab-panel">
+  <div class="fact-content"><h1 id="architecture-diagram">Architecture Diagram</h1>
+<p>Piranha CMS is a modular, headless-capable .NET CMS framework (v12.1.0) built on ASP.NET Core. It provides a clean separation between the core content engine, data-access providers, and pluggable front-end hosting layers.</p>
+<h2 id="application-architecture">Application Architecture</h2>
+<div class="mermaid">
+flowchart TD
+    subgraph Client["Client Layer"]
+        Browser["Web Browser"]
+        ApiConsumer["API Consumer"]
+    end
+
+    subgraph Presentation["Presentation Layer"]
+        MvcMiddleware["ASP.NET Core MVC\nRoutingMiddleware"]
+        ManagerUI["Manager UI\nRazor + Vue.js"]
+        WebApi["Piranha.WebApi\nREST Controllers"]
+        SignalR["SignalR Hub\nPreviewHub"]
+    end
+
+    subgraph BusinessLogic["Business Logic Layer - Piranha Core v12.1.0"]
+        CoreApi["IApi / Api\nContent Engine"]
+        Services["Services\nPage / Post / Media\nAlias / Archive / Site"]
+        AttributeBuilder["AttributeBuilder\nContent Type Discovery"]
+        AppConfig["App Config\nPiranhaServiceBuilder"]
+    end
+
+    subgraph DataAccess["Data Access Layer"]
+        Repos["Repository Interfaces\nIPageRepository etc."]
+        EFCore["Entity Framework Core\nPiranha.Data.EF"]
+        SQLite[("SQLite")]
+        SQLServer[("SQL Server")]
+        PostgreSQL[("PostgreSQL")]
+        MySQL[("MySQL")]
+    end
+
+    subgraph Identity["Identity Layer"]
+        AspNetIdentity["ASP.NET Core Identity\nEF Core Integration"]
+    end
+
+    subgraph Infrastructure["Infrastructure"]
+        LocalStorage["Local File Storage"]
+        AzureBlob["Azure Blob Storage"]
+        ImageSharp["SixLabors.ImageSharp\nImage Processing"]
+        MemCache["Memory Cache"]
+        Markdown["Markdig\nMarkdown Processing"]
+    end
+
+    subgraph External["External Services"]
+        AzureBlobSvc["Azure Blob Service"]
+        TinyMCE["TinyMCE Editor\nJS Bundle"]
+    end
+
+    Browser -->|"HTTP requests"| MvcMiddleware
+    ApiConsumer -->|"REST calls"| WebApi
+    Browser -->|"Admin UI"| ManagerUI
+    MvcMiddleware -->|"routes content"| CoreApi
+    ManagerUI -->|"SignalR preview"| SignalR
+    ManagerUI -->|"AJAX API calls"| WebApi
+    WebApi -->|"delegates"| CoreApi
+    CoreApi -->|"orchestrates"| Services
+    Services -->|"queries"| Repos
+    Services -->|"content types"| AttributeBuilder
+    Repos -->|"EF Core"| EFCore
+    EFCore -->|"SQLite"| SQLite
+    EFCore -->|"SQL Server"| SQLServer
+    EFCore -->|"PostgreSQL"| PostgreSQL
+    EFCore -->|"MySQL"| MySQL
+    CoreApi -->|"identity"| AspNetIdentity
+    Services -->|"media upload"| LocalStorage
+    Services -->|"media upload"| AzureBlob
+    Services -->|"resize/transform"| ImageSharp
+    Services -->|"caching"| MemCache
+    Services -->|"content rendering"| Markdown
+    AzureBlob -->|"stores blobs"| AzureBlobSvc
+    ManagerUI -->|"rich text editing"| TinyMCE
+</div>
+<h3 id="technology-stack-summary">Technology Stack Summary</h3>
+<div class="table-wrap"><table><thead><tr>
+<th>Layer</th><th>Technology</th><th>Version</th><th>Purpose</th>
+</tr></thead><tbody>
+<tr><td>Presentation</td><td>ASP.NET Core MVC</td><td>net8.0 / net9.0</td><td>Server-side routing and page rendering</td></tr>
+<tr><td>Presentation</td><td>Piranha.Manager (Razor + Vue.js)</td><td>12.1.0</td><td>Admin/manager UI with SPA components</td></tr>
+<tr><td>Presentation</td><td>Piranha.WebApi</td><td>12.1.0</td><td>REST API for headless consumption</td></tr>
+<tr><td>Presentation</td><td>SignalR</td><td>ASP.NET Core built-in</td><td>Live preview hub</td></tr>
+<tr><td>Business Logic</td><td>Piranha Core (IApi)</td><td>12.1.0</td><td>Content management engine</td></tr>
+<tr><td>Business Logic</td><td>Markdig</td><td>0.40.0</td><td>Markdown-to-HTML rendering</td></tr>
+<tr><td>Business Logic</td><td>Newtonsoft.Json</td><td>13.0.3</td><td>JSON serialization</td></tr>
+<tr><td>Business Logic</td><td>AttributeBuilder</td><td>12.1.0</td><td>Attribute-driven content type registration</td></tr>
+<tr><td>Data Access</td><td>Entity Framework Core</td><td>8.0.0 / 9.0.0</td><td>ORM for relational data persistence</td></tr>
+<tr><td>Data Access</td><td>AutoMapper</td><td>12.0.1</td><td>Entity-to-model mapping</td></tr>
+<tr><td>Data Access</td><td>SQLite / SQL Server / PostgreSQL / MySQL</td><td>—</td><td>Pluggable relational database backends</td></tr>
+<tr><td>Identity</td><td>ASP.NET Core Identity + EF Core</td><td>8.0.0 / 9.0.0</td><td>Authentication and user management</td></tr>
+<tr><td>Storage</td><td>Local FileStorage</td><td>12.1.0</td><td>Local disk media storage</td></tr>
+<tr><td>Storage</td><td>Azure Blob Storage SDK</td><td>12.18.0</td><td>Cloud media storage</td></tr>
+<tr><td>Image Processing</td><td>SixLabors.ImageSharp</td><td>2.1.13</td><td>Server-side image resizing and transformation</td></tr>
+<tr><td>Caching</td><td>Microsoft.Extensions.Caching</td><td>8.0.0 / 9.0.0</td><td>In-memory content cache</td></tr>
+</tbody></table></div>
+<h3 id="data-storage-external-services">Data Storage & External Services</h3>
+<p>Piranha CMS uses Entity Framework Core as its primary data-access layer with four interchangeable relational database backends — SQLite (default for development), SQL Server, PostgreSQL, and MySQL. Each backend is a separate NuGet package (<code>Piranha.Data.EF.*</code>). Media assets are stored either on local disk via <code>Piranha.Local.FileStorage</code> or in Azure Blob Storage via <code>Piranha.Azure.BlobStorage</code>. Identity and user data are managed through ASP.NET Core Identity with corresponding EF Core database providers. The in-memory cache (<code>IMemoryCache</code>) reduces repeated database lookups for frequently accessed content objects.</p>
+<h3 id="key-architectural-decisions">Key Architectural Decisions</h3>
+<ul>
+<li><strong>Repository + Service pattern</strong>: All content operations are exposed through strongly-typed service interfaces (<code>IPageService</code>, <code>IPostService</code>, etc.) backed by repository interfaces, enabling full substitution of the data layer without touching business logic.</li>
+<li><strong>Modular plug-in design</strong>: Storage, image processing, database provider, and identity are all opt-in packages — a host application composes them via <code>AddPiranha</code> / <code>UsePiranha</code> extension methods, following the ASP.NET Core options pattern.</li>
+<li><strong>Multi-target framework</strong>: All library packages target both <code>net8.0</code> and <code>net9.0</code>, allowing consumers to stay on either LTS or current releases.</li>
+</ul>
+<h2 id="component-relationships">Component Relationships</h2>
+<div class="mermaid">
+flowchart LR
+    subgraph Presentation["Presentation"]
+        RoutingMW["RoutingMiddleware"]
+        SecurityMW["SecurityMiddleware"]
+        SitemapMW["SitemapMiddleware"]
+        ManagerCtrl["ManagerController"]
+        ApiControllers["API Controllers\n(Page/Post/Media/Site...)"]
+        PreviewHub["PreviewHub\nSignalR"]
+    end
+
+    subgraph BusinessLogic["Business Logic"]
+        CoreApi["Api / IApi"]
+        PageSvc["PageService"]
+        PostSvc["PostService"]
+        MediaSvc["MediaService"]
+        AliasSvc["AliasService"]
+        SiteSvc["SiteService"]
+        ContentSvc["ContentService"]
+        AppSvc["ApplicationService"]
+        AttrBuilder["ContentTypeBuilder"]
+    end
+
+    subgraph DataAccess["Data Access"]
+        EFDb["Db / EF DbContext"]
+        PageRepo["PageRepository"]
+        PostRepo["PostRepository"]
+        MediaRepo["MediaRepository"]
+        SiteRepo["SiteRepository"]
+        AliasRepo["AliasRepository"]
+    end
+
+    subgraph Infrastructure["Infrastructure"]
+        IStorage["IStorage\nFile / Blob"]
+        IImageProc["IImageProcessor\nImageSharp"]
+        ICache["ICache\nMemoryCache"]
+        ISearch["ISearch"]
+    end
+
+    RoutingMW -->|"resolves route"| CoreApi
+    SecurityMW -.->|"secures"| RoutingMW
+    SitemapMW -->|"reads pages/sites"| CoreApi
+    ManagerCtrl -->|"delegates"| CoreApi
+    ApiControllers -->|"delegates"| CoreApi
+    ApiControllers -->|"preview notify"| PreviewHub
+    CoreApi -->|"orchestrates"| PageSvc
+    CoreApi -->|"orchestrates"| PostSvc
+    CoreApi -->|"orchestrates"| MediaSvc
+    CoreApi -->|"orchestrates"| AliasSvc
+    CoreApi -->|"orchestrates"| SiteSvc
+    CoreApi -->|"orchestrates"| ContentSvc
+    AppSvc -->|"loads model"| CoreApi
+    AttrBuilder -->|"registers types"| CoreApi
+    PageSvc -->|"persists"| PageRepo
+    PostSvc -->|"persists"| PostRepo
+    MediaSvc -->|"persists"| MediaRepo
+    MediaSvc -->|"stores file"| IStorage
+    MediaSvc -->|"processes image"| IImageProc
+    AliasSvc -->|"persists"| AliasRepo
+    SiteSvc -->|"persists"| SiteRepo
+    PageSvc -->|"caches"| ICache
+    PostSvc -->|"caches"| ICache
+    PageRepo -->|"queries"| EFDb
+    PostRepo -->|"queries"| EFDb
+    MediaRepo -->|"queries"| EFDb
+    SiteRepo -->|"queries"| EFDb
+    AliasRepo -->|"queries"| EFDb
+    CoreApi -->|"full-text"| ISearch
+</div>
+<h3 id="component-inventory">Component Inventory</h3>
+<div class="table-wrap"><table><thead><tr>
+<th>Component</th><th>Layer</th><th>Type</th><th>Responsibility</th>
+</tr></thead><tbody>
+<tr><td>RoutingMiddleware</td><td>Presentation</td><td>ASP.NET Middleware</td><td>Resolves incoming URLs to Piranha page/post routes</td></tr>
+<tr><td>SecurityMiddleware</td><td>Presentation</td><td>ASP.NET Middleware</td><td>Enforces content-level security policies</td></tr>
+<tr><td>SitemapMiddleware</td><td>Presentation</td><td>ASP.NET Middleware</td><td>Serves XML sitemap at <code>/sitemap.xml</code></td></tr>
+<tr><td>ManagerController</td><td>Presentation</td><td>MVC Controller</td><td>Renders the SPA shell for the Manager admin panel</td></tr>
+<tr><td>PageApiController</td><td>Presentation</td><td>API Controller</td><td>REST endpoints for page CRUD via Manager</td></tr>
+<tr><td>PostApiController</td><td>Presentation</td><td>API Controller</td><td>REST endpoints for post CRUD via Manager</td></tr>
+<tr><td>MediaApiController</td><td>Presentation</td><td>API Controller</td><td>REST endpoints for media management</td></tr>
+<tr><td>SiteApiController</td><td>Presentation</td><td>API Controller</td><td>REST endpoints for site management</td></tr>
+<tr><td>AliasApiController</td><td>Presentation</td><td>API Controller</td><td>REST endpoints for URL alias management</td></tr>
+<tr><td>ContentApiController</td><td>Presentation</td><td>API Controller</td><td>REST endpoints for generic content blocks</td></tr>
+<tr><td>ConfigApiController</td><td>Presentation</td><td>API Controller</td><td>REST endpoints for CMS configuration</td></tr>
+<tr><td>PreviewHub</td><td>Presentation</td><td>SignalR Hub</td><td>Pushes live preview refresh events to Manager UI</td></tr>
+<tr><td>IApi / Api</td><td>Business Logic</td><td>Facade Service</td><td>Central entry point exposing all CMS services</td></tr>
+<tr><td>PageService</td><td>Business Logic</td><td>Domain Service</td><td>Page lifecycle management (create, publish, delete)</td></tr>
+<tr><td>PostService</td><td>Business Logic</td><td>Domain Service</td><td>Post/blog lifecycle management</td></tr>
+<tr><td>MediaService</td><td>Business Logic</td><td>Domain Service</td><td>Media asset upload, resize, and deletion</td></tr>
+<tr><td>AliasService</td><td>Business Logic</td><td>Domain Service</td><td>URL alias resolution and management</td></tr>
+<tr><td>SiteService</td><td>Business Logic</td><td>Domain Service</td><td>Multi-site configuration management</td></tr>
+<tr><td>ContentService</td><td>Business Logic</td><td>Domain Service</td><td>Generic structured-content management</td></tr>
+<tr><td>ApplicationService</td><td>Business Logic</td><td>Request Service</td><td>Per-request application state (current site, language)</td></tr>
+<tr><td>ContentTypeBuilder</td><td>Business Logic</td><td>Utility</td><td>Scans assemblies for content type attributes and registers them</td></tr>
+<tr><td>Db / EF DbContext</td><td>Data Access</td><td>EF Core DbContext</td><td>Wraps all entity sets; applies migrations</td></tr>
+<tr><td>PageRepository</td><td>Data Access</td><td>Repository</td><td>EF-based persistence for page entities</td></tr>
+<tr><td>PostRepository</td><td>Data Access</td><td>Repository</td><td>EF-based persistence for post entities</td></tr>
+<tr><td>MediaRepository</td><td>Data Access</td><td>Repository</td><td>EF-based persistence for media metadata</td></tr>
+<tr><td>SiteRepository</td><td>Data Access</td><td>Repository</td><td>EF-based persistence for site entities</td></tr>
+<tr><td>AliasRepository</td><td>Data Access</td><td>Repository</td><td>EF-based persistence for URL aliases</td></tr>
+<tr><td>IStorage / LocalStorage</td><td>Infrastructure</td><td>Storage Provider</td><td>Abstracts file I/O (local disk or Azure Blob)</td></tr>
+<tr><td>IImageProcessor / ImageSharp</td><td>Infrastructure</td><td>Image Processor</td><td>Server-side image transformation using ImageSharp</td></tr>
+<tr><td>ICache / MemoryCache</td><td>Infrastructure</td><td>Cache</td><td>In-process caching of frequently read content</td></tr>
+<tr><td>ISearch</td><td>Infrastructure</td><td>Search Provider</td><td>Pluggable full-text search abstraction</td></tr>
+</tbody></table></div></div>
+</div>
+<div id="tab-api" class="tab-panel">
+  <div class="fact-content"><h1 id="api-service-communication-contracts">API & Service Communication Contracts</h1>
+<p>Piranha CMS exposes approximately 60+ REST API endpoints across two distinct API surfaces: the <strong>Manager API</strong> (admin panel operations under <code>/manager/api/</code>) and the <strong>Public Web API</strong> (headless content delivery under <code>/api/</code>). All communication is synchronous HTTP/JSON with no message broker or inter-service async patterns, as this is a single-process library framework.</p>
+<h2 id="service-catalog">Service Catalog</h2>
+<div class="table-wrap"><table><thead><tr>
+<th>Service</th><th>Port</th><th>Category</th><th>Purpose</th>
+</tr></thead><tbody>
+<tr><td>Piranha.Manager</td><td>443/80 (host)</td><td>API Layer</td><td>Admin panel REST API — CRUD for pages, posts, media, sites, aliases, config</td></tr>
+<tr><td>Piranha.WebApi</td><td>443/80 (host)</td><td>API Layer</td><td>Headless public REST API for pages, posts, media, and sitemap</td></tr>
+<tr><td>Piranha.AspNetCore</td><td>443/80 (host)</td><td>Business</td><td>ASP.NET Core middleware — routing, security, sitemap serving</td></tr>
+<tr><td>Piranha (Core)</td><td>—</td><td>Business</td><td>Central content engine: IApi facade, services, repositories</td></tr>
+<tr><td>Piranha.Data.EF.*</td><td>—</td><td>Infrastructure</td><td>Entity Framework Core data providers (SQLite/SQL Server/PostgreSQL/MySQL)</td></tr>
+<tr><td>Piranha.AspNetCore.Identity.*</td><td>—</td><td>Infrastructure</td><td>ASP.NET Core Identity authentication per database provider</td></tr>
+<tr><td>PreviewHub (SignalR)</td><td>443/80 (host)</td><td>Infrastructure</td><td>Real-time live-preview push notifications to Manager UI</td></tr>
+</tbody></table></div>
+<h2 id="api-endpoints-inventory">API Endpoints Inventory</h2>
+<h3 id="manager-api-manager-api-requires-admin-policy">Manager API (<code>/manager/api/</code> — requires Admin policy)</h3>
+<div class="table-wrap"><table><thead><tr>
+<th>Controller</th><th>Method</th><th>Path</th><th>Request Type</th><th>Response Type</th>
+</tr></thead><tbody>
+<tr><td>PageApiController</td><td>GET</td><td>/manager/api/page/list</td><td>—</td><td>PageListModel</td></tr>
+<tr><td>PageApiController</td><td>GET</td><td>/manager/api/page/sitemap/{siteId?}</td><td>siteId (path, opt.)</td><td>SiteListModel</td></tr>
+<tr><td>PageApiController</td><td>GET</td><td>/manager/api/page/archives/{siteId?}</td><td>siteId (path, opt.)</td><td>SiteListModel</td></tr>
+<tr><td>PageApiController</td><td>GET</td><td>/manager/api/page/{id}</td><td>id (Guid, path)</td><td>PageEditModel</td></tr>
+<tr><td>PageApiController</td><td>GET</td><td>/manager/api/page/info/{id}</td><td>id (Guid, path)</td><td>PageInfo</td></tr>
+<tr><td>PageApiController</td><td>GET</td><td>/manager/api/page/create/{siteId}/{typeId}</td><td>siteId, typeId (path)</td><td>PageEditModel</td></tr>
+<tr><td>PageApiController</td><td>GET</td><td>/manager/api/page/createrelative/{pageId}/{typeId}/{after}</td><td>path params</td><td>PageEditModel</td></tr>
+<tr><td>PageApiController</td><td>GET</td><td>/manager/api/page/copy/{sourceId}/{siteId}</td><td>path params</td><td>PageEditModel</td></tr>
+<tr><td>PageApiController</td><td>GET</td><td>/manager/api/page/copyrelative/{sourceId}/{pageId}/{after}</td><td>path params</td><td>PageEditModel</td></tr>
+<tr><td>PageApiController</td><td>POST</td><td>/manager/api/page/detach</td><td>Guid (body)</td><td>PageEditModel</td></tr>
+<tr><td>PageApiController</td><td>POST</td><td>/manager/api/page/save</td><td>PageEditModel (body)</td><td>PageEditModel</td></tr>
+<tr><td>PageApiController</td><td>POST</td><td>/manager/api/page/save/draft</td><td>PageEditModel (body)</td><td>PageEditModel</td></tr>
+<tr><td>PageApiController</td><td>POST</td><td>/manager/api/page/save/unpublish</td><td>PageEditModel (body)</td><td>PageEditModel</td></tr>
+<tr><td>PageApiController</td><td>POST</td><td>/manager/api/page/revert</td><td>Guid (body)</td><td>PageEditModel</td></tr>
+<tr><td>PageApiController</td><td>POST</td><td>/manager/api/page/move</td><td>StructureModel (body)</td><td>PageListModel</td></tr>
+<tr><td>PageApiController</td><td>DELETE</td><td>/manager/api/page/delete</td><td>Guid (body)</td><td>StatusMessage</td></tr>
+<tr><td>PostApiController</td><td>GET</td><td>/manager/api/post/list/{id}/{index?}</td><td>archiveId (path)</td><td>PostListModel</td></tr>
+<tr><td>PostApiController</td><td>GET</td><td>/manager/api/post/{id}</td><td>id (Guid, path)</td><td>PostEditModel</td></tr>
+<tr><td>PostApiController</td><td>GET</td><td>/manager/api/post/info/{id}</td><td>id (Guid, path)</td><td>PostInfo</td></tr>
+<tr><td>PostApiController</td><td>GET</td><td>/manager/api/post/create/{archiveId}/{typeId}</td><td>path params</td><td>PostEditModel</td></tr>
+<tr><td>PostApiController</td><td>GET</td><td>/manager/api/post/modal</td><td>siteId, archiveId (query)</td><td>PostModalModel</td></tr>
+<tr><td>PostApiController</td><td>POST</td><td>/manager/api/post/save</td><td>PostEditModel (body)</td><td>PostEditModel</td></tr>
+<tr><td>PostApiController</td><td>POST</td><td>/manager/api/post/save/draft</td><td>PostEditModel (body)</td><td>PostEditModel</td></tr>
+<tr><td>PostApiController</td><td>POST</td><td>/manager/api/post/save/unpublish</td><td>PostEditModel (body)</td><td>PostEditModel</td></tr>
+<tr><td>PostApiController</td><td>POST</td><td>/manager/api/post/revert</td><td>Guid (body)</td><td>PostEditModel</td></tr>
+<tr><td>PostApiController</td><td>DELETE</td><td>/manager/api/post/delete</td><td>Guid (body)</td><td>StatusMessage</td></tr>
+<tr><td>MediaApiController</td><td>GET</td><td>/manager/api/media/{id}</td><td>id (Guid, path)</td><td>MediaItem / 404</td></tr>
+<tr><td>MediaApiController</td><td>GET</td><td>/manager/api/media/url/{id}/{width?}/{height?}</td><td>path params</td><td>Redirect / 404</td></tr>
+<tr><td>MediaApiController</td><td>GET</td><td>/manager/api/media/list/{folderId?}</td><td>folderId (path), filter, width, height (query)</td><td>MediaListModel</td></tr>
+<tr><td>MediaApiController</td><td>POST</td><td>/manager/api/media/meta/save</td><td>MediaListModel.MediaItem (body)</td><td>StatusMessage</td></tr>
+<tr><td>MediaApiController</td><td>POST</td><td>/manager/api/media/folder/save</td><td>MediaFolderModel (body)</td><td>MediaListModel</td></tr>
+<tr><td>MediaApiController</td><td>POST</td><td>/manager/api/media/upload</td><td>MediaUploadModel (form)</td><td>StatusMessage</td></tr>
+<tr><td>MediaApiController</td><td>POST</td><td>/manager/api/media/move/{folderId?}</td><td>IEnumerable&lt;Guid&gt; (body)</td><td>StatusMessage</td></tr>
+<tr><td>MediaApiController</td><td>DELETE</td><td>/manager/api/media/folder/delete</td><td>Guid (body)</td><td>MediaListModel</td></tr>
+<tr><td>MediaApiController</td><td>DELETE</td><td>/manager/api/media/delete</td><td>IEnumerable&lt;Guid&gt; (body)</td><td>StatusMessage</td></tr>
+<tr><td>SiteApiController</td><td>GET</td><td>/manager/api/site/{id}</td><td>id (Guid, path)</td><td>SiteEditModel</td></tr>
+<tr><td>SiteApiController</td><td>GET</td><td>/manager/api/site/content/{id}</td><td>id (Guid, path)</td><td>SiteContentEditModel / 404</td></tr>
+<tr><td>SiteApiController</td><td>GET</td><td>/manager/api/site/create</td><td>—</td><td>SiteEditModel</td></tr>
+<tr><td>SiteApiController</td><td>POST</td><td>/manager/api/site/save</td><td>SiteEditModel (body)</td><td>StatusMessage</td></tr>
+<tr><td>SiteApiController</td><td>POST</td><td>/manager/api/site/savecontent</td><td>SiteContentEditModel (body)</td><td>StatusMessage</td></tr>
+<tr><td>SiteApiController</td><td>DELETE</td><td>/manager/api/site/delete</td><td>Guid (body)</td><td>StatusMessage</td></tr>
+<tr><td>AliasApiController</td><td>GET</td><td>/manager/api/alias/list/{siteId?}</td><td>siteId (path, opt.)</td><td>AliasListModel</td></tr>
+<tr><td>AliasApiController</td><td>POST</td><td>/manager/api/alias/save</td><td>AliasListModel.AliasItem (body)</td><td>AliasListModel</td></tr>
+<tr><td>AliasApiController</td><td>DELETE</td><td>/manager/api/alias/delete</td><td>Guid (body)</td><td>AliasListModel</td></tr>
+<tr><td>ConfigApiController</td><td>GET</td><td>/manager/api/config</td><td>—</td><td>ConfigModel</td></tr>
+<tr><td>ConfigApiController</td><td>POST</td><td>/manager/api/config/save</td><td>ConfigModel (body)</td><td>StatusMessage</td></tr>
+<tr><td>ContentApiController</td><td>GET</td><td>/manager/api/content/{id}</td><td>id (Guid, path)</td><td>ContentEditModel</td></tr>
+<tr><td>ContentApiController</td><td>POST</td><td>/manager/api/content/save</td><td>ContentEditModel (body)</td><td>ContentEditModel</td></tr>
+<tr><td>ContentApiController</td><td>DELETE</td><td>/manager/api/content/delete</td><td>Guid (body)</td><td>StatusMessage</td></tr>
+<tr><td>LanguageApiController</td><td>GET</td><td>/manager/api/language/list</td><td>—</td><td>LanguageListModel</td></tr>
+<tr><td>LanguageApiController</td><td>POST</td><td>/manager/api/language/save</td><td>LanguageItem (body)</td><td>StatusMessage</td></tr>
+<tr><td>LanguageApiController</td><td>DELETE</td><td>/manager/api/language/delete</td><td>Guid (body)</td><td>StatusMessage</td></tr>
+<tr><td>PermissionApiController</td><td>GET</td><td>/manager/api/permission</td><td>—</td><td>PermissionListModel</td></tr>
+<tr><td>ModuleApiController</td><td>GET</td><td>/manager/api/module</td><td>—</td><td>ModuleListModel</td></tr>
+<tr><td>CommentApiController</td><td>GET</td><td>/manager/api/comment/list/{id}</td><td>id (path)</td><td>CommentListModel</td></tr>
+<tr><td>CommentApiController</td><td>POST</td><td>/manager/api/comment/approve</td><td>Guid (body)</td><td>StatusMessage</td></tr>
+<tr><td>CommentApiController</td><td>DELETE</td><td>/manager/api/comment/delete</td><td>Guid (body)</td><td>StatusMessage</td></tr>
+</tbody></table></div>
+<h3 id="public-web-api-api-optional-auth-via-allowanonymousaccess-flag">Public Web API (<code>/api/</code> — optional auth via AllowAnonymousAccess flag)</h3>
+<div class="table-wrap"><table><thead><tr>
+<th>Controller</th><th>Method</th><th>Path</th><th>Request Type</th><th>Response Type</th>
+</tr></thead><tbody>
+<tr><td>PageApiController (WebApi)</td><td>GET</td><td>/api/page/{id}</td><td>id (Guid, path)</td><td>PageBase / 401</td></tr>
+<tr><td>PageApiController (WebApi)</td><td>GET</td><td>/api/page/slug/{slug}</td><td>slug (path)</td><td>PageBase / 401</td></tr>
+<tr><td>PostApiController (WebApi)</td><td>GET</td><td>/api/post/{id}</td><td>id (Guid, path)</td><td>PostBase / 401</td></tr>
+<tr><td>PostApiController (WebApi)</td><td>GET</td><td>/api/post/slug/{slug}</td><td>slug (path)</td><td>PostBase / 401</td></tr>
+<tr><td>MediaApiController (WebApi)</td><td>GET</td><td>/api/media/{id}</td><td>id (Guid, path)</td><td>Media / 401</td></tr>
+<tr><td>SitemapApiController (WebApi)</td><td>GET</td><td>/api/sitemap</td><td>siteId (query, opt.)</td><td>Sitemap XML / JSON</td></tr>
+</tbody></table></div>
+<h2 id="management-observability-endpoints">Management & Observability Endpoints</h2>
+<div class="table-wrap"><table><thead><tr>
+<th>Service</th><th>Endpoint</th><th>Notes</th>
+</tr></thead><tbody>
+<tr><td>Piranha.AspNetCore</td><td>/sitemap.xml</td><td>XML sitemap served by SitemapMiddleware</td></tr>
+<tr><td>Piranha.Manager</td><td>/manager</td><td>Manager SPA shell (ManagerController)</td></tr>
+<tr><td>Piranha.Manager</td><td>/manager/api/*</td><td>All Manager REST endpoints</td></tr>
+<tr><td>All (host app)</td><td>/health</td><td>No built-in health check endpoint; host application must register one via ASP.NET Core Health Checks</td></tr>
+</tbody></table></div>
+<p>> Note: No Swagger/OpenAPI, Prometheus metrics endpoint, or built-in <code>/health</code> probe is included in the Piranha framework. These must be configured at the host application level.</p>
+<h2 id="dtos-contracts">DTOs & Contracts</h2>
+<p>All DTOs are <strong>service-level models</strong> owned by Piranha.Manager or Piranha.WebApi — there is no API gateway tier aggregating data from separate services.</p>
+<p><strong>Manager API DTOs (Piranha.Manager.Models namespace):</strong></p>
+<ul>
+<li><code>PageEditModel</code> — request/response for page create/save/get operations; includes regions, blocks, and status</li>
+<li><code>PageListModel</code> — response for page list and sitemap views</li>
+<li><code>PostEditModel</code> — request/response for post create/save/get operations</li>
+<li><code>PostListModel</code> — response for paginated post archives</li>
+<li><code>MediaListModel</code> — response for media browser; embeds <code>MediaItem</code> sub-model</li>
+<li><code>MediaListModel.MediaItem</code> — request/response for media metadata</li>
+<li><code>MediaFolderModel</code> — request/response for folder management</li>
+<li><code>MediaUploadModel</code> — multipart form request for file uploads</li>
+<li><code>SiteEditModel</code> — request/response for site management</li>
+<li><code>SiteContentEditModel</code> — request/response for site-level content</li>
+<li><code>SiteListModel</code> — response for site-scoped page listings</li>
+<li><code>AliasListModel</code> — response for URL alias list; embeds <code>AliasItem</code></li>
+<li><code>AliasListModel.AliasItem</code> — request/response for alias save</li>
+<li><code>ConfigModel</code> — request/response for CMS configuration settings</li>
+<li><code>ContentEditModel</code> — request/response for structured generic content</li>
+<li><code>StructureModel</code> — request body for page reorder/move operations</li>
+<li><code>PostModalModel</code> — response for post picker dialog</li>
+<li><code>StatusMessage</code> — universal response envelope for mutation results; carries <code>Type</code> (Success/Error/Warning/Information) and <code>Body</code> string</li>
+</ul>
+<p><strong>Public Web API types (Piranha.Models namespace):</strong></p>
+<ul>
+<li><code>PageBase</code> / <code>GenericPage</code> — response model for public page delivery; fields listed in <code>data-architecture.md</code></li>
+<li><code>PostBase</code> / <code>GenericPost</code> — response model for public post delivery</li>
+<li><code>PageInfo</code> / <code>PostInfo</code> — lightweight info models (id, slug, title, published date)</li>
+</ul>
+<p><strong>Serialization:</strong> The Manager API uses <code>Newtonsoft.Json</code> via <code>AddNewtonsoftJson()</code>. The public Web API uses the default ASP.NET Core JSON serializer. No OpenAPI/Swagger specification, no protobuf <code>.proto</code> files, and no GraphQL schema are present in the repository.</p>
+<h2 id="communication-patterns">Communication Patterns</h2>
+<p><strong>Synchronous only:</strong> All inter-component communication is in-process method calls and direct HTTP REST within a single ASP.NET Core process. There are no message queues, event buses, or async messaging infrastructure.</p>
+<p><strong>No service discovery:</strong> All components are compiled into a single host process. There is no Eureka, Consul, or Kubernetes DNS service discovery.</p>
+<p><strong>No API gateway:</strong> The Manager and Public Web API are both hosted directly in the same ASP.NET Core application. There is no gateway tier, BFF, or proxy.</p>
+<p><strong>SignalR (real-time push):</strong> The <code>PreviewHub</code> uses SignalR for one-directional push from server to Manager UI clients. When a page or post is saved, the API controllers call <code>hub.Clients.All.SendAsync("Update", id)</code> to trigger a live preview refresh in open browser windows.</p>
+<p><strong>Resilience:</strong> No Polly circuit-breaker, retry, or timeout policies are configured. The framework relies on EF Core's built-in connection resiliency (via <code>EnableRetryOnFailure</code> available to consumers) and does not enforce timeout SLAs at the service layer.</p>
+<p><strong>Security posture:</strong> The Manager API enforces authentication via the <code>[Authorize(Policy = Permission.Admin)]</code> attribute at the controller class level, with granular per-action policies (e.g., <code>Permission.PagesPublish</code>, <code>Permission.MediaAdd</code>). ASP.NET Core's policy-based authorization backed by <code>IAuthorizationService</code> is used throughout. The public <code>Piranha.WebApi</code> supports an <code>AllowAnonymousAccess</code> flag — when <code>false</code>, an authorization check against <code>Permissions.Pages</code> is enforced on every public endpoint. No JWT or OAuth2 client credentials flow is built-in; identity is managed through ASP.NET Core Identity (cookie-based by default). HTTPS/TLS is not enforced at the framework level and must be configured by the host application. Anti-forgery token validation (<code>[AutoValidateAntiforgeryToken]</code>) is applied to all Manager API controllers.</p>
+<h2 id="service-technology-matrix">Service Technology Matrix</h2>
+<div class="table-wrap"><table><thead><tr>
+<th>Service</th><th>Web Framework</th><th>Data Access</th><th>Discovery</th><th>Gateway</th><th>Health Check</th><th>Cache</th><th>Metrics</th>
+</tr></thead><tbody>
+<tr><td>Piranha.Manager</td><td>ASP.NET Core MVC + SignalR</td><td>Via IApi/EF Core</td><td>None</td><td>None</td><td>None (host)</td><td>IMemoryCache</td><td>None</td></tr>
+<tr><td>Piranha.WebApi</td><td>ASP.NET Core MVC</td><td>Via IApi/EF Core</td><td>None</td><td>None</td><td>None (host)</td><td>IMemoryCache</td><td>None</td></tr>
+<tr><td>Piranha.AspNetCore</td><td>ASP.NET Core Middleware</td><td>Via IApi</td><td>None</td><td>None</td><td>None (host)</td><td>IMemoryCache</td><td>None</td></tr>
+<tr><td>Piranha (Core)</td><td>None</td><td>EF Core (pluggable)</td><td>None</td><td>None</td><td>None</td><td>IMemoryCache</td><td>None</td></tr>
+<tr><td>Piranha.Data.EF.*</td><td>None</td><td>EFCore + AutoMapper</td><td>None</td><td>None</td><td>None</td><td>None</td><td>None</td></tr>
+<tr><td>Piranha.AspNetCore.Identity.*</td><td>ASP.NET Core Identity</td><td>EFCore Identity</td><td>None</td><td>None</td><td>None</td><td>None</td><td>None</td></tr>
+</tbody></table></div>
+<h2 id="service-communication-sequence">Service Communication Sequence</h2>
+<div class="mermaid">
+sequenceDiagram
+    participant Browser as "Browser (Manager UI)"
+    participant PublicClient as "Public Client (Headless)"
+    participant PageCtrl as "PageApiController (Manager)"
+    participant WebApiCtrl as "PageApiController (WebApi)"
+    participant ManagerSvc as "Manager PageService"
+    participant CoreApi as "IApi (Core Engine)"
+    participant PageSvc as "PageService (Core)"
+    participant Cache as "IMemoryCache"
+    participant Repo as "PageRepository"
+    participant DB as "Database (EF Core)"
+    participant Hub as "PreviewHub (SignalR)"
+
+    Note over Browser,Hub: Manager Save Page Flow
+    Browser->>PageCtrl: POST /manager/api/page/save (PageEditModel)
+    PageCtrl->>ManagerSvc: Save(model, draft=false)
+    ManagerSvc->>CoreApi: api.Pages.SaveAsync(page)
+    CoreApi->>PageSvc: SaveAsync(page)
+    PageSvc->>Repo: SaveAsync(entity)
+    Repo->>DB: INSERT / UPDATE
+    DB-->>Repo: OK
+    Repo-->>PageSvc: OK
+    PageSvc->>Cache: Remove(cacheKey)
+    Cache-->>PageSvc: OK
+    PageSvc-->>CoreApi: OK
+    CoreApi-->>ManagerSvc: OK
+    ManagerSvc-->>PageCtrl: PageEditModel (updated)
+    PageCtrl->>Hub: Clients.All.SendAsync("Update", pageId)
+    Hub-->>Browser: SignalR push - preview refresh
+    PageCtrl-->>Browser: 200 PageEditModel + StatusMessage(Success)
+
+    Note over PublicClient,DB: Public Headless Page Read Flow
+    PublicClient->>WebApiCtrl: GET /api/page/{id}
+    alt Anonymous Access Allowed
+        WebApiCtrl->>CoreApi: api.Pages.GetByIdAsync(id)
+    else Auth Required
+        WebApiCtrl->>WebApiCtrl: Check authorization policy
+        alt Authorized
+            WebApiCtrl->>CoreApi: api.Pages.GetByIdAsync(id)
+        else Unauthorized
+            WebApiCtrl-->>PublicClient: 401 Unauthorized
+        end
+    end
+    CoreApi->>PageSvc: GetByIdAsync(id)
+    PageSvc->>Cache: Get(cacheKey)
+    alt Cache Hit
+        Cache-->>PageSvc: PageBase
+        PageSvc-->>CoreApi: PageBase
+    else Cache Miss
+        Cache-->>PageSvc: null
+        PageSvc->>Repo: GetByIdAsync(id)
+        Repo->>DB: SELECT
+        DB-->>Repo: PageEntity
+        Repo-->>PageSvc: PageBase
+        PageSvc->>Cache: Set(cacheKey, PageBase)
+    end
+    CoreApi-->>WebApiCtrl: PageBase
+    WebApiCtrl-->>PublicClient: 200 PageBase (JSON)
+</div></div>
+</div>
+<div id="tab-config" class="tab-panel">
+  <div class="fact-content"><h1 id="configuration-externalized-settings-inventory">Configuration & Externalized Settings Inventory</h1>
+<p>Piranha CMS uses ASP.NET Core's built-in <code>appsettings.json</code> / <code>appsettings.{Environment}.json</code> configuration system with no external configuration server, secret manager, or feature-flag service; runtime parameters are loaded from JSON files and environment variables via the standard Microsoft.Extensions.Configuration pipeline.</p>
+<h2 id="configuration-sources">Configuration Sources</h2>
+<div class="table-wrap"><table><thead><tr>
+<th>Source</th><th>Type</th><th>Path/Location</th><th>Notes</th>
+</tr></thead><tbody>
+<tr><td>appsettings.json</td><td>JSON config file</td><td><code>examples/MvcWeb/appsettings.json</code></td><td>Base configuration; connection strings, logging, AllowedHosts</td></tr>
+<tr><td>appsettings.json</td><td>JSON config file</td><td><code>examples/RazorWeb/appsettings.json</code></td><td>Identical structure to MvcWeb</td></tr>
+<tr><td>appsettings.Development.json</td><td>JSON config file</td><td><code>examples/MvcWeb/appsettings.Development.json</code></td><td>Development log-level overrides only</td></tr>
+<tr><td>appsettings.Development.json</td><td>JSON config file</td><td><code>examples/RazorWeb/appsettings.Development.json</code></td><td>Development log-level overrides only</td></tr>
+<tr><td>launchSettings.json</td><td>IDE/launch profile</td><td><code>examples/RazorWeb/Properties/launchSettings.json</code></td><td>Sets <code>ASPNETCORE_ENVIRONMENT=Development</code>; local dev only, not deployed</td></tr>
+<tr><td>editorconfig.json</td><td>TinyMCE config</td><td><code>examples/MvcWeb/editorconfig.json</code>, <code>examples/RazorWeb/editorconfig.json</code></td><td>Loaded at runtime by <code>EditorConfig.FromFile()</code>; configures TinyMCE plugins and toolbar</td></tr>
+<tr><td>Piranha Params (DB)</td><td>Database-backed params</td><td><code>Piranha_Params</code> table</td><td>Runtime CMS configuration (cache TTLs, comment settings, manager preferences) stored as key/value pairs in the database</td></tr>
+<tr><td>Environment Variables</td><td>OS/container env</td><td>Runtime</td><td><code>ASPNETCORE_ENVIRONMENT</code>, <code>ConnectionStrings__piranha</code>, <code>ConnectionStrings__blobstorage</code></td></tr>
+</tbody></table></div>
+<p>No Spring Cloud Config, Azure App Configuration, HashiCorp Vault, Azure KeyVault, AWS Secrets Manager, or other external configuration server is used.</p>
+<h2 id="build-profiles">Build Profiles</h2>
+<div class="table-wrap"><table><thead><tr>
+<th>Profile</th><th>Activation</th><th>Purpose</th><th>Key Dependencies/Plugins</th>
+</tr></thead><tbody>
+<tr><td>Debug</td><td>Default in IDE / <code>dotnet build</code></td><td>Development build; no optimization; debug symbols included</td><td><code><GenerateDocumentationFile></code> enabled; no AOT</td></tr>
+<tr><td>Release</td><td><code>-c Release</code> / CI pipeline</td><td>Production build; optimized; documentation XML generated</td><td><code><ContinuousIntegrationBuild>true</code> enabled on GitHub Actions (<code>GITHUB_ACTIONS=true</code>)</td></tr>
+<tr><td>net8.0 TFM</td><td><code><TargetFrameworks>net8.0</code></td><td>.NET 8.0 LTS target; selects net8.0-versioned NuGet package variants</td><td>EFCore 8.0.x packages, Extensions 8.0.x</td></tr>
+<tr><td>net9.0 TFM</td><td><code><TargetFrameworks>net9.0</code></td><td>.NET 9.0 current target; selects net9.0-versioned NuGet package variants</td><td>EFCore 9.0.x packages, Extensions 9.0.x</td></tr>
+</tbody></table></div>
+<h2 id="runtime-profiles">Runtime Profiles</h2>
+<div class="table-wrap"><table><thead><tr>
+<th>Profile</th><th>Activation Method</th><th>Config Files Loaded</th><th>Key Overrides</th>
+</tr></thead><tbody>
+<tr><td>Development</td><td><code>ASPNETCORE_ENVIRONMENT=Development</code> (via launchSettings.json or env var)</td><td><code>appsettings.json</code> → <code>appsettings.Development.json</code></td><td>Log level <code>Default=Information</code>, <code>Microsoft=Warning</code> (same as base; no functional difference)</td></tr>
+<tr><td>Production</td><td><code>ASPNETCORE_ENVIRONMENT=Production</code> (default when not set)</td><td><code>appsettings.json</code> only (no <code>appsettings.Production.json</code> present)</td><td>Same settings as base; connection strings must be overridden via environment variables</td></tr>
+<tr><td>Custom (any)</td><td>Set <code>ASPNETCORE_ENVIRONMENT=<name></code></td><td><code>appsettings.json</code> → <code>appsettings.<name>.json</code> (if present)</td><td>Standard ASP.NET Core layered config merging</td></tr>
+</tbody></table></div>
+<p>> Note: No <code>appsettings.Production.json</code> or <code>appsettings.Staging.json</code> files exist in the repository. Production deployments must override <code>ConnectionStrings:piranha</code> and any secrets via environment variables or a secrets manager configured by the host.</p>
+<h2 id="properties-inventory">Properties Inventory</h2>
+<h3 id="mvcweb-razorweb-example-applications">MvcWeb / RazorWeb (Example Applications)</h3>
+<div class="table-wrap"><table><thead><tr>
+<th>Property Key</th><th>Default Value</th><th>Profile</th><th>Source</th>
+</tr></thead><tbody>
+<tr><td><code>Logging:LogLevel:Default</code></td><td><code>Information</code></td><td>All</td><td>appsettings.json</td></tr>
+<tr><td><code>Logging:LogLevel:Microsoft</code></td><td><code>Warning</code></td><td>All</td><td>appsettings.json</td></tr>
+<tr><td><code>Logging:LogLevel:Microsoft.Hosting.Lifetime</code></td><td><code>Information</code></td><td>All</td><td>appsettings.json</td></tr>
+<tr><td><code>AllowedHosts</code></td><td><code>*</code></td><td>All</td><td>appsettings.json</td></tr>
+<tr><td><code>ConnectionStrings:piranha</code></td><td><code>Filename=./piranha.db</code></td><td>All</td><td>appsettings.json / env var override</td></tr>
+<tr><td><code>ConnectionStrings:blobstorage</code></td><td><code>DefaultEndpointsProtocol=https;AccountName=;AccountKey=;EndpointSuffix=</code></td><td>All</td><td>appsettings.json / env var override</td></tr>
+</tbody></table></div>
+<h3 id="piranha-runtime-parameters-database-backed-piranha-params-table">Piranha Runtime Parameters (Database-Backed, <code>Piranha_Params</code> Table)</h3>
+<div class="table-wrap"><table><thead><tr>
+<th>Param Key</th><th>Default Value</th><th>Type</th><th>Purpose</th>
+</tr></thead><tbody>
+<tr><td><code>ArchivePageSize</code></td><td><code>0</code> (unlimited)</td><td>int</td><td>Number of posts per archive page</td></tr>
+<tr><td><code>CacheExpiresPages</code></td><td><code>0</code> (no expiry)</td><td>int</td><td>Page cache TTL in minutes</td></tr>
+<tr><td><code>CacheExpiresPosts</code></td><td><code>0</code> (no expiry)</td><td>int</td><td>Post cache TTL in minutes</td></tr>
+<tr><td><code>CommentsApprove</code></td><td><code>true</code></td><td>bool</td><td>Auto-approve submitted comments</td></tr>
+<tr><td><code>CommentsPageSize</code></td><td><code>0</code></td><td>int</td><td>Comments per page</td></tr>
+<tr><td><code>CommentsPostsEnabled</code></td><td><code>true</code></td><td>bool</td><td>Enable comments on posts</td></tr>
+<tr><td><code>CommentsPagesEnabled</code></td><td><code>false</code></td><td>bool</td><td>Enable comments on pages</td></tr>
+<tr><td><code>CommentsCloseAfterDays</code></td><td><code>0</code> (never)</td><td>int</td><td>Days after publish before comments close</td></tr>
+<tr><td><code>HtmlExcerpt</code></td><td><code>false</code></td><td>bool</td><td>Render excerpts as HTML</td></tr>
+<tr><td><code>MediaCdnUrl</code></td><td><code>""</code></td><td>string</td><td>CDN base URL for media assets</td></tr>
+<tr><td><code>ManagerExpandedSitemapLevels</code></td><td><code>0</code></td><td>int</td><td>Manager sitemap auto-expand depth</td></tr>
+<tr><td><code>ManagerPageSize</code></td><td><code>0</code></td><td>int</td><td>Manager list pagination size</td></tr>
+<tr><td><code>ManagerDefaultCollapsedBlocks</code></td><td><code>false</code></td><td>bool</td><td>Collapse content blocks by default</td></tr>
+<tr><td><code>ManagerDefaultCollapsedBlockGroupHeaders</code></td><td><code>false</code></td><td>bool</td><td>Collapse block group headers by default</td></tr>
+<tr><td><code>ManagerOutlined</code></td><td><code>false</code></td><td>bool</td><td>Enable outlined manager UI style</td></tr>
+<tr><td><code>ManagerXhrTimeout</code></td><td><code>0</code></td><td>int</td><td>XHR timeout in ms for manager API calls</td></tr>
+<tr><td><code>HierarchicalPageSlugs</code></td><td><code>true</code></td><td>bool</td><td>Include parent slug in child page URL</td></tr>
+<tr><td><code>PageRevisions</code></td><td><code>0</code> (unlimited)</td><td>int</td><td>Max page revision history depth</td></tr>
+<tr><td><code>PostRevisions</code></td><td><code>0</code> (unlimited)</td><td>int</td><td>Max post revision history depth</td></tr>
+</tbody></table></div>
+<h3 id="piranha-manager-options-code-configured">Piranha Manager Options (Code-Configured)</h3>
+<div class="table-wrap"><table><thead><tr>
+<th>Option</th><th>Default Value</th><th>Configured In</th>
+</tr></thead><tbody>
+<tr><td><code>XsrfCookieName</code></td><td><code>XSRF-REQUEST-TOKEN</code></td><td><code>ManagerOptions</code> class</td></tr>
+<tr><td><code>XsrfHeaderName</code></td><td><code>X-XSRF-TOKEN</code></td><td><code>ManagerOptions</code> class</td></tr>
+<tr><td><code>JsonOptions</code></td><td>null</td><td><code>ManagerOptions</code> class; override via <code>AddPiranha</code></td></tr>
+</tbody></table></div>
+<h3 id="piranha-routing-options-code-configured">Piranha Routing Options (Code-Configured)</h3>
+<div class="table-wrap"><table><thead><tr>
+<th>Option</th><th>Default Value</th><th>Configured In</th>
+</tr></thead><tbody>
+<tr><td><code>UseAliasRouting</code></td><td><code>true</code></td><td><code>RoutingOptions</code> class</td></tr>
+<tr><td><code>UseArchiveRouting</code></td><td><code>true</code></td><td><code>RoutingOptions</code> class</td></tr>
+<tr><td><code>UsePageRouting</code></td><td><code>true</code></td><td><code>RoutingOptions</code> class</td></tr>
+<tr><td><code>UsePostRouting</code></td><td><code>true</code></td><td><code>RoutingOptions</code> class</td></tr>
+<tr><td><code>UseSiteRouting</code></td><td><code>true</code></td><td><code>RoutingOptions</code> class</td></tr>
+<tr><td><code>UseSitemapRouting</code></td><td><code>true</code></td><td><code>RoutingOptions</code> class</td></tr>
+<tr><td><code>UseStartpageRouting</code></td><td><code>true</code></td><td><code>RoutingOptions</code> class</td></tr>
+</tbody></table></div>
+<h3 id="piranha-web-api-options-code-configured">Piranha Web API Options (Code-Configured)</h3>
+<div class="table-wrap"><table><thead><tr>
+<th>Option</th><th>Default Value</th><th>Configured In</th>
+</tr></thead><tbody>
+<tr><td><code>AllowAnonymousAccess</code></td><td><code>false</code></td><td><code>WebApiOptions</code> class</td></tr>
+</tbody></table></div>
+<h2 id="startup-parameters-resource-requirements">Startup Parameters & Resource Requirements</h2>
+<div class="table-wrap"><table><thead><tr>
+<th>Service</th><th>Runtime Options</th><th>Memory</th><th>Instance Count</th>
+</tr></thead><tbody>
+<tr><td>MvcWeb (example)</td><td><code>ASPNETCORE_ENVIRONMENT=Development</code> (dev)</td><td>Not specified</td><td>1 (single-process)</td></tr>
+<tr><td>RazorWeb (example)</td><td><code>ASPNETCORE_ENVIRONMENT=Development</code> (dev); listens on <code>https://localhost:5001;http://localhost:5000</code></td><td>Not specified</td><td>1 (single-process)</td></tr>
+<tr><td>Library packages (Piranha.*)</td><td>No startup params; embedded in host</td><td>Not applicable</td><td>N/A</td></tr>
+</tbody></table></div>
+<p>No JVM heap settings, Docker <code>mem_limit</code>, Kubernetes <code>resources.requests/limits</code>, or instance scaling configurations are defined in the repository. These must be set by the consuming host application or deployment pipeline.</p>
+<h2 id="startup-dependency-chain">Startup Dependency Chain</h2>
+<p>Piranha CMS is a <strong>single-process</strong> library framework — all components start within one ASP.NET Core application startup sequence:</p>
+<ol>
+<li><strong><code>builder.AddPiranha()</code></strong> — registers all Piranha services into the DI container (services, repositories, EF Core DbContext)</li>
+<li><strong>DbContext constructor</strong> — on first request to the DbContext, <code>Database.Migrate()</code> is called (guarded by a static mutex). This blocks startup until all EF Core migrations complete</li>
+<li><strong><code>Seed()</code></strong> — runs immediately after migrations to seed default Language and Param records</li>
+<li><strong><code>app.UsePiranha()</code></strong> — configures middleware pipeline, initializes <code>App.Init(api)</code> to load content types and app configuration from the database</li>
+<li><strong><code>ContentTypeBuilder.Build()</code></strong> — scans host assembly for <code>[PageType]</code>/<code>[PostType]</code> attributes and registers them with the CMS API</li>
+</ol>
+<p>There are no inter-service TCP wait mechanisms, health check probes, <code>dockerize</code> patterns, or Kubernetes readiness probes defined in the framework itself. The host application is responsible for configuring health checks if needed.</p>
+<h2 id="secrets-sensitive-configuration">Secrets & Sensitive Configuration</h2>
+<div class="table-wrap"><table><thead><tr>
+<th>Secret Reference</th><th>Type</th><th>Storage</th>
+</tr></thead><tbody>
+<tr><td><code>ConnectionStrings:piranha</code></td><td>Database connection string</td><td>appsettings.json (plaintext for dev SQLite); <strong>must be overridden</strong> via environment variable (<code>ConnectionStrings__piranha</code>) or secrets manager in production</td></tr>
+<tr><td><code>ConnectionStrings:blobstorage</code></td><td>Azure Blob Storage connection string (AccountKey)</td><td>appsettings.json — <strong>currently empty/placeholder</strong>; must be populated via env var or secrets manager</td></tr>
+<tr><td>ASP.NET Core Identity password hash</td><td>PBKDF2 password hash</td><td>Stored in <code>AspNetUsers.PasswordHash</code> column — never in config files</td></tr>
+</tbody></table></div>
+<h3 id="secrets-provisioning-workflow">Secrets Provisioning Workflow</h3>
+<p>Piranha CMS does not include a built-in secrets management integration. The expected provisioning workflow for production deployments is:</p>
+<ol>
+<li><strong>Development</strong>: Connection strings are stored as plaintext in <code>appsettings.json</code> (SQLite file path); no actual credentials needed</li>
+<li><strong>Production</strong>: Connection strings must be injected via OS environment variables using ASP.NET Core's double-underscore separator convention (`ConnectionStrings__piranha=Server=...;User=...;<strong><em></strong></em> This overrides the appsettings.json values at runtime</li>
+<li><strong>Cloud deployments</strong>: Recommended approach is to use Azure App Service Connection Strings, Azure KeyVault with managed identity, or AWS Secrets Manager — none of which are pre-configured in the repository</li>
+<li><strong>No encryption</strong>: No Jasypt, DPAPI protected config, or <code>dotnet user-secrets</code> encryption is used in the example projects</li>
+</ol>
+<p>The <code>blobstorage</code> connection string is a placeholder in <code>appsettings.json</code> with empty <code>AccountName</code> and <code>AccountKey</code> values and <strong>must never be committed with real credentials</strong>.</p>
+<h2 id="feature-flags">Feature Flags</h2>
+<div class="table-wrap"><table><thead><tr>
+<th>Flag / Option</th><th>Default</th><th>Controlled By</th><th>Notes</th>
+</tr></thead><tbody>
+<tr><td><code>RoutingOptions.UseAliasRouting</code></td><td><code>true</code></td><td>Code (<code>UsePiranha</code> options lambda)</td><td>Disabling skips URL alias resolution middleware</td></tr>
+<tr><td><code>RoutingOptions.UseArchiveRouting</code></td><td><code>true</code></td><td>Code</td><td>Disabling skips post archive routing</td></tr>
+<tr><td><code>RoutingOptions.UsePageRouting</code></td><td><code>true</code></td><td>Code</td><td>Disabling skips page URL resolution</td></tr>
+<tr><td><code>RoutingOptions.UsePostRouting</code></td><td><code>true</code></td><td>Code</td><td>Disabling skips post URL resolution</td></tr>
+<tr><td><code>RoutingOptions.UseSiteRouting</code></td><td><code>true</code></td><td>Code</td><td>Disabling skips multi-site hostname resolution</td></tr>
+<tr><td><code>RoutingOptions.UseSitemapRouting</code></td><td><code>true</code></td><td>Code</td><td>Disabling skips <code>/sitemap.xml</code> serving</td></tr>
+<tr><td><code>WebApiOptions.AllowAnonymousAccess</code></td><td><code>false</code></td><td>Code (<code>UseWebApi</code> options lambda)</td><td>When <code>true</code>, public API endpoints require no authentication</td></tr>
+<tr><td><code>AddRazorRuntimeCompilation</code></td><td><code>false</code></td><td><code>PiranhaServiceBuilder</code></td><td>Enables hot-reload of <code>.cshtml</code> files without restart (dev only)</td></tr>
+<tr><td><code>CommentsApprove</code> (Param)</td><td><code>true</code></td><td>Manager UI / DB</td><td>Auto-approve comments without moderation</td></tr>
+<tr><td><code>CommentsPostsEnabled</code> (Param)</td><td><code>true</code></td><td>Manager UI / DB</td><td>Enable comment form on posts</td></tr>
+<tr><td><code>CommentsPagesEnabled</code> (Param)</td><td><code>false</code></td><td>Manager UI / DB</td><td>Enable comment form on pages</td></tr>
+<tr><td><code>HierarchicalPageSlugs</code> (Param)</td><td><code>true</code></td><td>Manager UI / DB</td><td>Include parent page slug in child URL</td></tr>
+</tbody></table></div>
+<p>No LaunchDarkly, Unleash, <code>Microsoft.FeatureManagement</code>, or other feature-flag SDK is used. Feature flags are either code-level options (set at startup) or database-backed <code>Piranha_Params</code> entries (configurable via Manager UI at runtime).</p>
+<h2 id="framework-runtime-versions">Framework & Runtime Versions</h2>
+<div class="table-wrap"><table><thead><tr>
+<th>Component</th><th>Version</th><th>Source</th>
+</tr></thead><tbody>
+<tr><td>.NET Runtime</td><td>8.0 (LTS) and 9.0 (Current)</td><td><code>Directory.Build.props</code> <code><TargetFrameworks>net8.0;net9.0</TargetFrameworks></code></td></tr>
+<tr><td>ASP.NET Core</td><td>8.0 / 9.0</td><td><code><FrameworkReference Include="Microsoft.AspNetCore.App" /></code></td></tr>
+<tr><td>Entity Framework Core</td><td>8.0.0 (net8.0) / 9.0.0 (net9.0)</td><td><code>*.csproj</code> EFCore package references</td></tr>
+<tr><td>EFCore.Sqlite</td><td>8.0.0 / 9.0.0</td><td><code>Piranha.Data.EF.SQLite.csproj</code></td></tr>
+<tr><td>EFCore.SqlServer</td><td>8.0.0 / 9.0.0</td><td><code>Piranha.Data.EF.SQLServer.csproj</code></td></tr>
+<tr><td>Npgsql.EFCore.PostgreSQL</td><td>8.0.11 / 9.0.4</td><td><code>Piranha.Data.EF.PostgreSql.csproj</code></td></tr>
+<tr><td>Pomelo.EFCore.MySql</td><td>8.0.3 / 9.0.0</td><td><code>Piranha.Data.EF.MySql.csproj</code></td></tr>
+<tr><td>ASP.NET Core Identity</td><td>8.0.0 / 9.0.0</td><td><code>Piranha.AspNetCore.Identity.csproj</code></td></tr>
+<tr><td>AutoMapper</td><td>12.0.1</td><td><code>Piranha.Data.EF.csproj</code></td></tr>
+<tr><td>Markdig</td><td>0.40.0</td><td><code>Piranha.csproj</code></td></tr>
+<tr><td>Newtonsoft.Json</td><td>13.0.3</td><td><code>Piranha.csproj</code></td></tr>
+<tr><td>Mvc.NewtonsoftJson</td><td>8.0.0 / 9.0.2</td><td><code>Piranha.Manager.csproj</code></td></tr>
+<tr><td>Mvc.Razor.RuntimeCompilation</td><td>8.0.0 / 9.0.2</td><td><code>Piranha.AspNetCore.csproj</code></td></tr>
+<tr><td>SixLabors.ImageSharp</td><td>2.1.13</td><td><code>Piranha.ImageSharp.csproj</code></td></tr>
+<tr><td>Azure.Storage.Blobs</td><td>12.18.0</td><td><code>Piranha.Azure.BlobStorage.csproj</code></td></tr>
+<tr><td>Microsoft.Extensions.Localization</td><td>8.0.0 / 9.0.2</td><td><code>Piranha.Manager.Localization.csproj</code></td></tr>
+<tr><td>X.Web.Sitemap</td><td>2.10.1</td><td><code>Piranha.AspNetCore.csproj</code></td></tr>
+<tr><td>xunit</td><td>2.7.0</td><td>Test projects</td></tr>
+<tr><td>Microsoft.NET.Test.Sdk</td><td>17.9.0</td><td>Test projects</td></tr>
+<tr><td>coverlet</td><td>6.0.2</td><td>Test projects</td></tr>
+<tr><td>Piranha CMS (solution)</td><td>12.1.0</td><td><code>Directory.Build.props</code> <code><Version>12.1.0</Version></code></td></tr>
+</tbody></table></div></div>
+</div>
+<div id="tab-workflows" class="tab-panel">
+  <div class="fact-content"><h1 id="core-business-workflows">Core Business Workflows</h1>
+<p>Piranha CMS is a headless-capable content management framework that enables editors to create, manage, and publish structured web content (pages, posts, media, and site settings) through a Manager back-office, while delivering that content to visitors via routed MVC/Razor views or a public REST API.</p>
+<h2 id="domain-entities">Domain Entities</h2>
+<div class="table-wrap"><table><thead><tr>
+<th>Entity</th><th>Service / Bounded Context</th><th>Description</th><th>Key Relationships</th>
+</tr></thead><tbody>
+<tr><td>Site</td><td>Site Management</td><td>Top-level tenant; one or more sites can run from a single instance</td><td>Owns SiteContent, Pages, Posts</td></tr>
+<tr><td>SiteContent</td><td>Site Management</td><td>Typed structured content fields attached to the site itself</td><td>Belongs to Site</td></tr>
+<tr><td>Page</td><td>Content Management</td><td>Hierarchical web page with typed regions, blocks, and comments</td><td>Belongs to Site; has parent Page; has Comments; linked to PageType</td></tr>
+<tr><td>Post</td><td>Content Management</td><td>Blog/news entry under a blog (archive) page, with tags and categories</td><td>Belongs to Blog Page; has Comments; linked to PostType</td></tr>
+<tr><td>Content</td><td>Content Management</td><td>Standalone typed content items (not routed)</td><td>Belongs to ContentGroup; linked to ContentType</td></tr>
+<tr><td>PageType</td><td>Schema Management</td><td>Registered template definition for Page structure (regions, blocks)</td><td>Used by Pages</td></tr>
+<tr><td>PostType</td><td>Schema Management</td><td>Registered template definition for Post structure</td><td>Used by Posts</td></tr>
+<tr><td>ContentType</td><td>Schema Management</td><td>Registered template definition for standalone Content items</td><td>Used by Content</td></tr>
+<tr><td>SiteType</td><td>Schema Management</td><td>Registered template definition for SiteContent fields</td><td>Used by SiteContent</td></tr>
+<tr><td>Media</td><td>Media Management</td><td>Uploaded binary files (images, documents, audio, video) with optional scaled versions</td><td>Belongs to MediaFolder; referenced by fields</td></tr>
+<tr><td>MediaFolder</td><td>Media Management</td><td>Hierarchical folder for organizing Media</td><td>Contains Media and child MediaFolders</td></tr>
+<tr><td>Comment (Page/Post)</td><td>Comment Management</td><td>Visitor-submitted comment, optionally requiring approval</td><td>Belongs to Page or Post</td></tr>
+<tr><td>Alias</td><td>Routing Management</td><td>URL redirect rule mapping an old URL to a new URL</td><td>Belongs to Site</td></tr>
+<tr><td>Taxonomy (Category/Tag)</td><td>Content Classification</td><td>Hierarchical category or flat tag applied to Posts</td><td>Applied to PostBase</td></tr>
+<tr><td>Param</td><td>Configuration Management</td><td>Named key/value pairs stored in the database for runtime CMS configuration</td><td>Global (no site scoping)</td></tr>
+<tr><td>Language</td><td>Localization</td><td>Registered language/culture for multilingual content</td><td>Referenced by Site for default language</td></tr>
+</tbody></table></div>
+<h2 id="service-to-domain-mapping">Service-to-Domain Mapping</h2>
+<div class="table-wrap"><table><thead><tr>
+<th>Service / Layer</th><th>Domain Context</th><th>Owned Entities</th><th>External Dependencies</th>
+</tr></thead><tbody>
+<tr><td><code>PageService</code></td><td>Content Management</td><td>Page, PageComment, PageRevision</td><td>IPageRepository, IContentFactory, ISiteService, IMediaService, ICache, ISearch</td></tr>
+<tr><td><code>PostService</code></td><td>Content Management</td><td>Post, PostComment, PostRevision</td><td>IPostRepository, IContentFactory, ISiteService, IPageService, IMediaService, ICache, ISearch</td></tr>
+<tr><td><code>ContentService</code></td><td>Content Management</td><td>Content</td><td>IContentRepository, IContentFactory, IMediaService, ICache</td></tr>
+<tr><td><code>SiteService</code></td><td>Site Management</td><td>Site, SiteContent</td><td>ISiteRepository, IContentFactory, ICache</td></tr>
+<tr><td><code>MediaService</code></td><td>Media Management</td><td>Media, MediaFolder, MediaVersion</td><td>IMediaRepository, IStorage, IImageProcessor, ICache</td></tr>
+<tr><td><code>AliasService</code></td><td>Routing Management</td><td>Alias</td><td>IAliasRepository, ICache</td></tr>
+<tr><td><code>ParamService</code></td><td>Configuration Management</td><td>Param</td><td>IParamRepository, ICache</td></tr>
+<tr><td><code>LanguageService</code></td><td>Localization</td><td>Language</td><td>ILanguageRepository, ICache</td></tr>
+<tr><td><code>ArchiveService</code></td><td>Content Delivery</td><td>PostArchive (read model)</td><td>IArchiveRepository, IPostService, IPageService</td></tr>
+<tr><td><code>ContentTypeService</code> / <code>PageTypeService</code> / <code>PostTypeService</code></td><td>Schema Management</td><td>ContentType, PageType, PostType, SiteType</td><td>Type repositories; ICache</td></tr>
+<tr><td>Manager API (<code>/manager/api/*</code>)</td><td>Editorial Back-Office</td><td>All entities (read/write)</td><td>All services via <code>IApi</code></td></tr>
+<tr><td>Public Web API (<code>/api/*</code>)</td><td>Headless Delivery</td><td>Pages, Posts, Sitemap (read-only)</td><td>IPageService, IPostService, ISiteService</td></tr>
+<tr><td>ASP.NET Core Routing Middleware</td><td>Request Routing</td><td>Site, Page, Post, Alias</td><td>ISiteService, IPageService, IPostService, IAliasService</td></tr>
+</tbody></table></div>
+<p>All services communicate synchronously within a single process via the <code>IApi</code> façade. There are no message queues or inter-service HTTP calls.</p>
+<h2 id="primary-workflows">Primary Workflows</h2>
+<h3 id="workflow-1-content-creation-and-publishing-page-post-lifecycle">Workflow 1: Content Creation and Publishing (Page/Post Lifecycle)</h3>
+<p>The most central workflow in Piranha CMS is the editorial cycle for pages and posts.</p>
+<p><strong>Steps:</strong></p>
+<ol>
+<li><strong>Create draft</strong> — Editor opens Manager and creates a new page or post. <code>PageService.CreateAsync<T>()</code> initializes the model with default comment settings from <code>Piranha_Params</code> (CommentsEnabledForPages/Posts, CommentsCloseAfterDays). No slug is generated yet.</li>
+<li><strong>Compose content</strong> — Editor fills in title, regions, and block content (HtmlBlock, MarkdownBlock, ImageBlock, etc.) through the Manager Vue.js SPA. Content is auto-saved as a draft via <code>POST /manager/api/pages/draft</code> or <code>POST /manager/api/posts/draft</code>.</li>
+<li><strong>Save draft</strong> — <code>PageService.SaveAsync(model, isDraft: true)</code> validates the model (Title required, Slug uniqueness within the site), auto-generates the slug from the title if not set, resolves hierarchical slug (if <code>HierarchicalPageSlugs=true</code>, prefixes parent slug), persists draft to <code>Piranha_PageRevisions</code> table, does NOT update <code>Piranha_Pages.Published</code>.</li>
+<li><strong>Preview</strong> — Editor can preview the draft. Manager serves the page with the draft content via <code>GET /manager/api/pages/preview/{id}</code>.</li>
+<li><strong>Publish</strong> — Editor clicks Publish. <code>PageService.SaveAsync(model, isDraft: false)</code> sets <code>Published = DateTime.Now</code> (or the scheduled date), persists the canonical record to <code>Piranha_Pages</code>, writes the current state as a numbered revision in <code>Piranha_PageRevisions</code>, invalidates the in-memory cache for this page's Id and the site's sitemap, and (if <code>ISearch</code> is registered) indexes the page in the configured search engine.</li>
+<li><strong>Routing serves published content</strong> — On the next visitor request, the <code>PageMiddleware</code> matches the URL slug, calls <code>PageService.GetBySlugAsync<T>()</code>, populates the cache, and forwards to the registered Razor/MVC view.</li>
+<li><strong>Unpublish</strong> — Editor saves with <code>Published = null</code>. Cache is invalidated; the page is no longer served by the routing middleware (returns 404) but remains in the database.</li>
+<li><strong>Delete</strong> — <code>PageService.DeleteAsync(id)</code> removes the page and all its revisions, comments, and block data. The storage service does NOT automatically delete referenced media files. Cache is invalidated.</li>
+</ol>
+<p><strong>Revision management:</strong> Revisions are created on every save (draft and publish). When <code>PageRevisions</code> Param is set to a nonzero value, older revisions beyond the limit are pruned during the save.</p>
+<p>---</p>
+<h3 id="workflow-2-media-upload-and-processing">Workflow 2: Media Upload and Processing</h3>
+<p><strong>Steps:</strong></p>
+<ol>
+<li><strong>Upload initiated</strong> — Editor drags and drops a file onto the Manager Media browser. Manager calls <code>POST /manager/api/media/upload</code>.</li>
+<li><strong>Validate</strong> — <code>MediaService.SaveAsync(model)</code> validates that filename and size are provided.</li>
+<li><strong>Store binary</strong> — Calls <code>IStorage.OpenWriteAsync()</code> to write the file bytes to the configured storage backend (local disk or Azure Blob Storage).</li>
+<li><strong>Process image</strong> — If <code>IImageProcessor</code> is registered (SixLabors.ImageSharp) and the file is an image type, <code>ProcessImageAsync()</code> generates scaled thumbnail and responsive variants, storing each variant via <code>IStorage</code> and recording them in <code>Piranha_MediaVersions</code>.</li>
+<li><strong>Persist metadata</strong> — Media record (filename, content type, MIME type, size, CDN URL if configured) is saved to <code>Piranha_Media</code>.</li>
+<li><strong>Cache invalidation</strong> — The in-memory <code>MediaStructure</code> cached list is removed from <code>ICache</code> so the next browse request reflects the new file.</li>
+<li><strong>Reference in content</strong> — Editors use the ImageField or MediaField pickers in the Manager to link the Media item's <code>Guid</code> ID into page/post content. During content serialization, field serializers resolve the ID to a URL using the CDN base URL from the <code>MediaCdnUrl</code> Param.</li>
+</ol>
+<p>---</p>
+<h3 id="workflow-3-url-alias-redirect-management">Workflow 3: URL Alias / Redirect Management</h3>
+<p><strong>Steps:</strong></p>
+<ol>
+<li><strong>Editor creates alias</strong> — Via Manager at <code>POST /manager/api/aliases</code>. Alias has an <code>AliasUrl</code> (source) and <code>RedirectUrl</code> (target) and a <code>RedirectType</code> (301 Permanent or 302 Temporary).</li>
+<li><strong>Persist</strong> — <code>AliasService.SaveAsync(alias)</code> ensures both <code>AliasUrl</code> and <code>RedirectUrl</code> are non-empty, normalizes the source URL (prepends <code>/</code> if missing), and persists to <code>Piranha_Aliases</code>. Cache entry for the alias set is removed.</li>
+<li><strong>Routing</strong> — On an incoming request, <code>AliasMiddleware</code> (enabled when <code>RoutingOptions.UseAliasRouting = true</code>) queries <code>AliasService.GetByAliasUrlAsync()</code>. If a match is found, the middleware issues an HTTP redirect with the configured redirect type.</li>
+</ol>
+<p>---</p>
+<h3 id="workflow-4-comment-submission-and-moderation">Workflow 4: Comment Submission and Moderation</h3>
+<p><strong>Steps:</strong></p>
+<ol>
+<li><strong>Visitor submits comment</strong> — A visitor posts to a page/post comment endpoint. <code>PageService.SaveCommentAsync(pageId, comment)</code> or <code>PostService.SaveCommentAsync(postId, comment)</code> is called.</li>
+<li><strong>Validate</strong> — Checks that the parent content item exists. Validates that commenting is enabled (<code>EnableComments = true</code>) and that the comment window has not expired (<code>CloseCommentsAfterDays</code> not exceeded since <code>Published</code> date). Also validates that <code>Author</code> and <code>Body</code> are provided.</li>
+<li><strong>Auto-approve check</strong> — If the <code>CommentsApprove</code> Param is <code>true</code>, the comment is saved with <code>IsApproved = true</code> and immediately visible to readers. If <code>false</code>, saved with <code>IsApproved = false</code> and placed in a moderation queue.</li>
+<li><strong>Moderation</strong> — In the Manager, editors access pending comments via <code>GET /manager/api/pages/comments/pending</code> or <code>GET /manager/api/posts/comments/pending</code>. Approving a comment calls <code>PageService.ApproveCommentAsync(commentId)</code>, which flips <code>IsApproved = true</code>.</li>
+<li><strong>Delete</strong> — Editors can delete any comment via <code>PageService.DeleteCommentAsync(commentId)</code>.</li>
+</ol>
+<p>---</p>
+<h3 id="workflow-5-application-startup-and-content-type-registration">Workflow 5: Application Startup and Content Type Registration</h3>
+<p><strong>Steps:</strong></p>
+<ol>
+<li><strong><code>builder.AddPiranha(options)</code></strong> — Registers all Piranha services into the ASP.NET Core DI container. Options include the storage provider (local/Azure Blob), image processor (ImageSharp), and database backend (SQLite/SQL Server/PostgreSQL/MySQL).</li>
+<li><strong><code>app.UsePiranha(options)</code></strong> — Configures the middleware pipeline and calls <code>App.Init(api)</code> to load all PageTypes, PostTypes, ContentTypes, SiteTypes, Params, and Languages from the database.</li>
+<li><strong><code>ContentTypeBuilder.Build(assembly)</code></strong> (optional) — Scans the host assembly for classes annotated with <code>[PageType]</code>, <code>[PostType]</code>, <code>[ContentType]</code>, <code>[SiteType]</code> and calls the corresponding <code>SaveAsync</code> on the type services to register or update content type definitions in the database.</li>
+<li><strong>EF Core migration</strong> — On first DbContext access, <code>Database.Migrate()</code> runs pending migrations to create or update the schema. This is guarded by a static <code>SemaphoreSlim</code> mutex to be safe in concurrent startup scenarios.</li>
+<li><strong>Seed</strong> — After migration, <code>Seed()</code> inserts the default Language (<code>en-US</code>) and required Param records if they do not already exist.</li>
+</ol>
+<h2 id="cross-service-data-flows">Cross-Service Data Flows</h2>
+<p>Piranha CMS is a <strong>single-process</strong> monolith. All cross-domain data flows occur in-process through the <code>IApi</code> façade rather than over a network.</p>
+<p><strong>Typical content delivery composition:</strong></p>
+<ul>
+<li><code>SiteService.GetDefaultAsync()</code> resolves the default site (or matches hostname for multi-site) → returns <code>Site</code> with default language and ContentType ID</li>
+<li><code>PageService.GetBySlugAsync<T>(slug, siteId)</code> checks <code>ICache</code> first; on miss, calls <code>IPageRepository.GetBySlug()</code> → joins <code>Piranha_Pages</code>, <code>Piranha_PageFields</code>, <code>Piranha_PageBlocks</code>, <code>Piranha_PageBlockFields</code>, <code>Piranha_PageRegions</code>; deserializes field values via <code>IContentFactory</code> → caches result → returns typed page model</li>
+</ul>
+<p><strong>Media field resolution in content:</strong></p>
+<ul>
+<li>When <code>PageService</code> or <code>PostService</code> loads a model via <code>ContentFactory.InitAsync()</code>, any <code>ImageField</code>/<code>MediaField</code> values (stored as <code>Guid</code> JSON in <code>Piranha_PageFields</code>) are resolved by <code>MediaFieldSerializer</code> → calls <code>MediaService.GetByIdAsync(mediaId)</code> → returns full <code>Media</code> record → field holds the URL built from <code>PublicUrl</code> + optional <code>MediaCdnUrl</code> prefix</li>
+</ul>
+<p><strong>Archive data aggregation:</strong></p>
+<ul>
+<li><code>ArchiveService.GetPageAsync<T>(blogId, currentPage, pageSize, ...)</code> queries posts via <code>IArchiveRepository</code>, then enriches each with blog page info via <code>IPageService.GetByIdAsync<PageInfo>()</code> — the blog page's <code>Title</code> and <code>Slug</code> are injected into each <code>PostBase.BlogSlug</code></li>
+</ul>
+<p><strong>No circuit breaker or fallback patterns</strong> are present because all calls are in-process. If the database is unavailable, the request fails rather than degrading gracefully.</p>
+<h2 id="business-workflow-sequence">Business Workflow Sequence</h2>
+<p>The following diagram shows the primary end-to-end workflow: a content editor publishes a page, and a visitor subsequently reads it.</p>
+<div class="mermaid">
+sequenceDiagram
+    participant Editor as "Content Editor"
+    participant ManagerUI as "Manager SPA"
+    participant ManagerAPI as "Manager API"
+    participant PageSvc as "PageService"
+    participant ContentFactory as "ContentFactory"
+    participant Repo as "PageRepository"
+    participant Cache as "ICache"
+    participant Search as "ISearch (optional)"
+    participant Visitor as "Site Visitor"
+    participant Middleware as "Page Middleware"
+    participant DB as "Database"
+
+    Editor->>ManagerUI: Fill in page title, regions, blocks
+    ManagerUI->>ManagerAPI: POST /manager/api/pages/draft
+    ManagerAPI->>PageSvc: SaveAsync(model, isDraft=true)
+    PageSvc->>PageSvc: Validate title required, slug uniqueness
+    PageSvc->>PageSvc: Auto-generate slug from title
+    PageSvc->>Repo: Save draft to Piranha_PageRevisions
+    Repo->>DB: INSERT/UPDATE draft record
+    DB-->>Repo: OK
+    Repo-->>PageSvc: Draft saved
+    PageSvc-->>ManagerAPI: Draft ID
+    ManagerAPI-->>ManagerUI: Success response
+
+    Editor->>ManagerUI: Click Publish
+    ManagerUI->>ManagerAPI: POST /manager/api/pages/save
+    ManagerAPI->>PageSvc: SaveAsync(model, isDraft=false)
+    PageSvc->>PageSvc: Set Published = DateTime.Now
+    PageSvc->>Repo: Save to Piranha_Pages + create revision
+    Repo->>DB: INSERT/UPDATE Piranha_Pages, Piranha_PageRevisions
+    DB-->>Repo: OK
+    PageSvc->>Cache: Remove cached page + sitemap entries
+    alt Search is configured
+        PageSvc->>Search: Index page content
+    end
+    PageSvc-->>ManagerAPI: Saved page ID
+    ManagerAPI-->>ManagerUI: Success
+    ManagerUI-->>Editor: Page is now live
+
+    Visitor->>Middleware: GET /my-page-slug
+    Middleware->>PageSvc: GetBySlugAsync(slug, siteId)
+    alt Cache hit
+        Cache-->>PageSvc: Cached page model
+    else Cache miss
+        PageSvc->>Repo: GetBySlug(slug, siteId)
+        Repo->>DB: SELECT with joins (fields, blocks, regions)
+        DB-->>Repo: Raw page data
+        Repo-->>PageSvc: Page record
+        PageSvc->>ContentFactory: InitAsync(page, type)
+        ContentFactory-->>PageSvc: Typed page with deserialized fields
+        PageSvc->>Cache: Store page model
+    end
+    PageSvc-->>Middleware: Typed page model
+    Middleware->>Middleware: Set RouteData (controller/action/id)
+    Middleware-->>Visitor: Render Razor/MVC view
+</div>
+<h2 id="business-rules-decision-logic">Business Rules & Decision Logic</h2>
+<h3 id="validation-rules">Validation Rules</h3>
+<div class="table-wrap"><table><thead><tr>
+<th>Rule</th><th>Entity</th><th>Details</th>
+</tr></thead><tbody>
+<tr><td>Title required</td><td>Page, Post, Content</td><td><code>[Required]</code> DataAnnotation; service throws <code>ValidationException</code> on save</td></tr>
+<tr><td>Slug uniqueness</td><td>Page</td><td>Slug must be unique within a Site; service checks existing slug before save</td></tr>
+<tr><td>Slug auto-generation</td><td>Page, Post</td><td>If Slug is empty on save, generated from Title via <code>Utils.GenerateSlug()</code> (lowercase, hyphenated)</td></tr>
+<tr><td>Hierarchical slug</td><td>Page</td><td>If <code>HierarchicalPageSlugs = true</code>, child page slug is prefixed with parent page slug</td></tr>
+<tr><td>Comment window</td><td>Page, Post</td><td>Comments rejected if <code>CloseCommentsAfterDays > 0</code> and <code>DateTime.Now > Published + CloseCommentsAfterDays</code></td></tr>
+<tr><td>Comment fields</td><td>Comment</td><td>Author and Body are required</td></tr>
+<tr><td>Page copy constraint</td><td>Page</td><td><code>DetachAsync()</code> throws <code>ValidationException("Page is not a copy")</code> if <code>OriginalPageId</code> is not set</td></tr>
+<tr><td>Alias URL normalization</td><td>Alias</td><td>Source <code>AliasUrl</code> is normalized to start with <code>/</code></td></tr>
+<tr><td>Media filename required</td><td>Media</td><td><code>ValidationException</code> thrown if filename is null/empty on save</td></tr>
+</tbody></table></div>
+<h3 id="state-transitions">State Transitions</h3>
+<p><strong>Page / Post lifecycle states:</strong></p>
+<div class="table-wrap"><table><thead><tr>
+<th>State</th><th>Condition</th>
+</tr></thead><tbody>
+<tr><td>Draft</td><td><code>Published == null</code> and only saved to <code>Piranha_PageRevisions</code></td></tr>
+<tr><td>Scheduled</td><td><code>Published != null</code> and <code>Published > DateTime.Now</code></td></tr>
+<tr><td>Published</td><td><code>Published != null</code> and <code>Published <= DateTime.Now</code></td></tr>
+<tr><td>Unpublished</td><td><code>Published</code> reset to <code>null</code> after having been published</td></tr>
+</tbody></table></div>
+<p><strong>Comment moderation states:</strong></p>
+<div class="table-wrap"><table><thead><tr>
+<th>State</th><th>Condition</th>
+</tr></thead><tbody>
+<tr><td>Pending</td><td><code>IsApproved == false</code></td></tr>
+<tr><td>Approved</td><td><code>IsApproved == true</code></td></tr>
+<tr><td>Deleted</td><td>Record removed from <code>Piranha_PostComments</code> / <code>Piranha_PageComments</code></td></tr>
+</tbody></table></div>
+<h3 id="decision-logic">Decision Logic</h3>
+<ul>
+<li><strong>Draft vs. Publish branch</strong>: The <code>isDraft</code> boolean parameter passed to <code>SaveAsync</code> controls whether the record is written to <code>Piranha_Pages</code> (published) or only to <code>Piranha_PageRevisions</code> (draft). The Manager calls the draft endpoint on auto-save and the publish endpoint on explicit user action.</li>
+<li><strong>Cache level gating</strong>: <code>PageService</code>, <code>PostService</code>, and <code>MediaService</code> only activate the <code>ICache</code> dependency if <code>App.CacheLevel > 2</code> (enum: None=0, Minimal=1, Full=3). This prevents unintended caching in multi-instance deployments without a distributed cache.</li>
+<li><strong>Image processing conditional</strong>: <code>MediaService.ProcessImageAsync()</code> is only invoked if both <code>IImageProcessor != null</code> (ImageSharp registered) and the file's MIME type is an image type. Non-image uploads skip scaling entirely.</li>
+<li><strong>Multi-site hostname routing</strong>: <code>SiteService</code> checks the request <code>Host</code> header against the <code>Hostnames</code> field on each Site record. If no match, the default site (marked <code>IsDefault = true</code>) is used as fallback.</li>
+<li><strong>Alias routing priority</strong>: <code>AliasMiddleware</code> runs before <code>PageMiddleware</code> and <code>PostMiddleware</code>. If an alias matches the request URL, a redirect is issued and no further content resolution occurs.</li>
+<li><strong>HierarchicalPageSlugs</strong>: When this Param is <code>true</code>, <code>PageService.SaveAsync()</code> reads the parent page's slug and prepends it (recursively up the tree) to the child slug. When <code>false</code>, each page's slug is relative to the site root regardless of hierarchy.</li>
+<li><strong>Revision pruning</strong>: If <code>PageRevisions</code> or <code>PostRevisions</code> Param is set to a positive integer N, the save operation deletes the oldest revisions beyond N. If set to 0 (default), all revision history is retained indefinitely.</li>
+</ul>
+<h3 id="cross-cutting-concerns">Cross-Cutting Concerns</h3>
+<div class="table-wrap"><table><thead><tr>
+<th>Concern</th><th>Implementation</th>
+</tr></thead><tbody>
+<tr><td>Authorization (Manager)</td><td><code>[Authorize(Policy = Permission.Admin)]</code> on all Manager API controllers; granular per-action policies (e.g., <code>Permission.PagesPublish</code>) checked via ASP.NET Core authorization middleware</td></tr>
+<tr><td>XSRF Protection</td><td>Manager SPA sends <code>X-XSRF-TOKEN</code> header; API validates against cookie <code>XSRF-REQUEST-TOKEN</code> (configured via <code>ManagerOptions</code>)</td></tr>
+<tr><td>Transactions</td><td>EF Core DbContext tracks changes and saves in a single <code>SaveChangesAsync()</code> call per repository operation; no distributed transaction support</td></tr>
+<tr><td>Cache invalidation</td><td>Services call <code>_cache.RemoveAsync(cacheKey)</code> for the affected entity and any derived cache keys (sitemap, structure) immediately after a successful save or delete</td></tr>
+<tr><td>Hook system</td><td><code>App.Hooks</code> provides <code>OnValidate</code>, <code>OnBeforeSave</code>, <code>OnAfterSave</code>, <code>OnBeforeDelete</code>, <code>OnAfterDelete</code> hooks for Page, Post, and Media — allowing host applications to inject custom business logic at extension points</td></tr>
+<tr><td>Search indexing</td><td>After a successful publish or delete, services call <code>ISearch.SavePageAsync()</code> / <code>ISearch.DeletePageAsync()</code> (or post equivalents) if an <code>ISearch</code> implementation is registered</td></tr>
+<tr><td>Audit / change tracking</td><td>All entities store <code>Created</code> and <code>LastModified</code> timestamps; revisions in <code>Piranha_PageRevisions</code> / <code>Piranha_PostRevisions</code> provide a full change history</td></tr>
+</tbody></table></div></div>
+</div>
+<div id="tab-deps" class="tab-panel">
+  <div class="fact-content"><h1 id="dependency-map">Dependency Map</h1>
+<p>Piranha CMS (v12.1.0) is a .NET 8.0/9.0 framework comprising 26 projects. It declares <strong>17 distinct external NuGet packages</strong> across production code, spanning web framework extensions, ORM providers, cloud storage, image processing, and content-rendering utilities.</p>
+<h2 id="dependencies">Dependencies</h2>
+<div class="mermaid">
+flowchart LR
+    App["Piranha CMS v12.1.0\n(.NET 8.0 / 9.0)"]
+
+    subgraph Web["Web Frameworks"]
+        RazorCompile["Mvc.Razor.RuntimeCompilation\nv8.0/9.0.2"]
+        NewtonsoftMvc["Mvc.NewtonsoftJson\nv8.0/9.0.2"]
+        FileProviders["FileProviders.Embedded\nv8.0/9.0.2"]
+        Localization["Extensions.Localization\nv8.0/9.0.2"]
+        Sitemap["X.Web.Sitemap v2.10.1"]
+    end
+
+    subgraph DB["Database / ORM"]
+        EFSQLite["EFCore.Sqlite\nv8.0/9.0"]
+        EFSQLServer["EFCore.SqlServer\nv8.0/9.0"]
+        EFPostgres["Npgsql.EFCore.PostgreSQL\nv8.0.11/9.0.4"]
+        EFMySQL["Pomelo.EFCore.MySql\nv8.0.3/9.0.0"]
+        AutoMapper["AutoMapper v12.0.1"]
+        EFIdentity["Identity.EntityFrameworkCore\nv8.0/9.0"]
+    end
+
+    subgraph Cache["Caching"]
+        CacheAbstr["Extensions.Caching.Abstractions\nv8.0/9.0.2"]
+    end
+
+    subgraph Storage["Cloud Storage"]
+        AzureBlobs["Azure.Storage.Blobs\nv12.18.0"]
+    end
+
+    subgraph Media["Image Processing"]
+        ImageSharp["SixLabors.ImageSharp\nv2.1.13"]
+    end
+
+    subgraph Util["Utilities"]
+        Markdig["Markdig v0.40.0"]
+        NewtonsoftJson["Newtonsoft.Json\nv13.0.3"]
+        ConfigAbstr["Extensions.Configuration.Abstractions\nv8.0/9.0.2"]
+        DIAbstr["Extensions.DependencyInjection.Abstractions\nv8.0/9.0.2"]
+    end
+
+    App -->|"web layer"| Web
+    App -->|"persistence"| DB
+    App -->|"caching"| Cache
+    App -->|"media storage"| Storage
+    App -->|"image processing"| Media
+    App -->|"utilities"| Util
+</div>
+<h3 id="dependency-summary">Dependency Summary</h3>
+<div class="table-wrap"><table><thead><tr>
+<th>Category</th><th>Count</th><th>Key Libraries</th><th>Notes</th>
+</tr></thead><tbody>
+<tr><td>Web Frameworks</td><td>5</td><td>Mvc.Razor.RuntimeCompilation, Mvc.NewtonsoftJson, Extensions.Localization, FileProviders.Embedded, X.Web.Sitemap</td><td>All ASP.NET Core aligned; dual versions for net8/net9</td></tr>
+<tr><td>Database / ORM</td><td>6</td><td>EFCore.Sqlite, EFCore.SqlServer, Npgsql EFCore, Pomelo EFCore MySql, AutoMapper, Identity.EFCore</td><td>Four pluggable DB backends; EFCore Design is build-time only</td></tr>
+<tr><td>Caching</td><td>1</td><td>Extensions.Caching.Abstractions</td><td>Abstraction only; concrete provider (MemoryCache) is implicit via ASP.NET Core</td></tr>
+<tr><td>Cloud Storage</td><td>1</td><td>Azure.Storage.Blobs 12.18.0</td><td>Used by Piranha.Azure.BlobStorage module</td></tr>
+<tr><td>Image Processing</td><td>1</td><td>SixLabors.ImageSharp 2.1.13</td><td>Used by Piranha.ImageSharp for server-side resize/transform</td></tr>
+<tr><td>Utilities</td><td>4</td><td>Markdig, Newtonsoft.Json, Configuration.Abstractions, DI.Abstractions</td><td>Core helpers for markdown, JSON, config, and DI</td></tr>
+</tbody></table></div>
+<h3 id="version-compatibility-risks">Version & Compatibility Risks</h3>
+<p>Most packages are current and aligned with the dual <code>net8.0</code>/<code>net9.0</code> target. The main risk area is <strong>SixLabors.ImageSharp v2.1.13</strong> — ImageSharp 3.x introduced breaking API changes and v2.x is receiving only security fixes; upgrading to v3 will require code changes in <code>Piranha.ImageSharp</code>. <strong>Newtonsoft.Json 13.0.3</strong> remains widely used but <code>System.Text.Json</code> (built into .NET 8+) is the recommended successor; the dependency exists partly because <code>Mvc.NewtonsoftJson</code> is explicitly referenced for JSON serialization in the Manager API. <strong>AutoMapper 12.0.1</strong> is stable but AutoMapper 13+ has significant DI registration API changes. <strong>Pomelo.EntityFrameworkCore.MySql 9.0.0</strong> and <strong>Npgsql 9.0.4</strong> are current for .NET 9, so no immediate risk there.</p>
+<h3 id="notable-observations">Notable Observations</h3>
+<ul>
+<li><strong>Dual-version package declarations</strong>: All Microsoft.Extensions.* and EFCore packages are declared twice (once per <code><TargetFramework></code> condition). This avoids floating version conflicts but doubles the number of explicit version pins to maintain.</li>
+<li><strong>No distributed cache provider declared</strong>: <code>Extensions.Caching.Abstractions</code> is referenced, but only <code>UseMemoryCache()</code> is used in examples. There is no Redis or SQL distributed cache package, limiting scalability for multi-instance deployments.</li>
+<li><strong>Azure Blob Storage is an opt-in module</strong>: <code>Azure.Storage.Blobs</code> is only pulled in if the <code>Piranha.Azure.BlobStorage</code> project is referenced. Default deployments rely solely on local filesystem storage.</li>
+<li><strong>No observability/telemetry package</strong>: There is no OpenTelemetry, Application Insights, or logging provider package referenced in any project file. Structured logging is expected to be configured entirely by the host application.</li>
+</ul>
+<h2 id="test-dependencies">Test Dependencies</h2>
+<div class="table-wrap"><table><thead><tr>
+<th>Framework</th><th>Version</th><th>Notes</th>
+</tr></thead><tbody>
+<tr><td>xunit</td><td>2.7.0</td><td>Primary test framework for both test projects</td></tr>
+<tr><td>xunit.runner.visualstudio</td><td>2.5.7</td><td>Visual Studio / CI test runner integration</td></tr>
+<tr><td>Microsoft.NET.Test.Sdk</td><td>17.9.0</td><td>.NET test execution host</td></tr>
+<tr><td>coverlet.collector</td><td>6.0.2</td><td>Code coverage data collection</td></tr>
+<tr><td>coverlet.msbuild</td><td>6.0.2</td><td>MSBuild-integrated code coverage</td></tr>
+</tbody></table></div>
+<p>Total test-scope dependencies: <strong>5</strong></p>
+<p>Both test projects (<code>Piranha.Tests</code> and <code>Piranha.Manager.Tests</code>) use the same xUnit + coverlet stack. No mocking framework (e.g., Moq, NSubstitute) is declared, which suggests tests rely on real or stub implementations rather than mocked dependencies. No integration-test framework (e.g., Testcontainers, WebApplicationFactory fixtures) is declared at the package level — integration tests are likely driven by EF Core in-memory or SQLite.</p></div>
+</div>
+<div id="tab-data" class="tab-panel">
+  <div class="fact-content"><h1 id="data-architecture-persistence-layer">Data Architecture & Persistence Layer</h1>
+<p>Piranha CMS uses Entity Framework Core as its single ORM layer, with 35+ mapped entities persisted to one of four interchangeable relational databases (SQLite, SQL Server, PostgreSQL, MySQL), all managed by a shared abstract <code>Db<T></code> DbContext in <code>Piranha.Data.EF</code>.</p>
+<h2 id="database-configuration">Database Configuration</h2>
+<div class="table-wrap"><table><thead><tr>
+<th>Service/Module</th><th>DB Type</th><th>Profile/Environment</th><th>Driver Package</th><th>Migration Tool</th><th>Notes</th>
+</tr></thead><tbody>
+<tr><td>Piranha.Data.EF.SQLite</td><td>SQLite</td><td>Development (default example)</td><td>Microsoft.EntityFrameworkCore.Sqlite</td><td>EF Core Migrations (auto)</td><td>Schema created/migrated in DbContext constructor via <code>Database.Migrate()</code></td></tr>
+<tr><td>Piranha.Data.EF.SQLServer</td><td>SQL Server</td><td>Production / SQL Server</td><td>Microsoft.EntityFrameworkCore.SqlServer</td><td>EF Core Migrations (auto)</td><td>Same migration base; provider-specific migrations in each package</td></tr>
+<tr><td>Piranha.Data.EF.PostgreSql</td><td>PostgreSQL</td><td>Production / PostgreSQL</td><td>Npgsql.EntityFrameworkCore.PostgreSQL</td><td>EF Core Migrations (auto)</td><td>Npgsql provider handles timestamp/uuid type mapping</td></tr>
+<tr><td>Piranha.Data.EF.MySql</td><td>MySQL / MariaDB</td><td>Production / MySQL</td><td>Pomelo.EntityFrameworkCore.MySql</td><td>EF Core Migrations (auto)</td><td>Pomelo provider; requires server version specification</td></tr>
+<tr><td>Piranha.AspNetCore.Identity.SQLite</td><td>SQLite (Identity)</td><td>Development</td><td>Microsoft.AspNetCore.Identity.EntityFrameworkCore</td><td>EF Core Migrations (auto)</td><td>Separate DbContext for ASP.NET Core Identity tables</td></tr>
+<tr><td>Piranha.AspNetCore.Identity.SQLServer</td><td>SQL Server (Identity)</td><td>Production / SQL Server</td><td>Microsoft.AspNetCore.Identity.EntityFrameworkCore</td><td>EF Core Migrations (auto)</td><td></td></tr>
+<tr><td>Piranha.AspNetCore.Identity.PostgreSQL</td><td>PostgreSQL (Identity)</td><td>Production / PostgreSQL</td><td>Microsoft.AspNetCore.Identity.EntityFrameworkCore</td><td>EF Core Migrations (auto)</td><td></td></tr>
+<tr><td>Piranha.AspNetCore.Identity.MySQL</td><td>MySQL (Identity)</td><td>Production / MySQL</td><td>Microsoft.AspNetCore.Identity.EntityFrameworkCore</td><td>EF Core Migrations (auto)</td><td></td></tr>
+</tbody></table></div>
+<p>All database providers use EF Core's <code>Database.Migrate()</code> called once on first DbContext construction (guarded by a static mutex). No Flyway, Liquibase, or separate migration runner is used. Seed data is applied in a virtual <code>Seed()</code> method on the DbContext after migrations run. For connection string configuration details see <code>configuration-inventory.md</code>.</p>
+<h2 id="data-ownership-per-service">Data Ownership per Service</h2>
+<div class="table-wrap"><table><thead><tr>
+<th>Service</th><th>Tables Owned</th><th>ORM Framework</th><th>Caching</th><th>Notes</th>
+</tr></thead><tbody>
+<tr><td>Piranha.Data.EF</td><td>Piranha_Aliases, Piranha_Blocks, Piranha_BlockFields, Piranha_Categories, Piranha_Content, Piranha_ContentBlocks, Piranha_ContentBlockFields, Piranha_ContentBlockFieldTranslations, Piranha_ContentFields, Piranha_ContentFieldTranslations, Piranha_ContentGroups, Piranha_ContentTaxonomies, Piranha_ContentTranslations, Piranha_ContentTypes, Piranha_Languages, Piranha_Media, Piranha_MediaFolders, Piranha_MediaVersions, Piranha_Pages, Piranha_PageBlocks, Piranha_PageComments, Piranha_PageFields, Piranha_PagePermissions, Piranha_PageRevisions, Piranha_PageTypes, Piranha_Params, Piranha_Posts, Piranha_PostBlocks, Piranha_PostComments, Piranha_PostFields, Piranha_PostPermissions, Piranha_PostRevisions, Piranha_PostTags, Piranha_PostTypes, Piranha_Sites, Piranha_SiteFields, Piranha_SiteTypes, Piranha_Tags, Piranha_Taxonomies</td><td>EF Core (AutoMapper for entity-to-model mapping)</td><td>IMemoryCache (via core services)</td><td>Single shared DbContext (<code>Db<T></code>) for all CMS tables</td></tr>
+<tr><td>Piranha.AspNetCore.Identity.*</td><td>AspNetUsers, AspNetRoles, AspNetUserRoles, AspNetUserClaims, AspNetRoleClaims, AspNetUserLogins, AspNetUserTokens</td><td>EF Core (ASP.NET Core Identity)</td><td>None</td><td>Separate DbContext; standard ASP.NET Core Identity schema</td></tr>
+</tbody></table></div>
+<h2 id="entity-model">Entity Model</h2>
+<div class="mermaid">
+erDiagram
+    Site ||--o{ Page : "hosts"
+    Site ||--o{ Alias : "has"
+    Site ||--o{ Tag : "has"
+    Site ||--o{ Category : "has"
+    Site }o--|| Language : "uses"
+    Page ||--o{ Page : "parent of"
+    Page ||--o{ PageBlock : "has"
+    Page ||--o{ PageField : "has"
+    Page ||--o{ PagePermission : "secured by"
+    Page ||--o{ PageRevision : "versioned via"
+    Page ||--o{ PageComment : "receives"
+    Page }o--|| PageType : "typed by"
+    Page ||--o{ Post : "archives"
+    Post ||--o{ PostBlock : "has"
+    Post ||--o{ PostField : "has"
+    Post ||--o{ PostPermission : "secured by"
+    Post ||--o{ PostRevision : "versioned via"
+    Post ||--o{ PostComment : "receives"
+    Post ||--o{ PostTag : "tagged with"
+    Post }o--|| PostType : "typed by"
+    Post }o--|| Category : "categorized as"
+    PostTag }o--|| Tag : "references"
+    Media ||--o{ MediaVersion : "has"
+    Media }o--|| MediaFolder : "stored in"
+    MediaFolder }o--|| MediaFolder : "parent of"
+    Block ||--o{ BlockField : "has"
+    Content ||--o{ ContentBlock : "has"
+    Content ||--o{ ContentField : "has"
+    Content ||--o{ ContentTaxonomy : "tagged with"
+    Content ||--o{ ContentTranslation : "translated via"
+    ContentBlock ||--o{ ContentBlockField : "has"
+    ContentBlockField ||--o{ ContentBlockFieldTranslation : "translated via"
+    ContentField ||--o{ ContentFieldTranslation : "translated via"
+    Content }o--|| ContentGroup : "grouped in"
+
+    Site {
+        Guid Id PK
+        string Title
+        string InternalId
+        string Hostnames
+        string Description
+        bool IsDefault
+        string Culture
+        string SiteTypeId FK
+        Guid LanguageId FK
+        datetime ContentLastModified
+    }
+    Page {
+        Guid Id PK
+        string Title
+        string Slug
+        string PageTypeId FK
+        Guid SiteId FK
+        Guid ParentId FK
+        int SortOrder
+        bool IsHidden
+        bool EnableComments
+        datetime Published
+        string ContentType
+        datetime Created
+        datetime LastModified
+    }
+    Post {
+        Guid Id PK
+        string Title
+        string Slug
+        string PostTypeId FK
+        Guid BlogId FK
+        Guid CategoryId FK
+        bool EnableComments
+        datetime Published
+        datetime Created
+        datetime LastModified
+    }
+    Media {
+        Guid Id PK
+        Guid FolderId FK
+        string Filename
+        string ContentType
+        string Title
+        long Size
+        int Width
+        int Height
+        datetime Created
+        datetime LastModified
+    }
+    MediaFolder {
+        Guid Id PK
+        Guid ParentId FK
+        string Name
+        datetime Created
+        datetime LastModified
+    }
+    Category {
+        Guid Id PK
+        Guid BlogId FK
+        string Title
+        string Slug
+    }
+    Tag {
+        Guid Id PK
+        Guid BlogId FK
+        string Title
+        string Slug
+    }
+    Language {
+        Guid Id PK
+        string Title
+        string Culture
+        bool IsDefault
+    }
+    Alias {
+        Guid Id PK
+        Guid SiteId FK
+        string AliasUrl
+        string RedirectUrl
+        int RedirectType
+    }
+    Block {
+        Guid Id PK
+        string CLRType
+        string Title
+        int SortOrder
+    }
+    Content {
+        Guid Id PK
+        string TypeId FK
+        string Title
+        Guid GroupId FK
+        datetime Created
+        datetime LastModified
+    }
+</div>
+<h2 id="key-repository-methods">Key Repository Methods</h2>
+<div class="table-wrap"><table><thead><tr>
+<th>Service</th><th>Repository</th><th>Notable Methods</th><th>Purpose</th>
+</tr></thead><tbody>
+<tr><td>Piranha.Data.EF</td><td>PageRepository</td><td><code>GetAll(siteId)</code></td><td>Returns all page IDs for a site, ordered by parent/sort</td></tr>
+<tr><td>Piranha.Data.EF</td><td>PageRepository</td><td><code>GetAllBlogs(siteId)</code></td><td>Returns IDs of blog archive pages only</td></tr>
+<tr><td>Piranha.Data.EF</td><td>PageRepository</td><td><code>GetById<T>(id)</code></td><td>Loads full page with blocks, fields, permissions, type via eager loading</td></tr>
+<tr><td>Piranha.Data.EF</td><td>PageRepository</td><td><code>GetBySlug<T>(slug, siteId)</code></td><td>Resolves page by URL slug within a site</td></tr>
+<tr><td>Piranha.Data.EF</td><td>PageRepository</td><td><code>GetDraft<T>(id)</code></td><td>Returns the current unpublished draft for a page</td></tr>
+<tr><td>Piranha.Data.EF</td><td>PageRepository</td><td><code>Move(page, parentId, sortOrder)</code></td><td>Reorders page in the sitemap hierarchy</td></tr>
+<tr><td>Piranha.Data.EF</td><td>PostRepository</td><td><code>GetAll(blogId, categoryId, tagId, page, pageSize)</code></td><td>Paginated post list for an archive, filtered by category/tag</td></tr>
+<tr><td>Piranha.Data.EF</td><td>PostRepository</td><td><code>GetById<T>(id)</code></td><td>Loads full post with blocks, fields, tags, category via eager loading</td></tr>
+<tr><td>Piranha.Data.EF</td><td>PostRepository</td><td><code>GetBySlug<T>(slug, blogId)</code></td><td>Resolves post by URL slug within a blog</td></tr>
+<tr><td>Piranha.Data.EF</td><td>PostRepository</td><td><code>GetDraft<T>(id)</code></td><td>Returns the current unpublished draft for a post</td></tr>
+<tr><td>Piranha.Data.EF</td><td>MediaRepository</td><td><code>GetAll(folderId)</code></td><td>Returns all media items in a folder</td></tr>
+<tr><td>Piranha.Data.EF</td><td>MediaRepository</td><td><code>GetById(id)</code></td><td>Loads media with versions</td></tr>
+<tr><td>Piranha.Data.EF</td><td>MediaRepository</td><td><code>Move(media, folderId)</code></td><td>Moves media to a different folder</td></tr>
+<tr><td>Piranha.Data.EF</td><td>AliasRepository</td><td><code>GetAll(siteId)</code></td><td>All URL aliases for a site</td></tr>
+<tr><td>Piranha.Data.EF</td><td>AliasRepository</td><td><code>GetByAliasUrl(url, siteId)</code></td><td>Resolves redirect alias by incoming URL</td></tr>
+<tr><td>Piranha.Data.EF</td><td>SiteRepository</td><td><code>GetDefault()</code></td><td>Returns the default site (IsDefault=true)</td></tr>
+<tr><td>Piranha.Data.EF</td><td>SiteRepository</td><td><code>GetByHostname(hostname)</code></td><td>Resolves site by request hostname</td></tr>
+<tr><td>Piranha.Data.EF</td><td>ArchiveRepository</td><td><code>GetPage(archiveId, currentPage, categoryId, tagId, year, month, take)</code></td><td>Paginated post archive query with optional date/taxonomy filters</td></tr>
+</tbody></table></div>
+<p>All repository implementations use <code>AsNoTracking()</code> for read operations and explicit <code>SaveChangesAsync()</code> for writes. No raw SQL stored procedures or <code>FromSqlRaw</code> calls were detected.</p>
+<h2 id="caching-strategy">Caching Strategy</h2>
+<div class="table-wrap"><table><thead><tr>
+<th>Layer</th><th>Provider</th><th>Pattern</th><th>Scope</th><th>Rationale</th>
+</tr></thead><tbody>
+<tr><td>ICache (Core)</td><td><code>IMemoryCache</code> (in-process)</td><td>Cache-aside</td><td>Per-entity by Guid key</td><td>Frequently read content objects (pages, posts, sites) are cached after first DB load and evicted on save/delete</td></tr>
+<tr><td>Sitemap cache</td><td><code>IMemoryCache</code></td><td>Cache-aside</td><td>Per-site sitemap structure</td><td>Full sitemap tree is cached to avoid recursive page queries on every request</td></tr>
+<tr><td>Content type cache</td><td>In-memory static collections</td><td>Write-once / read-many</td><td>Application lifetime</td><td>Registered page/post/site types are stored in static <code>App.*List</code> collections; never evicted</td></tr>
+</tbody></table></div>
+<p><strong>Pattern:</strong> Cache-aside throughout — services check <code>ICache.Get<T>(key)</code>, load from repository on miss, then call <code>ICache.Set(key, value)</code>. On mutation (save/delete), the service calls <code>ICache.Remove(key)</code> for the affected entity and any related collection caches (e.g., sitemap).</p>
+<p><strong>TTL:</strong> No explicit TTL is configured for the default <code>IMemoryCache</code> implementation. Items persist until manual eviction or application restart. Consumers may substitute a distributed cache (e.g., Redis via <code>IDistributedCache</code>) by providing a custom <code>ICache</code> implementation.</p>
+<p><strong>No second-level or query-result caching</strong> is configured at the EF Core layer.</p>
+<h2 id="data-ownership-boundaries">Data Ownership Boundaries</h2>
+<p>All CMS data — pages, posts, media, aliases, sites, taxonomies — is owned by a <strong>single shared database</strong> accessed through the <code>Db<T></code> DbContext. Identity data lives in a <strong>logically separate</strong> (but physically co-located) database context (<code>IdentityDbContext</code>) that uses its own connection string. In default example setups both contexts share the same SQLite file (<code>piranha.db</code>).</p>
+<p>There is no database-per-service topology; this is a monolithic single-process application where all services access the same DbContext. Cross-service data access does not occur over the network — all repositories share the same <code>IDb</code> instance injected at startup. The gateway aggregation pattern (combining data from multiple services) is implemented in-process: <code>ArchiveRepository.GetPage()</code> performs a bulk paginated query joining posts, categories, and tags in a single EF Core query.</p>
+<p><strong>Read/Write patterns:</strong> All reads use <code>AsNoTracking()</code> projections. Writes are explicit (<code>SaveChangesAsync()</code>). There is no CQRS split, no read replica, and no event sourcing pattern.</p>
+<h3 id="data-classification-sensitivity">Data Classification & Sensitivity</h3>
+<div class="table-wrap"><table><thead><tr>
+<th>Entity</th><th>Sensitive Fields</th><th>Classification</th><th>Controls in Place</th>
+</tr></thead><tbody>
+<tr><td>AspNetUsers (Identity)</td><td>UserName, Email, NormalizedEmail, PhoneNumber, PasswordHash</td><td>PII</td><td>ASP.NET Core Identity hashes passwords (PBKDF2); email stored in plaintext; no field-level encryption or masking configured</td></tr>
+<tr><td>AspNetUsers (Identity)</td><td>ConcurrencyStamp, SecurityStamp</td><td>Internal token</td><td>Used for invalidating sessions; not PII but security-sensitive</td></tr>
+<tr><td>Site</td><td>Hostnames, Culture</td><td>None (config data)</td><td>Not PII</td></tr>
+<tr><td>Page / Post</td><td>Title, Slug, MetaTitle, MetaDescription, OgTitle, OgDescription</td><td>None (content data)</td><td>Not PII</td></tr>
+<tr><td>Media</td><td>Filename, Title, AltText, Description</td><td>None (asset metadata)</td><td>Not PII</td></tr>
+<tr><td>PageComment / PostComment</td><td>AuthorName, AuthorEmail, AuthorUrl</td><td>PII</td><td>Stored in plaintext; no encryption or masking configured</td></tr>
+<tr><td>Alias</td><td>AliasUrl, RedirectUrl</td><td>None (routing data)</td><td>Not PII</td></tr>
+<tr><td>Language</td><td>Title, Culture</td><td>None (config data)</td><td>Not PII</td></tr>
+</tbody></table></div>
+<p><strong>Summary:</strong> PII is limited to user account data (managed by ASP.NET Core Identity) and comment author information. Passwords are hashed via PBKDF2 through Identity. Comment author emails and names are stored in plaintext with no field-level encryption or data masking configured. No PHI or PCI data types are present in the entity model.</p></div>
+</div>
+<p class="footer">Your feedback is invaluable &mdash; <a href="https://aka.ms/ghcp-appmod/feedback">Share feedback</a></p>
+<script>
+function toggleRow(rowId, triggerRow) {
+  var detail = document.getElementById(rowId);
+  var btn = document.getElementById('btn-' + rowId);
+  if (!detail) return;
+  var visible = detail.style.display !== 'none';
+  detail.style.display = visible ? 'none' : 'table-row';
+  if (btn) btn.classList.toggle('open', !visible);
+}
+(function() {
+  var nav = document.querySelector('.tab-nav');
+  if (!nav) return;
+  nav.addEventListener('click', function(e) {
+    var btn = e.target.closest('.tab-btn');
+    if (!btn) return;
+    var targetId = btn.getAttribute('data-tab');
+    document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+    btn.classList.add('active');
+    var panel = document.getElementById(targetId);
+    if (panel) {
+      panel.classList.add('active');
+      if (window.__mermaidReady) { window.__renderMermaidIn(panel); }
+    }
+  });
+})();
+
+// ── Diagram lightbox ────────────────────────────────────────
+(function() {
+  var lightbox = document.getElementById('diagram-lightbox');
+  var inner = document.getElementById('diagram-lightbox-inner');
+  var closeBtn = document.getElementById('diagram-lightbox-close');
+  if (!lightbox || !inner || !closeBtn) return;
+
+  var scale = 1;
+  var translateX = 0;
+  var translateY = 0;
+  var isDragging = false;
+  var dragStartX = 0;
+  var dragStartY = 0;
+
+  function applyTransform() {
+    var svg = inner.querySelector('svg');
+    if (svg) {
+      svg.style.transform = 'translate(' + translateX + 'px, ' + translateY + 'px) scale(' + scale + ')';
+      svg.style.transformOrigin = 'center center';
+      svg.style.transition = 'none';
+    }
+  }
+
+  function resetTransform() {
+    scale = 1; translateX = 0; translateY = 0;
+    applyTransform();
+  }
+
+  function openLightbox(svgEl) {
+    inner.innerHTML = svgEl.outerHTML;
+    var injected = inner.querySelector('svg');
+    if (injected) {
+      injected.removeAttribute('width');
+      injected.removeAttribute('height');
+      injected.style.cursor = 'grab';
+    }
+    resetTransform();
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    inner.innerHTML = '';
+    document.body.style.overflow = '';
+    resetTransform();
+  }
+
+  inner.addEventListener('wheel', function(e) {
+    e.preventDefault();
+    var delta = e.deltaY > 0 ? 0.9 : 1.1;
+    scale = Math.min(Math.max(scale * delta, 0.3), 8);
+    applyTransform();
+  }, { passive: false });
+
+  inner.addEventListener('mousedown', function(e) {
+    if (e.button !== 0) return;
+    isDragging = true;
+    dragStartX = e.clientX - translateX;
+    dragStartY = e.clientY - translateY;
+    var svg = inner.querySelector('svg');
+    if (svg) { svg.style.cursor = 'grabbing'; }
+    e.preventDefault();
+  });
+
+  document.addEventListener('mousemove', function(e) {
+    if (!isDragging) return;
+    translateX = e.clientX - dragStartX;
+    translateY = e.clientY - dragStartY;
+    applyTransform();
+  });
+
+  document.addEventListener('mouseup', function() {
+    if (!isDragging) return;
+    isDragging = false;
+    var svg = inner.querySelector('svg');
+    if (svg) { svg.style.cursor = 'grab'; }
+  });
+
+  inner.addEventListener('dblclick', function() { resetTransform(); });
+
+  document.addEventListener('click', function(e) {
+    var card = e.target.closest('.mermaid');
+    if (!card) return;
+    if (e.target.closest('.diagram-lightbox-close')) return;
+    var svg = card.querySelector('svg');
+    if (svg) { openLightbox(svg); }
+  });
+
+  closeBtn.addEventListener('click', closeLightbox);
+
+  lightbox.addEventListener('click', function(e) {
+    if (e.target === lightbox) { closeLightbox(); }
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') { closeLightbox(); }
+  });
+})();
+
+var _currentTarget = '';
+
+function toggleMultiSelect(id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  document.querySelectorAll('.multi-select.open').forEach(function(ms) { if (ms.id !== id) ms.classList.remove('open'); });
+  el.classList.toggle('open');
+}
+
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.multi-select')) {
+    document.querySelectorAll('.multi-select.open').forEach(function(ms) { ms.classList.remove('open'); });
+  }
+});
+
+function getMultiSelectValues(msId) {
+  var el = document.getElementById(msId);
+  if (!el) return [];
+  var checked = el.querySelectorAll('input[type=checkbox]:checked');
+  var vals = [];
+  for (var i = 0; i < checked.length; i++) vals.push(checked[i].value);
+  return vals;
+}
+
+function onMultiSelectChange(msId, label) {
+  var el = document.getElementById(msId);
+  if (!el) return;
+  var vals = getMultiSelectValues(msId);
+  var total = el.querySelectorAll('input[type=checkbox]').length;
+  var btn = el.querySelector('.multi-select-btn');
+  if (btn) {
+    btn.textContent = vals.length > 0 && vals.length < total ? label + ' (' + vals.length + ')' : label;
+  }
+  applyFilters();
+}
+
+function applyFilters() {
+  var selectedDomains = getMultiSelectValues('domain-ms');
+  var selectedCrits = getMultiSelectValues('criticality-ms');
+
+  var sections = document.querySelectorAll('.issue-section');
+  for (var i = 0; i < sections.length; i++) {
+    var domain = sections[i].getAttribute('data-domain');
+    sections[i].style.display = (selectedDomains.length === 0 || selectedDomains.indexOf(domain) >= 0) ? '' : 'none';
+  }
+
+  var rows = document.querySelectorAll('.issue-row');
+  for (var i = 0; i < rows.length; i++) {
+    var row = rows[i];
+    var section = row.closest('.issue-section');
+    if (section && section.style.display === 'none') {
+      row.style.display = 'none';
+      var next = row.nextElementSibling;
+      if (next && next.classList.contains('detail-row')) next.style.display = 'none';
+      continue;
+    }
+
+    var show = true;
+    if (_currentTarget && row.hasAttribute('data-targets')) {
+      var targetsStr = row.getAttribute('data-targets');
+      if (targetsStr && targetsStr !== '{}') {
+        try {
+          var targets = JSON.parse(targetsStr);
+          if (Object.keys(targets).length > 0 && !targets[_currentTarget]) {
+            show = false;
+          }
+        } catch(e) {}
+      }
+    }
+
+    if (show && selectedCrits.length > 0) {
+      var crit = row.getAttribute('data-criticality');
+      if (selectedCrits.indexOf(crit) < 0) show = false;
+    }
+
+    row.style.display = show ? '' : 'none';
+    var nextRow = row.nextElementSibling;
+    if (nextRow && nextRow.classList.contains('detail-row')) {
+      if (!show) nextRow.style.display = 'none';
+    }
+  }
+}
+
+function clearAllFilters() {
+  document.querySelectorAll('.multi-select input[type=checkbox]').forEach(function(cb) { cb.checked = false; });
+  var domainBtn = document.querySelector('#domain-ms .multi-select-btn');
+  if (domainBtn) domainBtn.textContent = 'Domain';
+  var critBtn = document.querySelector('#criticality-ms .multi-select-btn');
+  if (critBtn) critBtn.textContent = 'Criticality';
+  applyFilters();
+}
+
+function onTargetChange(targetId) {
+  _currentTarget = targetId;
+  var rows = document.querySelectorAll('.issue-row[data-targets]');
+  var totalEffort = 0;
+  var domainCrits = {};
+
+  for (var i = 0; i < rows.length; i++) {
+    var row = rows[i];
+    var targets = JSON.parse(row.getAttribute('data-targets'));
+    var section = row.closest('.issue-section');
+    var domain = section ? section.getAttribute('data-domain') : '';
+
+    if (!targets || Object.keys(targets).length === 0) {
+      var sp = parseFloat(row.querySelector('.sp-cell').textContent) || 0;
+      totalEffort += sp;
+      if (!domainCrits[domain]) domainCrits[domain] = {mandatory:0,potential:0,optional:0};
+      var crit = row.getAttribute('data-criticality') || 'optional';
+      domainCrits[domain][crit] = (domainCrits[domain][crit] || 0) + 1;
+      continue;
+    }
+
+    var override = targets[targetId];
+    if (!override) {
+      continue;
+    }
+
+    var newSeverity = (override.severity || row.getAttribute('data-default-severity') || '').toLowerCase();
+    row.setAttribute('data-criticality', newSeverity);
+    var critCell = row.querySelector('.crit-cell');
+    if (critCell) {
+      var critText = newSeverity === 'mandatory' ? 'Mandatory' : newSeverity === 'potential' ? 'Potential' : 'Optional';
+      var cssClass = newSeverity === 'mandatory' ? 'crit-square-mandatory' : newSeverity === 'potential' ? 'crit-square-potential' : 'crit-square-optional';
+      critCell.innerHTML = '<span class="crit-label"><span class="crit-square ' + cssClass + '"></span>' + critText + '</span>';
+    }
+
+    var newEffort = override.effort !== undefined ? override.effort : parseFloat(row.getAttribute('data-default-effort')) || 0;
+    var spCell = row.querySelector('.sp-cell');
+    if (spCell) spCell.textContent = newEffort;
+    totalEffort += newEffort;
+
+    if (!domainCrits[domain]) domainCrits[domain] = {mandatory:0,potential:0,optional:0};
+    domainCrits[domain][newSeverity] = (domainCrits[domain][newSeverity] || 0) + 1;
+  }
+
+  var secSection = document.querySelector('.issue-section[data-domain="security"]');
+  if (secSection) {
+    var secRows = secSection.querySelectorAll('.issue-row');
+    for (var j = 0; j < secRows.length; j++) {
+      if (!secRows[j].hasAttribute('data-targets') || secRows[j].getAttribute('data-targets') === '') {
+        var sp = parseFloat(secRows[j].querySelector('.sp-cell').textContent) || 0;
+        totalEffort += sp;
+        if (!domainCrits['security']) domainCrits['security'] = {mandatory:0,potential:0,optional:0};
+        var sc = secRows[j].getAttribute('data-criticality') || 'optional';
+        domainCrits['security'][sc] = (domainCrits['security'][sc] || 0) + 1;
+      }
+    }
+  }
+
+  var label = totalEffort < 20 ? 'S' : totalEffort < 50 ? 'M' : totalEffort < 100 ? 'L' : 'XL';
+  var effortEl = document.getElementById('effort-display');
+  if (effortEl) effortEl.textContent = label + ' (total story points: ' + totalEffort + ')';
+
+  updateDonuts(domainCrits);
+  applyFilters();
+}
+
+function updateDonuts(domainCrits) {
+  var container = document.getElementById('donut-container');
+  if (!container) return;
+  container.innerHTML = '';
+  var domainNames = {'cloud-readiness':'Cloud Readiness','java-upgrade':'Java Upgrade','dotnet-upgrade':'DotNET Upgrade','security':'Security'};
+  var domainOrder = ['cloud-readiness','java-upgrade','dotnet-upgrade','security'];
+  for (var d = 0; d < domainOrder.length; d++) {
+    var key = domainOrder[d];
+    var c = domainCrits[key];
+    if (!c || (c.mandatory + c.potential + c.optional) === 0) continue;
+    var total = c.mandatory + c.potential + c.optional;
+    var div = document.createElement('div');
+    div.className = 'domain-summary-item';
+    div.innerHTML = buildDonutSvg(c.mandatory, c.potential, c.optional) +
+      '<h3>' + domainNames[key] + '</h3>' +
+      '<div class="count">' + total + ' issue' + (total !== 1 ? 's' : '') + '</div>';
+    container.appendChild(div);
+  }
+}
+
+function buildDonutSvg(m, p, o) {
+  var total = m + p + o;
+  if (total === 0) return '<svg viewBox="0 0 100 100" width="100" height="100" style="display:block;margin:0 auto;"><circle cx="50" cy="50" r="35" fill="none" stroke="#d0d7de" stroke-width="15" opacity="0.5"/></svg>';
+  var r = 35, circ = 2 * Math.PI * r, offset = 0;
+  var svg = '<svg viewBox="0 0 100 100" width="100" height="100" style="display:block;margin:0 auto;transform:rotate(-90deg);">';
+  var segs = [{c:m,color:'var(--color-mandatory)'},{c:p,color:'var(--color-potential)'},{c:o,color:'var(--color-optional)'}];
+  for (var i = 0; i < segs.length; i++) {
+    if (segs[i].c === 0) continue;
+    var segLen = (segs[i].c / total) * circ;
+    var gap = total > segs[i].c ? 1.5 : 0;
+    var drawLen = Math.max(segLen - gap, 0.5);
+    svg += '<circle cx="50" cy="50" r="' + r + '" fill="none" stroke="' + segs[i].color + '" stroke-width="15" stroke-dasharray="' + drawLen.toFixed(2) + ' ' + circ.toFixed(2) + '" stroke-dashoffset="' + (-offset).toFixed(2) + '"/>';
+    offset += segLen;
+  }
+  svg += '</svg>';
+  return svg;
+}
+</script>
+<script>document.addEventListener('DOMContentLoaded', function() { onTargetChange('AppService.Windows'); });</script>
+</div></body></html>
