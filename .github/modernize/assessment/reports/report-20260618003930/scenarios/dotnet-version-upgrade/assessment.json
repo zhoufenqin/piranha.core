@@ -1,0 +1,1988 @@
+{
+  "settings": {
+    "components": {
+      "code": true,
+      "binaries": false
+    },
+    "targetId": "net10.0",
+    "targetDisplayName": ".NETCoreApp,Version=v10.0"
+  },
+  "analysisStartTime": "2026-06-18T00:41:12.8478676Z",
+  "analysisEndTime": "2026-06-18T00:41:29.7949207Z",
+  "privacyModeHelpUrl": "https://go.microsoft.com/fwlink/?linkid=2270980",
+  "stats": {
+    "summary": {
+      "projects": 26,
+      "issues": 6,
+      "incidents": 47,
+      "effort": 47
+    },
+    "charts": {
+      "severity": {
+        "Mandatory": 26,
+        "Optional": 3,
+        "Potential": 18,
+        "Information": 0
+      },
+      "category": {
+        "NuGet": 4,
+        "Project": 26,
+        "Api": 17
+      }
+    }
+  },
+  "projects": [
+    {
+      "path": "examples\\MvcWeb\\MvcWeb.csproj",
+      "startingProject": true,
+      "issues": 1,
+      "storyPoints": 1,
+      "properties": {
+        "appName": "MvcWeb",
+        "projectKind": "AspNetCore",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 0,
+        "numberOfCodeFiles": 0,
+        "linesTotal": 0,
+        "linesOfCode": 0,
+        "totalApiScanned": 402,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "9ba085fa-26b1-4b7b-926d-708a043fc971",
+          "ruleId": "Project.0002",
+          "projectPath": "examples\\MvcWeb\\MvcWeb.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+              "protected": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0"
+            },
+            "kind": "File",
+            "path": "examples\\MvcWeb\\MvcWeb.csproj",
+            "snippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "protectedSnippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0;net9.0",
+              "RecommendedTargetFramework": "net8.0;net9.0;net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "core\\Piranha.AspNetCore\\Piranha.AspNetCore.csproj",
+      "startingProject": true,
+      "issues": 3,
+      "storyPoints": 5,
+      "properties": {
+        "appName": "Piranha.AspNetCore",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 0,
+        "numberOfCodeFiles": 0,
+        "linesTotal": 0,
+        "linesOfCode": 0,
+        "totalApiScanned": 1828,
+        "minLinesOfCodeToChange": 4,
+        "maxLinesOfCodeToChange": 4
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "e422d050-2034-4b6a-9214-2d2375e7b3c1",
+          "ruleId": "Project.0002",
+          "projectPath": "core\\Piranha.AspNetCore\\Piranha.AspNetCore.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+              "protected": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0"
+            },
+            "kind": "File",
+            "path": "core\\Piranha.AspNetCore\\Piranha.AspNetCore.csproj",
+            "snippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "protectedSnippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0;net9.0",
+              "RecommendedTargetFramework": "net8.0;net9.0;net10.0"
+            }
+          }
+        },
+        {
+          "incidentId": "dfe1c9f7-3e8b-4d16-9459-fe90a987bdd6",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "core\\Piranha.AspNetCore\\Piranha.AspNetCore.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "urls.Add(new Url\r\n                    {\r\n                        ChangeFrequency = ChangeFrequency.Daily,\r\n                        // If the Permalink contains an absolute Uri (e.g. redirection), don\u0027t prefix with the baseUrl\r\n                        Location = Uri.IsWellFormedUriString(post.Permalink, UriKind.Absolute) ? item.Permalink : baseUrl \u002B post.Permalink,\r\n                        Priority = post.MetaPriority,\r\n                        TimeStamp = post.LastModified\r\n                    });",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "core\\Piranha.AspNetCore\\Http\\SitemapMiddleware.cs",
+            "snippet": "urls.Add(new Url\r\n                    {\r\n                        ChangeFrequency = ChangeFrequency.Daily,\r\n                        // If the Permalink contains an absolute Uri (e.g. redirection), don\u0027t prefix with the baseUrl\r\n                        Location = Uri.IsWellFormedUriString(post.Permalink, UriKind.Absolute) ? item.Permalink : baseUrl \u002B post.Permalink,\r\n                        Priority = post.MetaPriority,\r\n                        TimeStamp = post.LastModified\r\n                    });",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 118,
+            "column": 20
+          }
+        },
+        {
+          "incidentId": "c637f6a6-db80-40f1-a461-f710b68f7b2e",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "core\\Piranha.AspNetCore\\Piranha.AspNetCore.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "urls.Add(new Url\r\n            {\r\n                ChangeFrequency = ChangeFrequency.Daily,\r\n                // If the Permalink contains an absolute Uri (e.g. redirection), don\u0027t prefix with the baseUrl\r\n                Location = Uri.IsWellFormedUriString(item.Permalink, UriKind.Absolute) ? item.Permalink : baseUrl \u002B item.Permalink,\r\n                Priority = item.MetaPriority,\r\n                TimeStamp = item.LastModified\r\n            });",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "core\\Piranha.AspNetCore\\Http\\SitemapMiddleware.cs",
+            "snippet": "urls.Add(new Url\r\n            {\r\n                ChangeFrequency = ChangeFrequency.Daily,\r\n                // If the Permalink contains an absolute Uri (e.g. redirection), don\u0027t prefix with the baseUrl\r\n                Location = Uri.IsWellFormedUriString(item.Permalink, UriKind.Absolute) ? item.Permalink : baseUrl \u002B item.Permalink,\r\n                Priority = item.MetaPriority,\r\n                TimeStamp = item.LastModified\r\n            });",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 103,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "29b56c60-08c2-4589-9d8f-8c8726e180b2",
+          "ruleId": "Api.0002",
+          "description": "Breaking change: New TimeSpan.From*() overloads that take integers ",
+          "projectPath": "core\\Piranha.AspNetCore\\Piranha.AspNetCore.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "headers.CacheControl = new CacheControlHeaderValue\r\n            {\r\n                Public = true,\r\n                MaxAge = TimeSpan.FromMinutes(expires),\r\n            };",
+              "protected": "M:System.TimeSpan.FromMinutes(System.Double)"
+            },
+            "kind": "File",
+            "path": "core\\Piranha.AspNetCore\\Http\\RoutingMiddleware.cs",
+            "snippet": "headers.CacheControl = new CacheControlHeaderValue\r\n            {\r\n                Public = true,\r\n                MaxAge = TimeSpan.FromMinutes(expires),\r\n            };",
+            "protectedSnippet": "M:System.TimeSpan.FromMinutes(System.Double)",
+            "label": "M:System.TimeSpan.FromMinutes(System.Double)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/core-libraries/9.0/timespan-from-overloads.md",
+                "isCustom": false
+              }
+            ],
+            "line": 496,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "33ab64bf-b823-4d4b-847b-d473f008d5d9",
+          "ruleId": "Api.0002",
+          "description": "Breaking change: Razor run-time compilation is obsolete ",
+          "projectPath": "core\\Piranha.AspNetCore\\Piranha.AspNetCore.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "mvcBuilder.AddRazorRuntimeCompilation();",
+              "protected": "M:Microsoft.Extensions.DependencyInjection.RazorRuntimeCompilationMvcBuilderExtensions.AddRazorRuntimeCompilation(Microsoft.Extensions.DependencyInjection.IMvcBuilder)"
+            },
+            "kind": "File",
+            "path": "core\\Piranha.AspNetCore\\Extensions\\PiranhaStartupExtensions.cs",
+            "snippet": "mvcBuilder.AddRazorRuntimeCompilation();",
+            "protectedSnippet": "M:Microsoft.Extensions.DependencyInjection.RazorRuntimeCompilationMvcBuilderExtensions.AddRazorRuntimeCompilation(Microsoft.Extensions.DependencyInjection.IMvcBuilder)",
+            "label": "M:Microsoft.Extensions.DependencyInjection.RazorRuntimeCompilationMvcBuilderExtensions.AddRazorRuntimeCompilation(Microsoft.Extensions.DependencyInjection.IMvcBuilder)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/aspnet-core/10/razor-runtime-compilation-obsolete.md",
+                "isCustom": false
+              }
+            ],
+            "line": 36,
+            "column": 12
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "core\\Piranha.AspNetCore.Hosting\\Piranha.AspNetCore.Hosting.csproj",
+      "startingProject": true,
+      "issues": 1,
+      "storyPoints": 1,
+      "properties": {
+        "appName": "Piranha.AspNetCore.Hosting",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 0,
+        "numberOfCodeFiles": 0,
+        "linesTotal": 0,
+        "linesOfCode": 0,
+        "totalApiScanned": 125,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "6173238a-5753-4a3a-847b-f529c27fb1dc",
+          "ruleId": "Project.0002",
+          "projectPath": "core\\Piranha.AspNetCore.Hosting\\Piranha.AspNetCore.Hosting.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+              "protected": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0"
+            },
+            "kind": "File",
+            "path": "core\\Piranha.AspNetCore.Hosting\\Piranha.AspNetCore.Hosting.csproj",
+            "snippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "protectedSnippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0;net9.0",
+              "RecommendedTargetFramework": "net8.0;net9.0;net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "identity\\Piranha.AspNetCore.Identity\\Piranha.AspNetCore.Identity.csproj",
+      "startingProject": true,
+      "issues": 2,
+      "storyPoints": 5,
+      "properties": {
+        "appName": "Piranha.AspNetCore.Identity",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 2,
+        "numberOfCodeFiles": 0,
+        "linesTotal": 204,
+        "linesOfCode": 0,
+        "totalApiScanned": 1368,
+        "minLinesOfCodeToChange": 4,
+        "maxLinesOfCodeToChange": 4
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "e3855db3-fc4e-4272-8ccb-933d8aae5116",
+          "ruleId": "Project.0002",
+          "projectPath": "identity\\Piranha.AspNetCore.Identity\\Piranha.AspNetCore.Identity.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+              "protected": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0"
+            },
+            "kind": "File",
+            "path": "identity\\Piranha.AspNetCore.Identity\\Piranha.AspNetCore.Identity.csproj",
+            "snippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "protectedSnippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0;net9.0",
+              "RecommendedTargetFramework": "net8.0;net9.0;net10.0"
+            }
+          }
+        },
+        {
+          "incidentId": "c6d93da4-c204-4914-ad47-894fc28ff4f1",
+          "ruleId": "Api.0002",
+          "description": "Breaking change: New TimeSpan.From*() overloads that take integers ",
+          "projectPath": "identity\\Piranha.AspNetCore.Identity\\Piranha.AspNetCore.Identity.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "options.ExpireTimeSpan = TimeSpan.FromMinutes(30);",
+              "protected": "M:System.TimeSpan.FromMinutes(System.Double)"
+            },
+            "kind": "File",
+            "path": "identity\\Piranha.AspNetCore.Identity\\Extensions\\IdentityModuleExtensions.cs",
+            "snippet": "options.ExpireTimeSpan = TimeSpan.FromMinutes(30);",
+            "protectedSnippet": "M:System.TimeSpan.FromMinutes(System.Double)",
+            "label": "M:System.TimeSpan.FromMinutes(System.Double)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/core-libraries/9.0/timespan-from-overloads.md",
+                "isCustom": false
+              }
+            ],
+            "line": 200,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "82d36cdd-aae0-48ba-ab06-e2908fb673c4",
+          "ruleId": "Api.0002",
+          "description": "Breaking change: New TimeSpan.From*() overloads that take integers ",
+          "projectPath": "identity\\Piranha.AspNetCore.Identity\\Piranha.AspNetCore.Identity.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);",
+              "protected": "M:System.TimeSpan.FromMinutes(System.Double)"
+            },
+            "kind": "File",
+            "path": "identity\\Piranha.AspNetCore.Identity\\Extensions\\IdentityModuleExtensions.cs",
+            "snippet": "options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);",
+            "protectedSnippet": "M:System.TimeSpan.FromMinutes(System.Double)",
+            "label": "M:System.TimeSpan.FromMinutes(System.Double)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/core-libraries/9.0/timespan-from-overloads.md",
+                "isCustom": false
+              }
+            ],
+            "line": 185,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "4a7ad9c8-263d-4e4a-9431-d8cc5a7d7fbd",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Identity.EntityFrameworkCore, 8.0.6. Add package reference to Microsoft.AspNetCore.Identity.EntityFrameworkCore, 8.0.6",
+          "projectPath": "identity\\Piranha.AspNetCore.Identity\\Piranha.AspNetCore.Identity.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "services.AddIdentity\u003CUser, Role\u003E()\r\n            .AddEntityFrameworkStores\u003CT\u003E()\r\n            .AddDefaultTokenProviders();",
+              "protected": "T:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions"
+            },
+            "kind": "File",
+            "path": "identity\\Piranha.AspNetCore.Identity\\Extensions\\IdentityModuleExtensions.cs",
+            "snippet": "services.AddIdentity\u003CUser, Role\u003E()\r\n            .AddEntityFrameworkStores\u003CT\u003E()\r\n            .AddDefaultTokenProviders();",
+            "protectedSnippet": "T:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions",
+            "label": "T:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Identity.EntityFrameworkCore",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 120,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "097f4944-080e-4e84-ada6-97299883927e",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Identity.EntityFrameworkCore, 8.0.6. Add package reference to Microsoft.AspNetCore.Identity.EntityFrameworkCore, 8.0.6",
+          "projectPath": "identity\\Piranha.AspNetCore.Identity\\Piranha.AspNetCore.Identity.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "services.AddIdentity\u003CUser, Role\u003E()\r\n            .AddEntityFrameworkStores\u003CT\u003E()\r\n            .AddDefaultTokenProviders();",
+              "protected": "M:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores\u0060\u00601(Microsoft.AspNetCore.Identity.IdentityBuilder)"
+            },
+            "kind": "File",
+            "path": "identity\\Piranha.AspNetCore.Identity\\Extensions\\IdentityModuleExtensions.cs",
+            "snippet": "services.AddIdentity\u003CUser, Role\u003E()\r\n            .AddEntityFrameworkStores\u003CT\u003E()\r\n            .AddDefaultTokenProviders();",
+            "protectedSnippet": "M:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores\u0060\u00601(Microsoft.AspNetCore.Identity.IdentityBuilder)",
+            "label": "M:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores\u0060\u00601(Microsoft.AspNetCore.Identity.IdentityBuilder)",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Identity.EntityFrameworkCore",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 120,
+            "column": 8
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "identity\\Piranha.AspNetCore.Identity.MySQL\\Piranha.AspNetCore.Identity.MySQL.csproj",
+      "startingProject": true,
+      "issues": 1,
+      "storyPoints": 1,
+      "properties": {
+        "appName": "Piranha.AspNetCore.Identity.MySQL",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 0,
+        "numberOfCodeFiles": 0,
+        "linesTotal": 0,
+        "linesOfCode": 0,
+        "totalApiScanned": 785,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "d43a0581-eebb-4c83-b786-eea7e7d0a0d9",
+          "ruleId": "Project.0002",
+          "projectPath": "identity\\Piranha.AspNetCore.Identity.MySQL\\Piranha.AspNetCore.Identity.MySQL.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+              "protected": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0"
+            },
+            "kind": "File",
+            "path": "identity\\Piranha.AspNetCore.Identity.MySQL\\Piranha.AspNetCore.Identity.MySQL.csproj",
+            "snippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "protectedSnippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0;net9.0",
+              "RecommendedTargetFramework": "net8.0;net9.0;net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "identity\\Piranha.AspNetCore.Identity.PostgreSQL\\Piranha.AspNetCore.Identity.PostgreSQL.csproj",
+      "startingProject": true,
+      "issues": 1,
+      "storyPoints": 1,
+      "properties": {
+        "appName": "Piranha.AspNetCore.Identity.PostgreSQL",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 0,
+        "numberOfCodeFiles": 0,
+        "linesTotal": 0,
+        "linesOfCode": 0,
+        "totalApiScanned": 804,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "83e5fb68-8700-44d1-9668-3df5131877b6",
+          "ruleId": "Project.0002",
+          "projectPath": "identity\\Piranha.AspNetCore.Identity.PostgreSQL\\Piranha.AspNetCore.Identity.PostgreSQL.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+              "protected": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0"
+            },
+            "kind": "File",
+            "path": "identity\\Piranha.AspNetCore.Identity.PostgreSQL\\Piranha.AspNetCore.Identity.PostgreSQL.csproj",
+            "snippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "protectedSnippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0;net9.0",
+              "RecommendedTargetFramework": "net8.0;net9.0;net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "identity\\Piranha.AspNetCore.Identity.SQLite\\Piranha.AspNetCore.Identity.SQLite.csproj",
+      "startingProject": true,
+      "issues": 1,
+      "storyPoints": 1,
+      "properties": {
+        "appName": "Piranha.AspNetCore.Identity.SQLite",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 0,
+        "numberOfCodeFiles": 0,
+        "linesTotal": 0,
+        "linesOfCode": 0,
+        "totalApiScanned": 766,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "81bdac8a-efa3-4438-997e-b70b440272f7",
+          "ruleId": "Project.0002",
+          "projectPath": "identity\\Piranha.AspNetCore.Identity.SQLite\\Piranha.AspNetCore.Identity.SQLite.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+              "protected": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0"
+            },
+            "kind": "File",
+            "path": "identity\\Piranha.AspNetCore.Identity.SQLite\\Piranha.AspNetCore.Identity.SQLite.csproj",
+            "snippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "protectedSnippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0;net9.0",
+              "RecommendedTargetFramework": "net8.0;net9.0;net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "identity\\Piranha.AspNetCore.Identity.SQLServer\\Piranha.AspNetCore.Identity.SQLServer.csproj",
+      "startingProject": true,
+      "issues": 1,
+      "storyPoints": 1,
+      "properties": {
+        "appName": "Piranha.AspNetCore.Identity.SQLServer",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 0,
+        "numberOfCodeFiles": 0,
+        "linesTotal": 0,
+        "linesOfCode": 0,
+        "totalApiScanned": 794,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "52ee3ade-a9f5-4e2c-ad2c-480ab0175c57",
+          "ruleId": "Project.0002",
+          "projectPath": "identity\\Piranha.AspNetCore.Identity.SQLServer\\Piranha.AspNetCore.Identity.SQLServer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+              "protected": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0"
+            },
+            "kind": "File",
+            "path": "identity\\Piranha.AspNetCore.Identity.SQLServer\\Piranha.AspNetCore.Identity.SQLServer.csproj",
+            "snippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "protectedSnippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0;net9.0",
+              "RecommendedTargetFramework": "net8.0;net9.0;net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "core\\Piranha.AttributeBuilder\\Piranha.AttributeBuilder.csproj",
+      "startingProject": true,
+      "issues": 1,
+      "storyPoints": 1,
+      "properties": {
+        "appName": "Piranha.AttributeBuilder",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 0,
+        "numberOfCodeFiles": 0,
+        "linesTotal": 0,
+        "linesOfCode": 0,
+        "totalApiScanned": 758,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "09716e96-597e-4aeb-b915-d293f378316c",
+          "ruleId": "Project.0002",
+          "projectPath": "core\\Piranha.AttributeBuilder\\Piranha.AttributeBuilder.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+              "protected": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0"
+            },
+            "kind": "File",
+            "path": "core\\Piranha.AttributeBuilder\\Piranha.AttributeBuilder.csproj",
+            "snippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "protectedSnippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0;net9.0",
+              "RecommendedTargetFramework": "net8.0;net9.0;net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "core\\Piranha.Azure.BlobStorage\\Piranha.Azure.BlobStorage.csproj",
+      "startingProject": true,
+      "issues": 2,
+      "storyPoints": 9,
+      "properties": {
+        "appName": "Piranha.Azure.BlobStorage",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 0,
+        "numberOfCodeFiles": 0,
+        "linesTotal": 0,
+        "linesOfCode": 0,
+        "totalApiScanned": 174,
+        "minLinesOfCodeToChange": 8,
+        "maxLinesOfCodeToChange": 8
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "4196e728-2940-4594-a204-d4e456418c38",
+          "ruleId": "Project.0002",
+          "projectPath": "core\\Piranha.Azure.BlobStorage\\Piranha.Azure.BlobStorage.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+              "protected": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0"
+            },
+            "kind": "File",
+            "path": "core\\Piranha.Azure.BlobStorage\\Piranha.Azure.BlobStorage.csproj",
+            "snippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "protectedSnippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0;net9.0",
+              "RecommendedTargetFramework": "net8.0;net9.0;net10.0"
+            }
+          }
+        },
+        {
+          "incidentId": "8ffe1997-f4b2-4f15-9d4b-59782918061d",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "core\\Piranha.Azure.BlobStorage\\Piranha.Azure.BlobStorage.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "return blob.Uri.AbsoluteUri;",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "core\\Piranha.Azure.BlobStorage\\BlobStorage.cs",
+            "snippet": "return blob.Uri.AbsoluteUri;",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 138,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "5a869b1e-b8fc-4e13-bc06-2cbde5b65cee",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "core\\Piranha.Azure.BlobStorage\\Piranha.Azure.BlobStorage.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "return blob.Uri.AbsoluteUri;",
+              "protected": "P:System.Uri.AbsoluteUri"
+            },
+            "kind": "File",
+            "path": "core\\Piranha.Azure.BlobStorage\\BlobStorage.cs",
+            "snippet": "return blob.Uri.AbsoluteUri;",
+            "protectedSnippet": "P:System.Uri.AbsoluteUri",
+            "label": "P:System.Uri.AbsoluteUri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 138,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "3db2c6ff-af78-4ba5-9466-af5cca76b818",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "core\\Piranha.Azure.BlobStorage\\Piranha.Azure.BlobStorage.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "return media == null || string.IsNullOrWhiteSpace(id) ? null :\r\n            $\u0022{ _blobContainerClient.Uri.AbsoluteUri }/{ GetResourceName(media, id, true) }\u0022;",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "core\\Piranha.Azure.BlobStorage\\BlobStorage.cs",
+            "snippet": "return media == null || string.IsNullOrWhiteSpace(id) ? null :\r\n            $\u0022{ _blobContainerClient.Uri.AbsoluteUri }/{ GetResourceName(media, id, true) }\u0022;",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 79,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "4bdb6812-ad43-4d96-8b94-6449a27de6c3",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "core\\Piranha.Azure.BlobStorage\\Piranha.Azure.BlobStorage.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "return media == null || string.IsNullOrWhiteSpace(id) ? null :\r\n            $\u0022{ _blobContainerClient.Uri.AbsoluteUri }/{ GetResourceName(media, id, true) }\u0022;",
+              "protected": "P:System.Uri.AbsoluteUri"
+            },
+            "kind": "File",
+            "path": "core\\Piranha.Azure.BlobStorage\\BlobStorage.cs",
+            "snippet": "return media == null || string.IsNullOrWhiteSpace(id) ? null :\r\n            $\u0022{ _blobContainerClient.Uri.AbsoluteUri }/{ GetResourceName(media, id, true) }\u0022;",
+            "protectedSnippet": "P:System.Uri.AbsoluteUri",
+            "label": "P:System.Uri.AbsoluteUri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 79,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "0d1c7a31-b351-4790-ab2e-6518cdbc705e",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "core\\Piranha.Azure.BlobStorage\\Piranha.Azure.BlobStorage.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public BlobStorage(\r\n        Uri blobContainerUri,\r\n        TokenCredential tokenCredential,\r\n        BlobStorageNaming naming = BlobStorageNaming.UniqueFileNames)\r\n    {\r\n        _blobContainerClient = new BlobContainerClient(blobContainerUri, tokenCredential);\r\n        _naming = naming;\r\n\r\n        // Ensure that blob container exists\r\n        _blobContainerClient.CreateIfNotExists(PublicAccessType.Blob);\r\n    }",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "core\\Piranha.Azure.BlobStorage\\BlobStorage.cs",
+            "snippet": "public BlobStorage(\r\n        Uri blobContainerUri,\r\n        TokenCredential tokenCredential,\r\n        BlobStorageNaming naming = BlobStorageNaming.UniqueFileNames)\r\n    {\r\n        _blobContainerClient = new BlobContainerClient(blobContainerUri, tokenCredential);\r\n        _naming = naming;\r\n\r\n        // Ensure that blob container exists\r\n        _blobContainerClient.CreateIfNotExists(PublicAccessType.Blob);\r\n    }",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 39,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "56ffff53-7fb3-4806-a74c-5f6838b471fd",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "core\\Piranha.Azure.BlobStorage\\Piranha.Azure.BlobStorage.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public BlobStorage(\r\n        Uri blobContainerUri,\r\n        TokenCredential tokenCredential,\r\n        BlobStorageNaming naming = BlobStorageNaming.UniqueFileNames)\r\n    {\r\n        _blobContainerClient = new BlobContainerClient(blobContainerUri, tokenCredential);\r\n        _naming = naming;\r\n\r\n        // Ensure that blob container exists\r\n        _blobContainerClient.CreateIfNotExists(PublicAccessType.Blob);\r\n    }",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "core\\Piranha.Azure.BlobStorage\\BlobStorage.cs",
+            "snippet": "public BlobStorage(\r\n        Uri blobContainerUri,\r\n        TokenCredential tokenCredential,\r\n        BlobStorageNaming naming = BlobStorageNaming.UniqueFileNames)\r\n    {\r\n        _blobContainerClient = new BlobContainerClient(blobContainerUri, tokenCredential);\r\n        _naming = naming;\r\n\r\n        // Ensure that blob container exists\r\n        _blobContainerClient.CreateIfNotExists(PublicAccessType.Blob);\r\n    }",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 39,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "80b3e3a7-4418-4d3e-aadd-ec58bfd150e1",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "core\\Piranha.Azure.BlobStorage\\Piranha.Azure.BlobStorage.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public static IServiceCollection AddPiranhaBlobStorage(\r\n        this IServiceCollection services,\r\n        Uri blobContainerUri,\r\n        TokenCredential credential,\r\n        BlobStorageNaming naming = BlobStorageNaming.UniqueFileNames,\r\n        ServiceLifetime scope = ServiceLifetime.Singleton)",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "core\\Piranha.Azure.BlobStorage\\Extensions\\BlobStorageExtensions.cs",
+            "snippet": "public static IServiceCollection AddPiranhaBlobStorage(\r\n        this IServiceCollection services,\r\n        Uri blobContainerUri,\r\n        TokenCredential credential,\r\n        BlobStorageNaming naming = BlobStorageNaming.UniqueFileNames,\r\n        ServiceLifetime scope = ServiceLifetime.Singleton)",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 74,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "52a940c7-7114-4967-9ee9-edbc96bd585f",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "core\\Piranha.Azure.BlobStorage\\Piranha.Azure.BlobStorage.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public static PiranhaServiceBuilder UseBlobStorage(\r\n        this PiranhaServiceBuilder serviceBuilder,\r\n        Uri blobContainerUri,\r\n        TokenCredential credential,\r\n        BlobStorageNaming naming = BlobStorageNaming.UniqueFileNames,\r\n        ServiceLifetime scope = ServiceLifetime.Singleton)",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "core\\Piranha.Azure.BlobStorage\\Extensions\\BlobStorageExtensions.cs",
+            "snippet": "public static PiranhaServiceBuilder UseBlobStorage(\r\n        this PiranhaServiceBuilder serviceBuilder,\r\n        Uri blobContainerUri,\r\n        TokenCredential credential,\r\n        BlobStorageNaming naming = BlobStorageNaming.UniqueFileNames,\r\n        ServiceLifetime scope = ServiceLifetime.Singleton)",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 29,
+            "column": 4
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "core\\Piranha\\Piranha.csproj",
+      "startingProject": true,
+      "issues": 3,
+      "storyPoints": 3,
+      "properties": {
+        "appName": "Piranha",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 0,
+        "numberOfCodeFiles": 0,
+        "linesTotal": 0,
+        "linesOfCode": 0,
+        "totalApiScanned": 9652,
+        "minLinesOfCodeToChange": 1,
+        "maxLinesOfCodeToChange": 1
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "4d1a46ea-9ec4-4af9-a60d-432fa5d88120",
+          "ruleId": "NuGet.0002",
+          "projectPath": "core\\Piranha\\Piranha.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Newtonsoft.Json, 13.0.3\n\nRecommendation:\n\nRemove Newtonsoft.Json, and replace with new package Newtonsoft.Json 13.0.4",
+              "protected": "Newtonsoft.Json, 13.0.3\n\nRecommendation:\n\nRemove Newtonsoft.Json, and replace with new package Newtonsoft.Json 13.0.4"
+            },
+            "kind": "File",
+            "path": "core\\Piranha\\Piranha.csproj",
+            "snippet": "Newtonsoft.Json, 13.0.3\n\nRecommendation:\n\nRemove Newtonsoft.Json, and replace with new package Newtonsoft.Json 13.0.4",
+            "protectedSnippet": "Newtonsoft.Json, 13.0.3\n\nRecommendation:\n\nRemove Newtonsoft.Json, and replace with new package Newtonsoft.Json 13.0.4",
+            "label": "Newtonsoft.Json 13.0.3",
+            "properties": {
+              "PackageId": "Newtonsoft.Json",
+              "PackageVersion": "13.0.3",
+              "PackageNewVersion": "13.0.4",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "e17878d1-3c41-416f-8f18-15ec5531f385",
+          "ruleId": "Project.0002",
+          "projectPath": "core\\Piranha\\Piranha.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+              "protected": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0"
+            },
+            "kind": "File",
+            "path": "core\\Piranha\\Piranha.csproj",
+            "snippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "protectedSnippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0;net9.0",
+              "RecommendedTargetFramework": "net8.0;net9.0;net10.0"
+            }
+          }
+        },
+        {
+          "incidentId": "3c125714-7df9-4f1a-a49d-ed8e814f1213",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: Default \u0060Equals()\u0060 and \u0060GetHashCode()\u0060 throw for types marked with \u0060InlineArrayAttribute\u0060 ",
+          "projectPath": "core\\Piranha\\Piranha.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "return Value.GetHashCode();",
+              "protected": "M:System.ValueType.GetHashCode"
+            },
+            "kind": "File",
+            "path": "core\\Piranha\\Extend\\Fields\\SelectField.cs",
+            "snippet": "return Value.GetHashCode();",
+            "protectedSnippet": "M:System.ValueType.GetHashCode",
+            "label": "M:System.ValueType.GetHashCode",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/core-libraries/9.0/inlinearrayattribute.md",
+                "isCustom": false
+              }
+            ],
+            "line": 86,
+            "column": 8
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "data\\Piranha.Data.EF\\Piranha.Data.EF.csproj",
+      "startingProject": true,
+      "issues": 2,
+      "storyPoints": 2,
+      "properties": {
+        "appName": "Piranha.Data.EF",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 0,
+        "numberOfCodeFiles": 0,
+        "linesTotal": 0,
+        "linesOfCode": 0,
+        "totalApiScanned": 10058,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "29c3087c-2315-4580-8003-826863480660",
+          "ruleId": "NuGet.0004",
+          "projectPath": "data\\Piranha.Data.EF\\Piranha.Data.EF.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "AutoMapper, 12.0.1\n\nRecommendation:\n\nAutoMapper, 16.1.1",
+              "protected": "AutoMapper, 12.0.1\n\nRecommendation:\n\nAutoMapper, 16.1.1"
+            },
+            "kind": "File",
+            "path": "data\\Piranha.Data.EF\\Piranha.Data.EF.csproj",
+            "snippet": "AutoMapper, 12.0.1\n\nRecommendation:\n\nAutoMapper, 16.1.1",
+            "protectedSnippet": "AutoMapper, 12.0.1\n\nRecommendation:\n\nAutoMapper, 16.1.1",
+            "label": "AutoMapper 12.0.1",
+            "properties": {
+              "PackageId": "AutoMapper",
+              "PackageVersion": "12.0.1",
+              "PackageNewVersion": "16.1.1",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "e65468be-c5f6-4048-b784-63713325c410",
+          "ruleId": "Project.0002",
+          "projectPath": "data\\Piranha.Data.EF\\Piranha.Data.EF.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+              "protected": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0"
+            },
+            "kind": "File",
+            "path": "data\\Piranha.Data.EF\\Piranha.Data.EF.csproj",
+            "snippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "protectedSnippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0;net9.0",
+              "RecommendedTargetFramework": "net8.0;net9.0;net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "data\\Piranha.Data.EF.MySql\\Piranha.Data.EF.MySql.csproj",
+      "startingProject": true,
+      "issues": 1,
+      "storyPoints": 1,
+      "properties": {
+        "appName": "Piranha.Data.EF.MySql",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 0,
+        "numberOfCodeFiles": 0,
+        "linesTotal": 0,
+        "linesOfCode": 0,
+        "totalApiScanned": 35744,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "dfe65956-0902-492b-899e-3b94e3f26c90",
+          "ruleId": "Project.0002",
+          "projectPath": "data\\Piranha.Data.EF.MySql\\Piranha.Data.EF.MySql.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+              "protected": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0"
+            },
+            "kind": "File",
+            "path": "data\\Piranha.Data.EF.MySql\\Piranha.Data.EF.MySql.csproj",
+            "snippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "protectedSnippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0;net9.0",
+              "RecommendedTargetFramework": "net8.0;net9.0;net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "data\\Piranha.Data.EF.PostgreSql\\Piranha.Data.EF.PostgreSql.csproj",
+      "startingProject": true,
+      "issues": 1,
+      "storyPoints": 1,
+      "properties": {
+        "appName": "Piranha.Data.EF.PostgreSql",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 0,
+        "numberOfCodeFiles": 0,
+        "linesTotal": 0,
+        "linesOfCode": 0,
+        "totalApiScanned": 35784,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "810c946e-6313-4bfb-ae77-3576b75bc8e7",
+          "ruleId": "Project.0002",
+          "projectPath": "data\\Piranha.Data.EF.PostgreSql\\Piranha.Data.EF.PostgreSql.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+              "protected": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0"
+            },
+            "kind": "File",
+            "path": "data\\Piranha.Data.EF.PostgreSql\\Piranha.Data.EF.PostgreSql.csproj",
+            "snippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "protectedSnippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0;net9.0",
+              "RecommendedTargetFramework": "net8.0;net9.0;net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "data\\Piranha.Data.EF.SQLite\\Piranha.Data.EF.SQLite.csproj",
+      "startingProject": true,
+      "issues": 1,
+      "storyPoints": 1,
+      "properties": {
+        "appName": "Piranha.Data.EF.SQLite",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 0,
+        "numberOfCodeFiles": 0,
+        "linesTotal": 0,
+        "linesOfCode": 0,
+        "totalApiScanned": 35719,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "fe04d508-694c-4080-87cb-ef295d1bd7d9",
+          "ruleId": "Project.0002",
+          "projectPath": "data\\Piranha.Data.EF.SQLite\\Piranha.Data.EF.SQLite.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+              "protected": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0"
+            },
+            "kind": "File",
+            "path": "data\\Piranha.Data.EF.SQLite\\Piranha.Data.EF.SQLite.csproj",
+            "snippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "protectedSnippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0;net9.0",
+              "RecommendedTargetFramework": "net8.0;net9.0;net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "data\\Piranha.Data.EF.SQLServer\\Piranha.Data.EF.SQLServer.csproj",
+      "startingProject": true,
+      "issues": 1,
+      "storyPoints": 1,
+      "properties": {
+        "appName": "Piranha.Data.EF.SQLServer",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 0,
+        "numberOfCodeFiles": 0,
+        "linesTotal": 0,
+        "linesOfCode": 0,
+        "totalApiScanned": 35799,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "45d70112-c83c-43b0-8b5d-b3b2c01eb7e0",
+          "ruleId": "Project.0002",
+          "projectPath": "data\\Piranha.Data.EF.SQLServer\\Piranha.Data.EF.SQLServer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+              "protected": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0"
+            },
+            "kind": "File",
+            "path": "data\\Piranha.Data.EF.SQLServer\\Piranha.Data.EF.SQLServer.csproj",
+            "snippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "protectedSnippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0;net9.0",
+              "RecommendedTargetFramework": "net8.0;net9.0;net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "core\\Piranha.ImageSharp\\Piranha.ImageSharp.csproj",
+      "startingProject": true,
+      "issues": 1,
+      "storyPoints": 1,
+      "properties": {
+        "appName": "Piranha.ImageSharp",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 0,
+        "numberOfCodeFiles": 0,
+        "linesTotal": 0,
+        "linesOfCode": 0,
+        "totalApiScanned": 189,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "ded2b56f-115e-479e-a9c5-bd2e4fc11594",
+          "ruleId": "Project.0002",
+          "projectPath": "core\\Piranha.ImageSharp\\Piranha.ImageSharp.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+              "protected": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0"
+            },
+            "kind": "File",
+            "path": "core\\Piranha.ImageSharp\\Piranha.ImageSharp.csproj",
+            "snippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "protectedSnippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0;net9.0",
+              "RecommendedTargetFramework": "net8.0;net9.0;net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "core\\Piranha.Local.FileStorage\\Piranha.Local.FileStorage.csproj",
+      "startingProject": true,
+      "issues": 1,
+      "storyPoints": 1,
+      "properties": {
+        "appName": "Piranha.Local.FileStorage",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 0,
+        "numberOfCodeFiles": 0,
+        "linesTotal": 0,
+        "linesOfCode": 0,
+        "totalApiScanned": 226,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "16664d9f-021e-4ad7-98c6-65cc2219d7cd",
+          "ruleId": "Project.0002",
+          "projectPath": "core\\Piranha.Local.FileStorage\\Piranha.Local.FileStorage.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+              "protected": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0"
+            },
+            "kind": "File",
+            "path": "core\\Piranha.Local.FileStorage\\Piranha.Local.FileStorage.csproj",
+            "snippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "protectedSnippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0;net9.0",
+              "RecommendedTargetFramework": "net8.0;net9.0;net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "core\\Piranha.Manager\\Piranha.Manager.csproj",
+      "startingProject": true,
+      "issues": 1,
+      "storyPoints": 1,
+      "properties": {
+        "appName": "Piranha.Manager",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 81,
+        "numberOfCodeFiles": 0,
+        "linesTotal": 154402,
+        "linesOfCode": 0,
+        "totalApiScanned": 7096,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "c0139fbe-5bfe-4ad8-bd53-ab208a1e9ed4",
+          "ruleId": "Project.0002",
+          "projectPath": "core\\Piranha.Manager\\Piranha.Manager.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+              "protected": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0"
+            },
+            "kind": "File",
+            "path": "core\\Piranha.Manager\\Piranha.Manager.csproj",
+            "snippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "protectedSnippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0;net9.0",
+              "RecommendedTargetFramework": "net8.0;net9.0;net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "core\\Piranha.Manager.LocalAuth\\Piranha.Manager.LocalAuth.csproj",
+      "startingProject": true,
+      "issues": 1,
+      "storyPoints": 1,
+      "properties": {
+        "appName": "Piranha.Manager.LocalAuth",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 0,
+        "numberOfCodeFiles": 0,
+        "linesTotal": 0,
+        "linesOfCode": 0,
+        "totalApiScanned": 100,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "44846fd1-74b8-43c8-b280-1713a090bb8e",
+          "ruleId": "Project.0002",
+          "projectPath": "core\\Piranha.Manager.LocalAuth\\Piranha.Manager.LocalAuth.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+              "protected": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0"
+            },
+            "kind": "File",
+            "path": "core\\Piranha.Manager.LocalAuth\\Piranha.Manager.LocalAuth.csproj",
+            "snippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "protectedSnippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0;net9.0",
+              "RecommendedTargetFramework": "net8.0;net9.0;net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "core\\Piranha.Manager.Localization\\Piranha.Manager.Localization.csproj",
+      "startingProject": true,
+      "issues": 1,
+      "storyPoints": 1,
+      "properties": {
+        "appName": "Piranha.Manager.Localization",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 0,
+        "numberOfCodeFiles": 0,
+        "linesTotal": 0,
+        "linesOfCode": 0,
+        "totalApiScanned": 110,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "54f7507d-53c5-440e-914f-8156aa2a26b0",
+          "ruleId": "Project.0002",
+          "projectPath": "core\\Piranha.Manager.Localization\\Piranha.Manager.Localization.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+              "protected": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0"
+            },
+            "kind": "File",
+            "path": "core\\Piranha.Manager.Localization\\Piranha.Manager.Localization.csproj",
+            "snippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "protectedSnippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0;net9.0",
+              "RecommendedTargetFramework": "net8.0;net9.0;net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "test\\Piranha.Manager.Tests\\Piranha.Manager.Tests.csproj",
+      "startingProject": true,
+      "issues": 2,
+      "storyPoints": 2,
+      "properties": {
+        "appName": "Piranha.Manager.Tests",
+        "projectKind": "DotNetCoreApp",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 0,
+        "numberOfCodeFiles": 0,
+        "linesTotal": 0,
+        "linesOfCode": 0,
+        "totalApiScanned": 36,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "de6bb092-b192-4778-ba96-4eaa52afd9db",
+          "ruleId": "NuGet.0005",
+          "projectPath": "test\\Piranha.Manager.Tests\\Piranha.Manager.Tests.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "xunit, 2.7.0\n\nRecommendation:\n\nThis package will only be updated for security issues. All future feature work has moved onto v3.\n\nGuide for migrating from xUnit.net v2 to v3: https://xunit.net/docs/getting-started/v3/migration\nRemove xunit, and replace with new package xunit, 2.9.3",
+              "protected": "xunit, 2.7.0\n\nRecommendation:\n\nThis package will only be updated for security issues. All future feature work has moved onto v3.\n\nGuide for migrating from xUnit.net v2 to v3: https://xunit.net/docs/getting-started/v3/migration\nRemove xunit, and replace with new package xunit, 2.9.3"
+            },
+            "kind": "File",
+            "path": "test\\Piranha.Manager.Tests\\Piranha.Manager.Tests.csproj",
+            "snippet": "xunit, 2.7.0\n\nRecommendation:\n\nThis package will only be updated for security issues. All future feature work has moved onto v3.\n\nGuide for migrating from xUnit.net v2 to v3: https://xunit.net/docs/getting-started/v3/migration\nRemove xunit, and replace with new package xunit, 2.9.3",
+            "protectedSnippet": "xunit, 2.7.0\n\nRecommendation:\n\nThis package will only be updated for security issues. All future feature work has moved onto v3.\n\nGuide for migrating from xUnit.net v2 to v3: https://xunit.net/docs/getting-started/v3/migration\nRemove xunit, and replace with new package xunit, 2.9.3",
+            "label": "xunit 2.7.0",
+            "properties": {
+              "PackageId": "xunit",
+              "PackageVersion": "2.7.0",
+              "PackageNewVersion": null,
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "96ccbf0e-f90d-4aad-adc3-188121fdbd15",
+          "ruleId": "Project.0002",
+          "projectPath": "test\\Piranha.Manager.Tests\\Piranha.Manager.Tests.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+              "protected": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0"
+            },
+            "kind": "File",
+            "path": "test\\Piranha.Manager.Tests\\Piranha.Manager.Tests.csproj",
+            "snippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "protectedSnippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0;net9.0",
+              "RecommendedTargetFramework": "net8.0;net9.0;net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "core\\Piranha.Manager.TinyMCE\\Piranha.Manager.TinyMCE.csproj",
+      "startingProject": true,
+      "issues": 1,
+      "storyPoints": 1,
+      "properties": {
+        "appName": "Piranha.Manager.TinyMCE",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 76,
+        "numberOfCodeFiles": 0,
+        "linesTotal": 20353,
+        "linesOfCode": 0,
+        "totalApiScanned": 70,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "455b799a-76d5-406f-8739-340f450a02b5",
+          "ruleId": "Project.0002",
+          "projectPath": "core\\Piranha.Manager.TinyMCE\\Piranha.Manager.TinyMCE.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+              "protected": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0"
+            },
+            "kind": "File",
+            "path": "core\\Piranha.Manager.TinyMCE\\Piranha.Manager.TinyMCE.csproj",
+            "snippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "protectedSnippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0;net9.0",
+              "RecommendedTargetFramework": "net8.0;net9.0;net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "test\\Piranha.Tests\\Piranha.Tests.csproj",
+      "startingProject": true,
+      "issues": 2,
+      "storyPoints": 2,
+      "properties": {
+        "appName": "Piranha.Tests",
+        "projectKind": "DotNetCoreApp",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 0,
+        "numberOfCodeFiles": 0,
+        "linesTotal": 0,
+        "linesOfCode": 0,
+        "totalApiScanned": 9130,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "7e7b3cf6-ee65-4f15-982e-981dcdf32938",
+          "ruleId": "NuGet.0005",
+          "projectPath": "test\\Piranha.Tests\\Piranha.Tests.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "xunit, 2.7.0\n\nRecommendation:\n\nThis package will only be updated for security issues. All future feature work has moved onto v3.\n\nGuide for migrating from xUnit.net v2 to v3: https://xunit.net/docs/getting-started/v3/migration\nRemove xunit, and replace with new package xunit, 2.9.3",
+              "protected": "xunit, 2.7.0\n\nRecommendation:\n\nThis package will only be updated for security issues. All future feature work has moved onto v3.\n\nGuide for migrating from xUnit.net v2 to v3: https://xunit.net/docs/getting-started/v3/migration\nRemove xunit, and replace with new package xunit, 2.9.3"
+            },
+            "kind": "File",
+            "path": "test\\Piranha.Tests\\Piranha.Tests.csproj",
+            "snippet": "xunit, 2.7.0\n\nRecommendation:\n\nThis package will only be updated for security issues. All future feature work has moved onto v3.\n\nGuide for migrating from xUnit.net v2 to v3: https://xunit.net/docs/getting-started/v3/migration\nRemove xunit, and replace with new package xunit, 2.9.3",
+            "protectedSnippet": "xunit, 2.7.0\n\nRecommendation:\n\nThis package will only be updated for security issues. All future feature work has moved onto v3.\n\nGuide for migrating from xUnit.net v2 to v3: https://xunit.net/docs/getting-started/v3/migration\nRemove xunit, and replace with new package xunit, 2.9.3",
+            "label": "xunit 2.7.0",
+            "properties": {
+              "PackageId": "xunit",
+              "PackageVersion": "2.7.0",
+              "PackageNewVersion": null,
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "4bbc9b7c-e6e6-432c-8511-109061fc4029",
+          "ruleId": "Project.0002",
+          "projectPath": "test\\Piranha.Tests\\Piranha.Tests.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+              "protected": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0"
+            },
+            "kind": "File",
+            "path": "test\\Piranha.Tests\\Piranha.Tests.csproj",
+            "snippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "protectedSnippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0;net9.0",
+              "RecommendedTargetFramework": "net8.0;net9.0;net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "core\\Piranha.WebApi\\Piranha.WebApi.csproj",
+      "startingProject": true,
+      "issues": 1,
+      "storyPoints": 1,
+      "properties": {
+        "appName": "Piranha.WebApi",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 0,
+        "numberOfCodeFiles": 0,
+        "linesTotal": 0,
+        "linesOfCode": 0,
+        "totalApiScanned": 470,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "6d57ddfa-b939-45d6-b053-91f945adb422",
+          "ruleId": "Project.0002",
+          "projectPath": "core\\Piranha.WebApi\\Piranha.WebApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+              "protected": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0"
+            },
+            "kind": "File",
+            "path": "core\\Piranha.WebApi\\Piranha.WebApi.csproj",
+            "snippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "protectedSnippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0;net9.0",
+              "RecommendedTargetFramework": "net8.0;net9.0;net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "examples\\RazorWeb\\RazorWeb.csproj",
+      "startingProject": true,
+      "issues": 1,
+      "storyPoints": 1,
+      "properties": {
+        "appName": "RazorWeb",
+        "projectKind": "AspNetCore",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 0,
+        "numberOfCodeFiles": 0,
+        "linesTotal": 0,
+        "linesOfCode": 0,
+        "totalApiScanned": 496,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "54f18b79-9f54-4c3d-922d-9a024f9c2841",
+          "ruleId": "Project.0002",
+          "projectPath": "examples\\RazorWeb\\RazorWeb.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+              "protected": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0"
+            },
+            "kind": "File",
+            "path": "examples\\RazorWeb\\RazorWeb.csproj",
+            "snippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "protectedSnippet": "Current target framework: net8.0;net9.0\nRecommended target framework: net8.0;net9.0;net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0;net9.0",
+              "RecommendedTargetFramework": "net8.0;net9.0;net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    }
+  ],
+  "rules": {
+    "NuGet.0002": {
+      "id": "NuGet.0002",
+      "isFeature": false,
+      "description": "NuGet package upgrade is recommended for selected target framework.\n\nStandard .NET packages are recommended to have versions matching version of .NET that project targets.\n\nSome other packages also are known to work better for selected target frameworks.",
+      "label": "NuGet package upgrade is recommended",
+      "severity": "Potential",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262530",
+          "isCustom": false
+        }
+      ]
+    },
+    "Project.0002": {
+      "id": "Project.0002",
+      "isFeature": false,
+      "description": "Project\u0027s target framework(s) needs to be changed to the new target framework that you selected for this upgrade.\n\nDuring upgrade target framework will be adjusted to corresponding platform when applicable. In some cases project would result in multiple target frameworks after the upgrade if it was using features that now have their own platforms in modern .NET frameworks (windows, iOS, Android etc).",
+      "label": "Project\u0027s target framework(s) needs to be changed",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Overview of porting from .NET Framework to .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265227",
+          "isCustom": false
+        },
+        {
+          "title": ".NET project SDKs",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265226",
+          "isCustom": false
+        }
+      ]
+    },
+    "Api.0003": {
+      "id": "Api.0003",
+      "isFeature": false,
+      "description": "API has a behavioral change in selected .NET version: code and binaries may behave differently at runtime without needing recompilation, but the new behavior might be undesirable and require updates.",
+      "label": "Behavioral change in selected .NET version",
+      "severity": "Potential",
+      "effort": 1
+    },
+    "Api.0002": {
+      "id": "Api.0002",
+      "isFeature": false,
+      "description": "API is source incompatible for selected .NET version: requires code changes to compile successfully when targeting a new version, such as removing obsolete APIs or changing method signatures.",
+      "label": "Source incompatible for selected .NET version",
+      "severity": "Potential",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Breaking changes in .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262679",
+          "isCustom": false
+        }
+      ]
+    },
+    "NuGet.0004": {
+      "id": "NuGet.0004",
+      "isFeature": false,
+      "description": "NuGet package contains security vulnerabilities.\n\nPackage needs to be upgraded to a newer version that addresses known security vulnerabilities.",
+      "label": "NuGet package contains security vulnerability",
+      "severity": "Optional",
+      "effort": 1
+    },
+    "NuGet.0005": {
+      "id": "NuGet.0005",
+      "isFeature": false,
+      "description": "NuGet package is deprecated.\n\nGo to its documentation and if there is a guidance for replacement of functionality provided by this package.",
+      "label": "NuGet package is deprecated",
+      "severity": "Optional",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262531",
+          "isCustom": false
+        }
+      ]
+    }
+  }
+}

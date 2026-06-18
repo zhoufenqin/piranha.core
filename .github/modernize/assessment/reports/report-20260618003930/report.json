@@ -1,0 +1,543 @@
+{
+  "version": "1.0.0",
+  "producer": ".NET AppCAT CLI",
+  "metadata": {
+    "analysisStartTime": "2026-06-18T00:39:30.2515996Z",
+    "analysisEndTime": "2026-06-18T00:39:42.9139351Z",
+    "privacyMode": "Restricted",
+    "privacyModeHelpUrl": "https://go.microsoft.com/fwlink/?linkid=2271074",
+    "targetIds": [
+      "AppService.Windows",
+      "AppService.Linux",
+      "AKS.Linux",
+      "AKS.Windows",
+      "ACA",
+      "AppServiceContainer.Linux",
+      "AppServiceContainer.Windows",
+      "AppServiceManagedInstance.Windows"
+    ],
+    "targetDisplayNames": [
+      "Azure App Service",
+      "Azure Kubernetes Service",
+      "Azure Container Apps",
+      "Azure App Service Container",
+      "Azure App Service Managed Instance"
+    ],
+    "os": [
+      "windows",
+      "linux"
+    ]
+  },
+  "summary": {
+    "totalProjects": 26,
+    "totalIssues": 0,
+    "totalIncidents": 0,
+    "totalEffort": 0,
+    "charts": {
+      "severity": {
+        "mandatory": 0,
+        "optional": 0,
+        "potential": 0,
+        "information": 0
+      },
+      "category": {}
+    }
+  },
+  "projects": [
+    {
+      "path": "examples\\MvcWeb\\MvcWeb.csproj",
+      "issues": 0,
+      "storyPoints": 0,
+      "properties": {
+        "appName": "MvcWeb",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ]
+      },
+      "incidents": []
+    },
+    {
+      "path": "core\\Piranha.AspNetCore\\Piranha.AspNetCore.csproj",
+      "issues": 0,
+      "storyPoints": 0,
+      "properties": {
+        "appName": "Piranha.AspNetCore",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ]
+      },
+      "incidents": []
+    },
+    {
+      "path": "core\\Piranha.AspNetCore.Hosting\\Piranha.AspNetCore.Hosting.csproj",
+      "issues": 0,
+      "storyPoints": 0,
+      "properties": {
+        "appName": "Piranha.AspNetCore.Hosting",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ]
+      },
+      "incidents": []
+    },
+    {
+      "path": "identity\\Piranha.AspNetCore.Identity\\Piranha.AspNetCore.Identity.csproj",
+      "issues": 0,
+      "storyPoints": 0,
+      "properties": {
+        "appName": "Piranha.AspNetCore.Identity",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ]
+      },
+      "incidents": []
+    },
+    {
+      "path": "identity\\Piranha.AspNetCore.Identity.MySQL\\Piranha.AspNetCore.Identity.MySQL.csproj",
+      "issues": 0,
+      "storyPoints": 0,
+      "properties": {
+        "appName": "Piranha.AspNetCore.Identity.MySQL",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ]
+      },
+      "incidents": []
+    },
+    {
+      "path": "identity\\Piranha.AspNetCore.Identity.PostgreSQL\\Piranha.AspNetCore.Identity.PostgreSQL.csproj",
+      "issues": 0,
+      "storyPoints": 0,
+      "properties": {
+        "appName": "Piranha.AspNetCore.Identity.PostgreSQL",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ]
+      },
+      "incidents": []
+    },
+    {
+      "path": "identity\\Piranha.AspNetCore.Identity.SQLite\\Piranha.AspNetCore.Identity.SQLite.csproj",
+      "issues": 0,
+      "storyPoints": 0,
+      "properties": {
+        "appName": "Piranha.AspNetCore.Identity.SQLite",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ]
+      },
+      "incidents": []
+    },
+    {
+      "path": "identity\\Piranha.AspNetCore.Identity.SQLServer\\Piranha.AspNetCore.Identity.SQLServer.csproj",
+      "issues": 0,
+      "storyPoints": 0,
+      "properties": {
+        "appName": "Piranha.AspNetCore.Identity.SQLServer",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ]
+      },
+      "incidents": []
+    },
+    {
+      "path": "core\\Piranha.AttributeBuilder\\Piranha.AttributeBuilder.csproj",
+      "issues": 0,
+      "storyPoints": 0,
+      "properties": {
+        "appName": "Piranha.AttributeBuilder",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ]
+      },
+      "incidents": []
+    },
+    {
+      "path": "core\\Piranha.Azure.BlobStorage\\Piranha.Azure.BlobStorage.csproj",
+      "issues": 0,
+      "storyPoints": 0,
+      "properties": {
+        "appName": "Piranha.Azure.BlobStorage",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ]
+      },
+      "incidents": []
+    },
+    {
+      "path": "core\\Piranha\\Piranha.csproj",
+      "issues": 0,
+      "storyPoints": 0,
+      "properties": {
+        "appName": "Piranha",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ]
+      },
+      "incidents": []
+    },
+    {
+      "path": "data\\Piranha.Data.EF\\Piranha.Data.EF.csproj",
+      "issues": 0,
+      "storyPoints": 0,
+      "properties": {
+        "appName": "Piranha.Data.EF",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ]
+      },
+      "incidents": []
+    },
+    {
+      "path": "data\\Piranha.Data.EF.MySql\\Piranha.Data.EF.MySql.csproj",
+      "issues": 0,
+      "storyPoints": 0,
+      "properties": {
+        "appName": "Piranha.Data.EF.MySql",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ]
+      },
+      "incidents": []
+    },
+    {
+      "path": "data\\Piranha.Data.EF.PostgreSql\\Piranha.Data.EF.PostgreSql.csproj",
+      "issues": 0,
+      "storyPoints": 0,
+      "properties": {
+        "appName": "Piranha.Data.EF.PostgreSql",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ]
+      },
+      "incidents": []
+    },
+    {
+      "path": "data\\Piranha.Data.EF.SQLite\\Piranha.Data.EF.SQLite.csproj",
+      "issues": 0,
+      "storyPoints": 0,
+      "properties": {
+        "appName": "Piranha.Data.EF.SQLite",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ]
+      },
+      "incidents": []
+    },
+    {
+      "path": "data\\Piranha.Data.EF.SQLServer\\Piranha.Data.EF.SQLServer.csproj",
+      "issues": 0,
+      "storyPoints": 0,
+      "properties": {
+        "appName": "Piranha.Data.EF.SQLServer",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ]
+      },
+      "incidents": []
+    },
+    {
+      "path": "core\\Piranha.ImageSharp\\Piranha.ImageSharp.csproj",
+      "issues": 0,
+      "storyPoints": 0,
+      "properties": {
+        "appName": "Piranha.ImageSharp",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ]
+      },
+      "incidents": []
+    },
+    {
+      "path": "core\\Piranha.Local.FileStorage\\Piranha.Local.FileStorage.csproj",
+      "issues": 0,
+      "storyPoints": 0,
+      "properties": {
+        "appName": "Piranha.Local.FileStorage",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ]
+      },
+      "incidents": []
+    },
+    {
+      "path": "core\\Piranha.Manager\\Piranha.Manager.csproj",
+      "issues": 0,
+      "storyPoints": 0,
+      "properties": {
+        "appName": "Piranha.Manager",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ]
+      },
+      "incidents": []
+    },
+    {
+      "path": "core\\Piranha.Manager.LocalAuth\\Piranha.Manager.LocalAuth.csproj",
+      "issues": 0,
+      "storyPoints": 0,
+      "properties": {
+        "appName": "Piranha.Manager.LocalAuth",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ]
+      },
+      "incidents": []
+    },
+    {
+      "path": "core\\Piranha.Manager.Localization\\Piranha.Manager.Localization.csproj",
+      "issues": 0,
+      "storyPoints": 0,
+      "properties": {
+        "appName": "Piranha.Manager.Localization",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ]
+      },
+      "incidents": []
+    },
+    {
+      "path": "test\\Piranha.Manager.Tests\\Piranha.Manager.Tests.csproj",
+      "issues": 0,
+      "storyPoints": 0,
+      "properties": {
+        "appName": "Piranha.Manager.Tests",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ]
+      },
+      "incidents": []
+    },
+    {
+      "path": "core\\Piranha.Manager.TinyMCE\\Piranha.Manager.TinyMCE.csproj",
+      "issues": 0,
+      "storyPoints": 0,
+      "properties": {
+        "appName": "Piranha.Manager.TinyMCE",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ]
+      },
+      "incidents": []
+    },
+    {
+      "path": "test\\Piranha.Tests\\Piranha.Tests.csproj",
+      "issues": 0,
+      "storyPoints": 0,
+      "properties": {
+        "appName": "Piranha.Tests",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ]
+      },
+      "incidents": []
+    },
+    {
+      "path": "core\\Piranha.WebApi\\Piranha.WebApi.csproj",
+      "issues": 0,
+      "storyPoints": 0,
+      "properties": {
+        "appName": "Piranha.WebApi",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ]
+      },
+      "incidents": []
+    },
+    {
+      "path": "examples\\RazorWeb\\RazorWeb.csproj",
+      "issues": 0,
+      "storyPoints": 0,
+      "properties": {
+        "appName": "RazorWeb",
+        "frameworks": [
+          "net8.0",
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ]
+      },
+      "incidents": []
+    }
+  ],
+  "rules": {}
+}
